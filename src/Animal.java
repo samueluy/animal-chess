@@ -1,7 +1,10 @@
 public class Animal {
     int nRank;
-    boolean bAlive;
+    boolean bAlive = true;
 
+    public Animal(int rank){
+        this.nRank = rank;
+    }
     public int getRank() {
         return nRank;
     }
