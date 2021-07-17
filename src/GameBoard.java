@@ -1,7 +1,7 @@
 public class GameBoard {
-    public static void main(String[] args){
-        Player Players[];
-        boolean bTurn;
+        private Player[] Players;
+        private boolean bTurn;
         BlockCoords[][] Board;
-    }
+
+        
 }

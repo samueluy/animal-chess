@@ -3,7 +3,27 @@ public class Player {
     long lColor;
     boolean bWin;
 
-    public boolean checkWin(boolean win){ // this is stupid HAHAHAHA
-        return win;
+    public int getnNumber() {
+        return nNumber;
+    }
+
+    public long getlColor() {
+        return lColor;
+    }
+
+    public boolean isbWin() {
+        return bWin;
+    }
+
+    public void setNumber(int number) {
+        this.nNumber = number;
+    }
+
+    public void setColor(long color) {
+        this.lColor = color;
+    }
+
+    public void setWin(boolean win) {
+        this.bWin = win;
     }
 }
