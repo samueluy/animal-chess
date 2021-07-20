@@ -1,30 +1,28 @@
-import java.util.Scanner;
-
 public class BlockCoords {
-    int x, y;
-    String temp;
+    int x=1, y;
+    String temp = "/";
 
-    Scanner in = new Scanner(System.in);
-
-    public int getX(){
-        return  x;
+    public int getX() {
+        return x;
     }
 
-    public int getY(){
+    public int getY() {
         return y;
     }
 
-    public void setX(int x) {
-        this.x = in.nextInt();
+    public String getTemp(){
+        return temp;
     }
 
-    public void setY(int y) {
-        this.y = in.nextInt();
+    public void setX(int coord) {
+        this.x = coord;
+    } // might be wrong
+
+    public void setY(int coord) {
+        this.y = coord;
+    } // might be wrong
+
+    public void setTemp(String character) {
+        this.temp = character;
     }
-
-    public void setTemp(){
-        this.temp = temp;
-    }
-
-
 }
