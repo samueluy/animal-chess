@@ -1,5 +1,6 @@
 public class BlockCoords {
     Animal piece;
+    Special special;
     int x, y;
     String temp = "/";
 
@@ -8,6 +9,12 @@ public class BlockCoords {
         this.y = y;
         this.piece = piece;
         this.temp = piece.symbol;
+    }
+    public BlockCoords(int x, int y, Special special){
+        this.x = x;
+        this.y = y;
+        this.special = special;
+        this.temp = special.symbol;
     }
 
     public BlockCoords(int x, int y){

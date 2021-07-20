@@ -4,6 +4,5 @@ public class AnimalChess {
 
         board.createBoard();
         board.display();
-
     }
 }
