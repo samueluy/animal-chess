@@ -1,6 +1,19 @@
 public class BlockCoords {
-    int x=1, y;
+    Animal piece;
+    int x, y;
     String temp = "/";
+
+    public BlockCoords(int x, int y, Animal piece){
+        this.x = x;
+        this.y = y;
+        this.piece = piece;
+        this.temp = piece.symbol;
+    }
+
+    public BlockCoords(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public int getX() {
         return x;
