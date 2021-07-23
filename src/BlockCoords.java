@@ -34,6 +34,14 @@ public class BlockCoords {
         return temp;
     }
 
+    public Animal getPiece(){
+        return piece;
+    }
+
+    public Special getSpecial() {
+        return special;
+    }
+
     public void setX(int coord) {
         this.x = coord;
     } // might be wrong
@@ -44,5 +52,9 @@ public class BlockCoords {
 
     public void setTemp(String character) {
         this.temp = character;
+    }
+
+    public void setPiece(Animal animal){
+        this.piece = animal;
     }
 }

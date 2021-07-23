@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class GameBoard {
     private Player[] players;
     private boolean bTurn;
@@ -35,9 +33,22 @@ public class GameBoard {
     public void display() {
         for (int row = 0; row < block.length; row++) {
             for (int col = 0; col < block[row].length; col++) {
-                System.out.print(block[row][col].temp + " ");
+                if(block[row][col].getPiece() != null){
+                    System.out.print(block[row][col].getPiece().symbol + "\t");
+                }
+                else if(block[row][col].getSpecial() != null){
+                    System.out.print(block[row][col].getSpecial().symbol + "\t");
+                }
+                else{
+                    System.out.print("/\t");
+                }
             }
-            System.out.println();
+            System.out.println(row+1);
         }
+        System.out.println("1\t2\t3\t4\t5\t6\t7");
+    }
+
+    public BlockCoords[][] getBlock() {
+        return block;
     }
 }
