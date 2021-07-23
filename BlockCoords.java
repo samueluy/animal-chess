@@ -1,32 +1,49 @@
-import java.util.Scanner;
-
 public class BlockCoords {
-    private int x;
+    private Animal piece;
+    private Special special;
+    private int x; 
 	private int y;
-	
-    private String temp;
+    public String temp = "/";
 
-    Scanner in = new Scanner(System.in);
-
-    public int getX(){
-        return  x;
+    public BlockCoords(int x, int y, Animal piece){
+        this.x = x;
+        this.y = y;
+        this.piece = piece;
+        this.temp = piece.symbol;
+    }
+    public BlockCoords(int x, int y, Special special){
+        this.x = x;
+        this.y = y;
+        this.special = special;
+        this.temp = special.symbol;
     }
 
-    public int getY(){
+    public BlockCoords(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
         return y;
     }
 
-    public void setX(int x) {
-        this.x = in.nextInt();		//??
+    public String getTemp(){
+        return temp;
     }
 
-    public void setY(int y) {
-        this.y = in.nextInt();
+    public void setX(int coord) {
+        this.x = coord;
+    } // might be wrong
+
+    public void setY(int coord) {
+        this.y = coord;
+    } // might be wrong
+
+    public void setTemp(String character) {
+        this.temp = character;
     }
-
-    public void setTemp(String temp){
-        this.temp = temp;
-    }
-
-
 }
