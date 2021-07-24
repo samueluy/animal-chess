@@ -75,8 +75,8 @@ public class Move {
     public void updatePos(BlockCoords from, BlockCoords to) {
         to.setPiece(from.getPiece());
         from.setPiece(null);
-     //   from.setPiece(to.getPiece()); /*Swaps the locations of piece and mover if no obstacle, if someone is killed ther position is replaced by /.*/
-     //   System.out.print(to.getPiece().symbol);
+        //   from.setPiece(to.getPiece()); /*Swaps the locations of piece and mover if no obstacle, if someone is killed ther position is replaced by /.*/
+        //   System.out.print(to.getPiece().symbol);
 
     }
 
@@ -88,26 +88,49 @@ public class Move {
 
         for (int row = 0; row < board.getBlock().length; row++) {
             for (int col = 0; col < board.getBlock()[row].length; col++) {
-                if(board.getBlock()[row][col].getPiece() != null){
-                    if(board.getBlock()[row][col].getPiece().symbol.equals(symbol) && board.getBlock()[row][col].getPiece().isBlue == player){
-                        switch(direction){
-                            case "U": updatePos(board.getBlock()[row][col], board.getBlock()[row-1][col]);
+                if (board.getBlock()[row][col].getPiece() != null) {
+                    if (board.getBlock()[row][col].getPiece().symbol.equals(symbol) && board.getBlock()[row][col].getPiece().isBlue == player) {
+                        switch (direction) {
+                            case "U":
+                                if(checkValid(board, row-1,col)){
+                                    updatePos(board.getBlock()[row][col], board.getBlock()[row - 1][col]);
+                                }
                                 break;
 
-                            case "D": updatePos(board.getBlock()[row][col], board.getBlock()[row+1][col]);
-                                row = board.getBlock().length-1; // para di paulit ulit yung loop. there has to be a better fix to this zz
+                            case "D":
+                                if(checkValid(board, row+1, col)){
+                                    updatePos(board.getBlock()[row][col], board.getBlock()[row + 1][col]);
+                                    row = board.getBlock().length - 1; // para di paulit ulit yung loop. there has to be a better fix to this zz
+                                }
+
                                 break;
 
-                            case "L": updatePos(board.getBlock()[row][col], board.getBlock()[row][col-1]);
+                            case "L":
+                                if(checkValid(board, row, col-1)){
+                                    updatePos(board.getBlock()[row][col], board.getBlock()[row][col - 1]);
+                                }
                                 break;
 
-                            case "R": updatePos(board.getBlock()[row][col], board.getBlock()[row][col+1]);
-                                col = board.getBlock()[row].length-1;
+                            case "R":
+                                if(checkValid(board, row, col+1)){
+                                    updatePos(board.getBlock()[row][col], board.getBlock()[row][col + 1]);
+                                    col = board.getBlock()[row].length - 1;
+                                }
                                 break;
                         }
                     }
                 }
-            }// still need to check if player 1 or 2, if special, and if may ibang character
+            }
         }
+        board.setPlayer(!board.isPlayer()); // next player move
+    }
+
+    public boolean checkValid(GameBoard board, int newRow, int newCol){
+        if(board.getBlock()[newRow][newCol].getSpecial() != null){
+            System.out.println("Invalid move");
+            board.setPlayer(!board.isPlayer()); // reset player move if invalid
+            return false;
+        }
+        return true;
     }
 }

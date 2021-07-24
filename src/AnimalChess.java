@@ -8,9 +8,9 @@ public class AnimalChess {
         board.createBoard();
         board.display();
         while(!board.checkWin()){
-            move.move(board, player);
+            move.move(board, board.isPlayer());
             board.display();
-            player = !player; // exchange between true or fasle
+         //   player = !player; // exchange between true or fasle
         }
     }
 }

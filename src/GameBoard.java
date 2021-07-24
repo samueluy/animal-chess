@@ -1,5 +1,6 @@
 public class GameBoard {
-    private Player[] players;
+    private boolean player = true;
+ //   private Player[] players;
     private boolean bTurn;
     BlockCoords[][] block = new BlockCoords[9][7];
 
@@ -28,35 +29,33 @@ public class GameBoard {
             block[5][4] = new BlockCoords(5, 4, new Special(3, "="));
             block[5][5] = new BlockCoords(5, 5, new Special(3, "="));
 
-            block[8][3] = new BlockCoords(4,9, new Special(1, "@", true));
-            block[0][3] = new BlockCoords(4,9, new Special(1, "@", false));
+            block[8][3] = new BlockCoords(4, 9, new Special(1, "@", true));
+            block[0][3] = new BlockCoords(4, 9, new Special(1, "@", false));
         }
     }
 
     public void display() {
         for (int row = 0; row < block.length; row++) {
             for (int col = 0; col < block[row].length; col++) {
-                if(block[row][col].getPiece() != null){
+                if (block[row][col].getPiece() != null) {
                     System.out.print(block[row][col].getPiece().symbol + "\t");
-                }
-                else if(block[row][col].getSpecial() != null){
+                } else if (block[row][col].getSpecial() != null) {
                     System.out.print(block[row][col].getSpecial().symbol + "\t");
-                }
-                else{
-                    System.out.print("/\t");
+                } else {
+                    System.out.print("·\t");
                 }
             }
-            System.out.println(row+1);
+            System.out.println(row + 1);
         }
         System.out.println("1\t2\t3\t4\t5\t6\t7");
     }
 
-    public boolean checkWin(){ // den taken
-        if(block[8][3].getPiece() != null){
+    public boolean checkWin() { // den taken
+        if (block[8][3].getPiece() != null) {
             System.out.println("Player 2 wins!");
             return true;
         }
-        if(block[0][3].getPiece() != null){
+        if (block[0][3].getPiece() != null) {
             System.out.println("Player 1 wins!");
             return true;
         }
@@ -69,5 +68,13 @@ public class GameBoard {
 
     public boolean isbTurn() {
         return bTurn;
+    }
+
+    public boolean isPlayer(){
+        return player;
+    }
+
+    public void setPlayer(boolean player){
+        this.player = player;
     }
 }
