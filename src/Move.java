@@ -92,13 +92,13 @@ public class Move {
                     if (board.getBlock()[row][col].getPiece().symbol.equals(symbol) && board.getBlock()[row][col].getPiece().isBlue == player) {
                         switch (direction) {
                             case "U":
-                                if(checkValid(board, row-1,col)){
+                                if(checkValid(board, row, col, row-1,col, player)){
                                     updatePos(board.getBlock()[row][col], board.getBlock()[row - 1][col]);
                                 }
                                 break;
 
                             case "D":
-                                if(checkValid(board, row+1, col)){
+                                if(checkValid(board, row, col, row+1, col, player)){
                                     updatePos(board.getBlock()[row][col], board.getBlock()[row + 1][col]);
                                     row = board.getBlock().length - 1; // para di paulit ulit yung loop. there has to be a better fix to this zz
                                 }
@@ -106,13 +106,13 @@ public class Move {
                                 break;
 
                             case "L":
-                                if(checkValid(board, row, col-1)){
+                                if(checkValid(board, row, col, row, col-1, player)){
                                     updatePos(board.getBlock()[row][col], board.getBlock()[row][col - 1]);
                                 }
                                 break;
 
                             case "R":
-                                if(checkValid(board, row, col+1)){
+                                if(checkValid(board, row, col, row,col+1, player)){
                                     updatePos(board.getBlock()[row][col], board.getBlock()[row][col + 1]);
                                     col = board.getBlock()[row].length - 1;
                                 }
@@ -125,11 +125,37 @@ public class Move {
         board.setPlayer(!board.isPlayer()); // next player move
     }
 
-    public boolean checkValid(GameBoard board, int newRow, int newCol){
-        if(board.getBlock()[newRow][newCol].getSpecial() != null){
-            System.out.println("Invalid move");
-            board.setPlayer(!board.isPlayer()); // reset player move if invalid
-            return false;
+    public boolean checkValid(GameBoard board, int oldRow, int oldCol, int newRow, int newCol, boolean player){
+        if(board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getPiece() != null){ // animal rank condition
+            if(board.getBlock()[oldRow][oldCol].getPiece().getRank() < board.getBlock()[newRow][newCol].getPiece().getRank()){
+                System.out.println("Invalid move");
+                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                return false;
+            }
+        }
+
+        if(board.getBlock()[newRow][newCol].getSpecial() != null){ // check if special block
+            if(board.getBlock()[newRow][newCol].getSpecial().symbol.equals("=")){ // to edit for tiger
+                System.out.println("Invalid move");
+                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                return false;
+            }
+        }
+
+        if(board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getPiece() != null) { // animal same player condition; can not eat own piece
+            if(board.getBlock()[oldRow][oldCol].getPiece().isBlue() == board.getBlock()[newRow][newCol].getPiece().isBlue()){
+                System.out.println("Invalid move");
+                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                return false;
+            }
+        }
+
+        if(board.getBlock()[newRow][newCol].getSpecial() != null){ // can not take own den
+            if(board.getBlock()[newRow][newCol].getSpecial().isBlue() == player){
+                System.out.println("Invalid move");
+                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                return false;
+            }
         }
         return true;
     }

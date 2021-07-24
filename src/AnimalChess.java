@@ -10,7 +10,6 @@ public class AnimalChess {
         while(!board.checkWin()){
             move.move(board, board.isPlayer());
             board.display();
-         //   player = !player; // exchange between true or fasle
         }
     }
 }
