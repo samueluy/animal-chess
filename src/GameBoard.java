@@ -27,6 +27,9 @@ public class GameBoard {
             block[4][5] = new BlockCoords(4, 5, new Special(3, "="));
             block[5][4] = new BlockCoords(5, 4, new Special(3, "="));
             block[5][5] = new BlockCoords(5, 5, new Special(3, "="));
+
+            block[8][3] = new BlockCoords(4,9, new Special(1, "@", true));
+            block[0][3] = new BlockCoords(4,9, new Special(1, "@", false));
         }
     }
 
@@ -46,6 +49,18 @@ public class GameBoard {
             System.out.println(row+1);
         }
         System.out.println("1\t2\t3\t4\t5\t6\t7");
+    }
+
+    public boolean checkWin(){ // den taken
+        if(block[8][3].getPiece() != null){
+            System.out.println("Player 2 wins!");
+            return true;
+        }
+        if(block[0][3].getPiece() != null){
+            System.out.println("Player 1 wins!");
+            return true;
+        }
+        return false;
     }
 
     public BlockCoords[][] getBlock() {

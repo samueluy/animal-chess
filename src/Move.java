@@ -80,7 +80,7 @@ public class Move {
 
     }
 
-    public void move(GameBoard board, boolean player) {
+    public void move(GameBoard board, boolean player) { // need input checking pa
         System.out.print("Enter piece character: ");
         String symbol = in.nextLine();
         System.out.print("Enter direction (U,D,L,R): ");

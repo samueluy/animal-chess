@@ -3,13 +3,14 @@ public class AnimalChess {
         GameBoard board = new GameBoard();
         Move move = new Move();
         boolean player = true;
+        boolean isDone = false;
 
         board.createBoard();
         board.display();
-        while(true){
-            player = !player; // exchange between true or fasle
+        while(!board.checkWin()){
             move.move(board, player);
             board.display();
+            player = !player; // exchange between true or fasle
         }
     }
 }
