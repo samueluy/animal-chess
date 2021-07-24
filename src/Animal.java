@@ -1,13 +1,13 @@
 public class Animal {
     int nRank;
     boolean bAlive = true;
-    boolean isBlue;
+    boolean bBlue;
     String symbol;
 
     public Animal(int rank, String symbol, boolean isBlue) {
         this.nRank = rank;
         this.symbol = symbol;
-        this.isBlue = isBlue;
+        this.bBlue = isBlue;
     }
 
     public int getRank() {
@@ -19,7 +19,11 @@ public class Animal {
     }
 
     public boolean isBlue() {
-        return isBlue;
+        return bBlue;
+    }
+
+    public String getSymbol(){
+        return symbol;
     }
 
     public void setRank(int rank) {

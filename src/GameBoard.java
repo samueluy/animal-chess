@@ -1,6 +1,6 @@
 public class GameBoard {
     private boolean player = true;
- //   private Player[] players;
+    //   private Player[] players;
     private boolean bTurn;
     BlockCoords[][] block = new BlockCoords[9][7];
 
@@ -50,15 +50,37 @@ public class GameBoard {
         System.out.println("1\t2\t3\t4\t5\t6\t7");
     }
 
-    public boolean checkWin() { // den taken
-        if (block[8][3].getPiece() != null) {
+    public boolean checkWin() {
+        int playerOneCount = 0;
+        int playerTwoCount = 0;
+        if (block[8][3].getPiece() != null) { // den taken
             System.out.println("Player 2 wins!");
             return true;
         }
-        if (block[0][3].getPiece() != null) {
+        if (block[0][3].getPiece() != null) { // den taken
             System.out.println("Player 1 wins!");
             return true;
         }
+        for (int row = 0; row < block.length; row++) { // check amount of pieces per player
+            for (int col = 0; col < block[row].length; col++) {
+                if (block[row][col].getPiece() != null) {
+                    if (block[row][col].getPiece().isBlue())
+                        playerOneCount++;
+                    if (!block[row][col].getPiece().isBlue())
+                        playerTwoCount++;
+                }
+            }
+        }
+        if (playerOneCount == 0) {
+            System.out.println("Player 2 wins!");
+            return true;
+        }
+
+        if (playerTwoCount == 0) {
+            System.out.println("Player 1 wins!");
+            return true;
+        }
+
         return false;
     }
 
@@ -70,11 +92,11 @@ public class GameBoard {
         return bTurn;
     }
 
-    public boolean isPlayer(){
+    public boolean isPlayer() {
         return player;
     }
 
-    public void setPlayer(boolean player){
+    public void setPlayer(boolean player) {
         this.player = player;
     }
 }

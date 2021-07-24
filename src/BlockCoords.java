@@ -2,7 +2,7 @@ public class BlockCoords {
     Animal piece;
     Special special;
     int x, y;
-    String temp = "/";
+    String temp;
 
     public BlockCoords(int x, int y, Animal piece) {
         this.x = x;
