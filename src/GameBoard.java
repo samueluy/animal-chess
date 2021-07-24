@@ -1,7 +1,5 @@
 public class GameBoard {
     private boolean player = true;
-    //   private Player[] players;
-    private boolean bTurn;
     BlockCoords[][] block = new BlockCoords[9][7];
 
     public void createBoard() {
@@ -86,10 +84,6 @@ public class GameBoard {
 
     public BlockCoords[][] getBlock() {
         return block;
-    }
-
-    public boolean isbTurn() {
-        return bTurn;
     }
 
     public boolean isPlayer() {
