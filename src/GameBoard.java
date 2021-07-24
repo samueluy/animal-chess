@@ -8,10 +8,10 @@ public class GameBoard {
             for (int col = 0; col < block[row].length; col++) {
                 block[row][col] = new BlockCoords(row, col);
             }
-            block[8][0] = new BlockCoords(8, 0, new Animal(6, "T"));
-            block[0][6] = new BlockCoords(0, 6, new Animal(6, "T"));
-            block[6][4] = new BlockCoords(6, 4, new Animal(5, "L"));
-            block[2][2] = new BlockCoords(2, 2, new Animal(5, "L"));
+            block[8][0] = new BlockCoords(8, 0, new Animal(6, "T", true));
+            block[0][6] = new BlockCoords(0, 6, new Animal(6, "T", false));
+            block[6][4] = new BlockCoords(6, 4, new Animal(5, "L", true));
+            block[2][2] = new BlockCoords(2, 2, new Animal(5, "L", false));
 
             // Special blocks
             block[3][1] = new BlockCoords(3, 1, new Special(3, "="));
@@ -50,5 +50,9 @@ public class GameBoard {
 
     public BlockCoords[][] getBlock() {
         return block;
+    }
+
+    public boolean isbTurn() {
+        return bTurn;
     }
 }

@@ -4,9 +4,10 @@ public class Animal {
     boolean isBlue;
     String symbol;
 
-    public Animal(int rank, String symbol) {
+    public Animal(int rank, String symbol, boolean isBlue) {
         this.nRank = rank;
         this.symbol = symbol;
+        this.isBlue = isBlue;
     }
 
     public int getRank() {
@@ -15,6 +16,10 @@ public class Animal {
 
     public boolean isAlive() {
         return bAlive;
+    }
+
+    public boolean isBlue() {
+        return isBlue;
     }
 
     public void setRank(int rank) {

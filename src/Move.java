@@ -5,10 +5,6 @@ public class Move {
     private BlockCoords[][] from;
     private BlockCoords[][] to;
     private GameBoard board;
-    private static int isTurn;
-
-    private CharSequence Lion = "L";
-    private CharSequence Tiger = "T";
 
     Scanner in = new Scanner(System.in);
 
@@ -84,22 +80,34 @@ public class Move {
 
     }
 
-    public void move(GameBoard board) {
+    public void move(GameBoard board, boolean player) {
         System.out.print("Enter piece character: ");
         String symbol = in.nextLine();
-        System.out.print("Enter X: ");
-        int destX = in.nextInt()-1;
-        System.out.print("Enter Y: ");
-        int destY = in.nextInt()-1;
+        System.out.print("Enter direction (U,D,L,R): ");
+        String direction = in.nextLine();
 
         for (int row = 0; row < board.getBlock().length; row++) {
             for (int col = 0; col < board.getBlock()[row].length; col++) {
                 if(board.getBlock()[row][col].getPiece() != null){
-                    if(board.getBlock()[row][col].getPiece().symbol.equals(symbol)){
-                        updatePos(board.getBlock()[row][col], board.getBlock()[destY][destX]);
+                    if(board.getBlock()[row][col].getPiece().symbol.equals(symbol) && board.getBlock()[row][col].getPiece().isBlue == player){
+                        switch(direction){
+                            case "U": updatePos(board.getBlock()[row][col], board.getBlock()[row-1][col]);
+                                break;
+
+                            case "D": updatePos(board.getBlock()[row][col], board.getBlock()[row+1][col]);
+                                row = board.getBlock().length-1; // para di paulit ulit yung loop. there has to be a better fix to this zz
+                                break;
+
+                            case "L": updatePos(board.getBlock()[row][col], board.getBlock()[row][col-1]);
+                                break;
+
+                            case "R": updatePos(board.getBlock()[row][col], board.getBlock()[row][col+1]);
+                                col = board.getBlock()[row].length-1;
+                                break;
+                        }
                     }
                 }
-            } // still need to check if player 1 or 2, if special, and if may ibang character
+            }// still need to check if player 1 or 2, if special, and if may ibang character
         }
     }
 }
