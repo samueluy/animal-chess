@@ -1,24 +1,25 @@
 public class BlockCoords {
     private Animal piece;
     private Special special;
-    private int x; 
-	private int y;
-    public String temp = "/";
+    private int x;
+	private int	y;
+    private String temp = "/";
 
-    public BlockCoords(int x, int y, Animal piece){
+    public BlockCoords(int x, int y, Animal piece) {
         this.x = x;
         this.y = y;
         this.piece = piece;
         this.temp = piece.symbol;
     }
-    public BlockCoords(int x, int y, Special special){
+
+    public BlockCoords(int x, int y, Special special) {
         this.x = x;
         this.y = y;
         this.special = special;
         this.temp = special.symbol;
     }
 
-    public BlockCoords(int x, int y){
+    public BlockCoords(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -31,8 +32,16 @@ public class BlockCoords {
         return y;
     }
 
-    public String getTemp(){
+    public String getTemp() {
         return temp;
+    }
+
+    public Animal getPiece() {
+        return piece;
+    }
+
+    public Special getSpecial() {
+        return special;
     }
 
     public void setX(int coord) {
@@ -45,5 +54,9 @@ public class BlockCoords {
 
     public void setTemp(String character) {
         this.temp = character;
+    }
+
+    public void setPiece(Animal animal) {
+        this.piece = animal;
     }
 }
