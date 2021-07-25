@@ -4,7 +4,8 @@
 public class BlockCoords {
     private Animal piece;
     private Special special;
-    private int x, y;
+    private int x;
+    private int y;
     private String temp;
 
     /**
