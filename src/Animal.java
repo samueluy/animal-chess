@@ -2,10 +2,10 @@
  * This class represents each piece of the game.
  */
 public class Animal {
-    int nRank;
-    boolean bAlive = true;
-    boolean bBlue;
-    String symbol;
+    private int nRank;
+    private boolean bAlive = true;
+    private boolean bBlue;
+    private String symbol;
 
     /**
      * @param rank   Given rank of a piece
@@ -25,6 +25,15 @@ public class Animal {
      */
     public int getRank() {
         return nRank;
+    }
+
+    /**
+     * This method returns the string representation of the animal
+     *
+     * @return
+     */
+    public String getSymbol() {
+        return symbol;
     }
 
     /**
@@ -52,14 +61,5 @@ public class Animal {
      */
     public boolean isBlue() {
         return bBlue;
-    }
-
-    /**
-     * This method returns the string representation of the animal
-     *
-     * @return
-     */
-    public String getSymbol() {
-        return symbol;
     }
 }

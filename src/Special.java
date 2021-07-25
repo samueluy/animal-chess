@@ -28,15 +28,6 @@ public class Special {
     }
 
     /**
-     * Returns if the Special object is taken or not
-     *
-     * @return
-     */
-    public boolean isFree() {
-        return free;
-    }
-
-    /**
      * Returns the type of Special object
      *
      * @return
@@ -61,5 +52,14 @@ public class Special {
      */
     public boolean isBlue() {
         return blue;
+    }
+
+    /**
+     * Returns if the Special object is taken or not
+     *
+     * @return
+     */
+    public boolean isFree() {
+        return free;
     }
 }

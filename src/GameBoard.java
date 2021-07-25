@@ -6,6 +6,24 @@ public class GameBoard {
     private boolean player = true;
 
     /**
+     * Returns a block object
+     *
+     * @return
+     */
+    public BlockCoords[][] getBlock() {
+        return block;
+    }
+
+    /**
+     * Sets a boolean which determines player turn
+     *
+     * @param player
+     */
+    public void setPlayer(boolean player) {
+        this.player = player;
+    }
+
+    /**
      * Creates a new board with each piece in its standard location
      */
     public void createBoard() {
@@ -46,7 +64,8 @@ public class GameBoard {
         for (int row = 0; row < block.length; row++) {
             for (int col = 0; col < block[row].length; col++) {
                 if (block[row][col].getPiece() != null) {
-                    System.out.print(block[row][col].getPiece().symbol + "\t");
+                    System.out.print(block[row][col].getPiece().getSymbol() +
+                            "\t");
                 } else if (block[row][col].getSpecial() != null) {
                     System.out
                             .print(block[row][col].getSpecial().symbol + "\t");
@@ -102,29 +121,11 @@ public class GameBoard {
     }
 
     /**
-     * Returns a block object
-     *
-     * @return
-     */
-    public BlockCoords[][] getBlock() {
-        return block;
-    }
-
-    /**
      * Returns a boolean which determines the player turn
      *
      * @return
      */
     public boolean isPlayer() {
         return player;
-    }
-
-    /**
-     * Sets a boolean which determines player turn
-     *
-     * @param player
-     */
-    public void setPlayer(boolean player) {
-        this.player = player;
     }
 }
