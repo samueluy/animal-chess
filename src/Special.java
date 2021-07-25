@@ -3,7 +3,7 @@
  */
 public class Special {
     private int type;
-    public String symbol;
+    private String symbol;
     private boolean blue;
     private boolean free = true;
 
