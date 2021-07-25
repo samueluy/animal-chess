@@ -255,7 +255,7 @@ public class Move {
                                 break;
 
                             default:
-                                System.out.println("Invalid move");
+                                System.out.println("Invalid input");
                                 board.setPlayer(!board.isPlayer());
                         }
                     }
