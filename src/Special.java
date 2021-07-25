@@ -2,10 +2,10 @@
  * This class represents each block which has a special trait.
  */
 public class Special {
-    int type;
-    String symbol;
-    boolean blue;
-    boolean free = true;
+    private int type;
+    public String symbol;
+    private boolean blue;
+    private boolean free = true;
 
     /**
      * @param type   1: Den; 2: Trap; 3: River
