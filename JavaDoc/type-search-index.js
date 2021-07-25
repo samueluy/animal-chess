@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Animal"},{"p":"<Unnamed>","l":"AnimalChess"},{"p":"<Unnamed>","l":"BlockCoords"},{"p":"<Unnamed>","l":"GameBoard"},{"p":"<Unnamed>","l":"Move"},{"p":"<Unnamed>","l":"Special"}];updateSearchResults();
