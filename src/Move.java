@@ -244,7 +244,7 @@ public class Move {
 
         if (board.getBlock()[newRow][newCol].getSpecial() !=
                 null) { // Check if special block
-            if (board.getBlock()[newRow][newCol].getSpecial().symbol
+            if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
                     .equals("=")) {
                 System.out.println("Invalid move");
                 board.setPlayer(

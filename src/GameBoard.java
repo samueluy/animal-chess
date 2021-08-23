@@ -68,7 +68,7 @@ public class GameBoard {
                             "\t");
                 } else if (block[row][col].getSpecial() != null) {
                     System.out
-                            .print(block[row][col].getSpecial().symbol + "\t");
+                            .print(block[row][col].getSpecial().getSymbol() + "\t");
                 } else {
                     System.out.print(".\t");
                 }

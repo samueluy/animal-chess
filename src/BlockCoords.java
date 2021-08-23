@@ -33,7 +33,7 @@ public class BlockCoords {
         this.x = x;
         this.y = y;
         this.special = special;
-        this.temp = special.symbol;
+        this.temp = special.getSymbol();
     }
 
     /**
