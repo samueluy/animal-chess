@@ -5,6 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI{
+    private JFrame displayInstructions(){
+        JLabel text = new JLabel();
+        JFrame instructions = new JFrame("Instructions");
+
+        text.setHorizontalAlignment(JLabel.CENTER); // Align to center
+
+        instructions.setLayout(new BorderLayout());
+        text.setText("ISDOAJSA");
+        instructions.add(text, BorderLayout.CENTER);
+        instructions.setSize(400, 600);
+        instructions.setVisible(true);
+        return instructions;
+    }
 
     public GUI() {
         GameBoard board = new GameBoard();
@@ -13,7 +26,6 @@ public class GUI{
 
         JPanel toolbar = new JPanel();
         JButton restart = new JButton("Restart");
-        JButton exit = new JButton("Exit");
         JButton showInstructions = new JButton("Instructions");
 
         frame.add(panel,BorderLayout.CENTER);
@@ -24,7 +36,8 @@ public class GUI{
         toolbar.setLayout(new FlowLayout());
         toolbar.add(showInstructions);
         toolbar.add(restart);
-        toolbar.add(exit);
         frame.add(toolbar, BorderLayout.NORTH);
+
+        displayInstructions();
     }
 }
