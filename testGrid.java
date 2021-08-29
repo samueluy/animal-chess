@@ -13,7 +13,7 @@ public class testGrid extends JFrame
          super("Grid Layout");
          setSize(500,300);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         setLayout(new GridLayout(9,7,5,5));
+         setLayout(new BorderLayout());
 
 
         setup();
@@ -23,19 +23,19 @@ public class testGrid extends JFrame
     public void setup()
     {
         buttons = new ArrayList<>(63);
-        JPanel header = new JPanel();
-        header.setLayout(new FlowLayout());
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new FlowLayout());
 
         //Top Panel
-       /* lblheader = new JLabel("ANIMAL CHESS");
-        header.add(lblheader);
-
         JButton btnRules = new JButton("Rules");
-        header.add(btnRules);
+        northPanel.add(btnRules);
+
+        lblheader = new JLabel("ANIMAL CHESS");
+        northPanel.add(lblheader);
 
         JButton btnRestart = new JButton("Restart");
-        header.add(btnRestart);
-        add(header);*/
+        northPanel.add(btnRestart);
+        add(northPanel,BorderLayout.NORTH);
 
         JPanel gl = new JPanel();
         gl.setLayout(new GridLayout(9,7,5,5));
@@ -61,10 +61,12 @@ public class testGrid extends JFrame
                 boardlbl+="Trap.";
             else if(i==3 || i==59)
                 boardlbl+="Base";
-            buttons.add(new JButton(boardlbl));      //SSa arraylist
-            add(buttons.get(i));
+
+            buttons.add(new JButton(boardlbl));      //Sa arraylist
+            gl.add(buttons.get(i));     //Adding Buttons in the grid.
             boardlbl ="";
         }
+        add(gl,BorderLayout.CENTER);
  }
 
     public static void main(String[] args) {
