@@ -1,55 +1,81 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class Move {
-    private Animal piece;            ///private Player player;
-    private BlockCoords[][] from;
-    private BlockCoords[][] to;
+/**
+ * This class contains all the methods which will allow a player to move their pieces
+ */
+public class Move 
+{
+    Scanner in = new Scanner(System.in);
+    private Animal piece;
     private GameBoard board;
 
-    Scanner in = new Scanner(System.in);
-	
-    public void move(GameBoard board, boolean player) { // need input checking pa
+    /**
+     * Ask the player for an input to determine which piece he/she desires to move and to where
+     *
+     * @param board  GameBoard object
+     * @param player Current player move
+     */
+    public void move(GameBoard board, boolean player) 
+	{
         System.out.print("Enter piece character: ");
         String symbol = in.nextLine();
         System.out.print("Enter direction (U,D,L,R): ");
         String direction = in.nextLine();
 
         boolean validPiece = false;
-        for (int row = 0; row < board.getBlock().length; row++) {
-            for (int col = 0; col < board.getBlock()[row].length; col++) {
-                if (board.getBlock()[row][col].getPiece() != null) {
-                    if (board.getBlock()[row][col].getPiece().symbol.equals(symbol) && board.getBlock()[row][col].getPiece().isBlue() == player){ //Whats this condition for?
+        for (int row = 0; row < board.getBlock().length; row++) 
+		{
+            for (int col = 0; col < board.getBlock()[row].length; col++) 
+			{
+                if (board.getBlock()[row][col].getPiece() != null) 
+				{
+                    if (board.getBlock()[row][col].getPiece().getSymbol().equals(symbol) &&
+                            board.getBlock()[row][col].getPiece().isBlue() == player) 
+					{
                         validPiece = true;
                         boolean hasMoved = false;
-                        switch (direction) {
+                        switch (direction) 
+						{
                             case "U":
-                                if(checkBounds(board, row - 1, col)){
-                                    if(board.getBlock()[row-1][col].getSpecial() != null){
-                                        if(board.getBlock()[row][col].getPiece().getSymbol().equals("T") && board.getBlock()[row-1][col].getSpecial().getSymbol().equals("=")){ // if tiger
+                                if (checkBounds(board, row - 1, col)) 
+								{
+                                    if (board.getBlock()[row - 1][col].getSpecial() != null) 
+									{
+										// Tiger special block condition
+                                        if (board.getBlock()[row][col].getPiece().getSymbol().equals("T") &&
+                                                board.getBlock()[row - 1][col].getSpecial().getSymbol().equals("="))
+										{
                                             updatePos(board.getBlock()[row][col], board.getBlock()[row - 4][col]);
                                             hasMoved = true;
                                         }
                                     }
-                                    if(!hasMoved){
+                                    if (!hasMoved) 
+									{
                                         if (checkValid(board, row, col, row - 1, col, player))
-                                            updatePos(board.getBlock()[row][col], board.getBlock()[row - 1][col]);
+                                            updatePos(board.getBlock()[row][col], board.getBlock()[row -1][col]);
                                     }
                                 }
                                 break;
 
                             case "D":
-                                if(checkBounds(board, row + 1, col)){
-                                    if(board.getBlock()[row+1][col].getSpecial() != null){
-                                        if(board.getBlock()[row][col].getPiece().getSymbol().equals("T") && board.getBlock()[row+1][col].getSpecial().getSymbol().equals("=")){ // if tiger
+                                if (checkBounds(board, row + 1, col)) 
+								{
+                                    if (board.getBlock()[row + 1][col].getSpecial() != null) 
+									{
+										// Tiger special block condition
+                                        if (board.getBlock()[row][col].getPiece().getSymbol().equals("T") &&
+                                                board.getBlock()[row + 1][col].getSpecial().getSymbol().equals("=")) 
+										{ 
                                             updatePos(board.getBlock()[row][col], board.getBlock()[row + 3][col]);
                                             hasMoved = true;
                                         }
                                     }
-                                    if(!hasMoved){
-                                        if (checkValid(board, row, col, row + 1, col, player)) {
+                                    if (!hasMoved) 
+									{
+                                        if (checkValid(board, row, col, row + 1, col, player)) 
+										{
                                             updatePos(board.getBlock()[row][col], board.getBlock()[row + 1][col]);
-                                            row = board.getBlock().length - 1; // para di paulit ulit yung loop. there has to be a better fix to this zz
-                                            /*Whats the issue?*/ // masasatisfy pa rin yung loop kaya tuloy tuloy till sumagad HAHAHA
+                                            row = board.getBlock().length - 1;
                                         }
                                     }
                                 }
@@ -57,33 +83,45 @@ public class Move {
                                 break;
 
                             case "L":
-                                if(checkBounds(board, row, col - 1)){
-                                    if(board.getBlock()[row][col-1].getSpecial() != null){
-                                        if(board.getBlock()[row][col].getPiece().getSymbol().equals("T") && board.getBlock()[row][col - 1].getSpecial().getSymbol().equals("=")){ // if tiger
-                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col- 3]);
+                                if (checkBounds(board, row, col - 1)) 
+								{
+                                    if (board.getBlock()[row][col - 1].getSpecial() != null)
+									{
+										// Tiger special block condition
+                                        if (board.getBlock()[row][col].getPiece().getSymbol().equals("T") &&
+                                                board.getBlock()[row][col - 1].getSpecial().getSymbol().equals("=")) { 
+                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col -3]);
                                             hasMoved = true;
                                         }
                                     }
-                                    if(!hasMoved){
+                                    if (!hasMoved) 
+									{
                                         if (checkValid(board, row, col, row, col - 1, player))
-                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col - 1]);
+                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col -1]);
                                     }
                                 }
 
                                 break;
 
                             case "R":
-                                if(checkBounds(board, row, col + 1)){
-                                    if(board.getBlock()[row][col+1].getSpecial() != null){
-                                        if(board.getBlock()[row][col].getPiece().getSymbol().equals("T") && board.getBlock()[row][col + 1].getSpecial().getSymbol().equals("=")){ // if tiger
-                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col + 3]);
+                                if (checkBounds(board, row, col + 1)) 
+								{
+                                    if (board.getBlock()[row][col + 1].getSpecial() != null) 
+									{
+										// Tiger special block condition
+                                        if (board.getBlock()[row][col].getPiece().getSymbol().equals("T") &&
+                                                board.getBlock()[row][col + 1].getSpecial().getSymbol().equals("="))
+										{  
+                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col +3]);
                                             hasMoved = true;
                                             col = board.getBlock()[row].length - 1;
                                         }
                                     }
-                                    if(!hasMoved){
-                                        if (checkValid(board, row, col, row, col + 1, player)) {
-                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col + 1]);
+                                    if (!hasMoved) 
+									{
+                                        if (checkValid(board, row, col, row, col + 1, player)) 
+										{
+                                            updatePos(board.getBlock()[row][col], board.getBlock()[row][col +1]);
                                             col = board.getBlock()[row].length - 1;
                                         }
                                     }
@@ -92,79 +130,114 @@ public class Move {
                                 break;
 
                             default:
-                                System.out.println("Invalid move");
+                                System.out.println("Invalid input");
                                 board.setPlayer(!board.isPlayer());
                         }
                     }
                 }
             }
         }
-        if(!validPiece){
+        if (!validPiece) 
+		 {
             System.out.println("Invalid input");
             board.setPlayer(!board.isPlayer());
         }
-        board.setPlayer(!board.isPlayer()); // next player move
+        board.setPlayer(!board.isPlayer()); // Next player move
     }
 
-    public void updatePos(BlockCoords from, BlockCoords to) {
+    /**
+     * Transfers an Animal object from one block to another
+     *
+     * @param from Block object where the piece is originally located
+     * @param to   Block object where the piece desires to go
+     */
+    public void updatePos(BlockCoords from, BlockCoords to) 
+	{
         to.setPiece(from.getPiece());
         from.setPiece(null);
-        //   from.setPiece(to.getPiece()); /*Swaps the locations of piece and mover if no obstacle, if someone is killed ther position is replaced by /.*/
-        //   System.out.print(to.getPiece().symbol);
     }
-	
-    public boolean checkBounds(GameBoard board, int newRow, int newCol) {
+
+    /**
+     * Checks if a move that will be made is within the bounds of the board
+     *
+     * @param board  GameBoard object
+     * @param newRow Row coordinate where the animal object desires to go
+     * @param newCol Column coordinate where the animal object desires to go
+     * @return
+     */
+    public boolean checkBounds(GameBoard board, int newRow, int newCol) 
+	{
         if (newRow < 0 || newRow >= board.getBlock().length ||
                 newCol >= board.getBlock()[newRow].length ||
-                newCol < 0) {
+                newCol < 0) 
+		{
             System.out.println("Invalid move");
-            board.setPlayer(!board.isPlayer()); // reset player move if invalid
+            board.setPlayer(!board.isPlayer()); // Reset player move if invalid
             return false;
         }
-        //if the newRow and Col wont be out of bounds:
         return true;
     }
 
-    public boolean checkValid(GameBoard board, int oldRow, int oldCol, int newRow, int newCol, boolean player) {
-		/*
-			Confusion on usage of '==', .equals().
-				-Override methods might be needed.
-		*/
-        // Comparing animal ranks
-
-
-        if (board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getPiece() != null) {
-            if (board.getBlock()[oldRow][oldCol].getPiece().getRank() < board.getBlock()[newRow][newCol].getPiece().getRank()) {
+    /**
+     * Checks if a move to be made is valid. This method looks into possible issues such as:<br>
+     * 1. Piece takes another piece of a higher rank<br>
+     * 2. Piece takes another piece of its own (color/team)<br>
+     * 3. Piece moves to a river (exception made for Tiger and Mouse)<br>
+     * 4. Piece takes its own (color/team) den
+     *
+     * @param board  GameBoard object
+     * @param oldRow Row coordinate where the animal object is currently located
+     * @param oldCol Column coordinate where the animal object is currently located
+     * @param newRow Row coordinate where the animal object desires to go
+     * @param newCol Column coordinate where the animal object desires to go
+     * @param player Current player moving
+     * @return
+     */
+    public boolean checkValid(GameBoard board, int oldRow, int oldCol,
+                              int newRow, int newCol, boolean player) 
+	{
+								  
+        if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
+                board.getBlock()[newRow][newCol].getPiece() != null) 
+		{
+            if (board.getBlock()[oldRow][oldCol].getPiece().getRank() < board.getBlock()[newRow][newCol].getPiece().getRank()) 
+			{
                 System.out.println("Invalid move");
-                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
         }
-
-        if (board.getBlock()[newRow][newCol].getSpecial() != null) { // check if special block
-            if (board.getBlock()[newRow][newCol].getSpecial().symbol.equals("=")) { // to edit for tiger
+		// Animal same player condition; can not eat own piece
+        if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
+                board.getBlock()[newRow][newCol].getPiece() != null) 
+		{ 
+            if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() == board.getBlock()[newRow][newCol].getPiece().isBlue()) 
+			{
                 System.out.println("Invalid move");
-                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
         }
-
-        if (board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getPiece() != null) { // animal same player condition; can not eat own piece
-            if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() == board.getBlock()[newRow][newCol].getPiece().isBlue()) {        //Bakit kaya gumagana to? --- true<->true = true, false<->false = true
+		// Check if special block: Trap / River
+        if (board.getBlock()[newRow][newCol].getSpecial() != null) 
+		{ 
+            if (board.getBlock()[newRow][newCol].getSpecial().getSymbol().equals("=")) 
+			{
                 System.out.println("Invalid move");
-                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
         }
-
-        if (board.getBlock()[newRow][newCol].getSpecial() != null) { // can not take own den
-            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() == player) {
+		// Can not take own den
+        if (board.getBlock()[newRow][newCol].getSpecial() != null) 
+		{ 
+            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() == player) 
+			{
                 System.out.println("Invalid move");
-                board.setPlayer(!board.isPlayer()); // reset player move if invalid
+                board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
         }
-
         return true;
     }
 }
