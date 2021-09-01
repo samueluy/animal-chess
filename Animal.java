@@ -3,7 +3,6 @@
  */
 public class Animal 
 {
-{
     private int nRank;
     private boolean bAlive = true;
     private boolean bBlue;

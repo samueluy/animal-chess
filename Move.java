@@ -196,28 +196,30 @@ public class Move
     public boolean checkValid(GameBoard board, int oldRow, int oldCol,
                               int newRow, int newCol, boolean player) 
 	{
-								  
+		//If there is something in the Chosen block and in the desired block to move at						  
         if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
                 board.getBlock()[newRow][newCol].getPiece() != null) 
 		{
+			//Comparing the ranks of the Current player's piece and it's opponent
             if (board.getBlock()[oldRow][oldCol].getPiece().getRank() < board.getBlock()[newRow][newCol].getPiece().getRank()) 
 			{
                 System.out.println("Invalid move");
                 board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
-        }
-		// Animal same player condition; can not eat own piece
-        if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                board.getBlock()[newRow][newCol].getPiece() != null) 
-		{ 
-            if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() == board.getBlock()[newRow][newCol].getPiece().isBlue()) 
+        
+			// Animal same player condition; cannot eat own piece
+            else if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() == board.getBlock()[newRow][newCol].getPiece().isBlue()) 
 			{
                 System.out.println("Invalid move");
                 board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
         }
+		/*Im confused with Lines 200 - 221. */
+		
+		
+		
 		// Check if special block: Trap / River
         if (board.getBlock()[newRow][newCol].getSpecial() != null) 
 		{ 
@@ -227,11 +229,8 @@ public class Move
                 board.setPlayer(!board.isPlayer()); // Reset player move if invalid
                 return false;
             }
-        }
-		// Can not take own den
-        if (board.getBlock()[newRow][newCol].getSpecial() != null) 
-		{ 
-            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() == player) 
+			// Can not take own den
+            else if (board.getBlock()[newRow][newCol].getSpecial().isBlue() == player) 
 			{
                 System.out.println("Invalid move");
                 board.setPlayer(!board.isPlayer()); // Reset player move if invalid

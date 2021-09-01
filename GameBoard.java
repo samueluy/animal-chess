@@ -26,7 +26,8 @@ public class GameBoard {
     /**
      * Creates a new board with each piece in its standard location
      */
-    public void createBoard() {
+    public void createBoard() 
+	{
         for (int row = 0; row < block.length; row++) { // Set blanks
             for (int col = 0; col < block[row].length; col++) {
                 block[row][col] = new BlockCoords(row, col);
@@ -60,18 +61,21 @@ public class GameBoard {
     /**
      * Displays the current state of the board
      */
-    public void display() {
-        for (int row = 0; row < block.length; row++) {
-            for (int col = 0; col < block[row].length; col++) {
-                if (block[row][col].getPiece() != null) {
-                    System.out.print(block[row][col].getPiece().getSymbol() +
-                            "\t");
-                } else if (block[row][col].getSpecial() != null) {
-                    System.out
-                            .print(block[row][col].getSpecial().getSymbol() + "\t");
-                } else {
+    public void display() 
+	{
+        for (int row = 0; row < block.length; row++) 
+		{
+            for (int col = 0; col < block[row].length; col++) 
+			{
+                if (block[row][col].getPiece() != null) 
+                    System.out.print(block[row][col].getPiece().getSymbol() + "\t");
+                
+				else if (block[row][col].getSpecial() != null) 
+                    System.out.print(block[row][col].getSpecial().getSymbol() + "\t"); 
+				
+				else 
                     System.out.print(".\t");
-                }
+                
             }
             System.out.println(9 - row);
         }
@@ -85,7 +89,8 @@ public class GameBoard {
      *
      * @return
      */
-    public boolean checkWin() {
+    public boolean checkWin() 
+	{
         int playerOneCount = 0;
         int playerTwoCount = 0;
         if (block[8][3].getPiece() != null) { // Den taken
