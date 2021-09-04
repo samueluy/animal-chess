@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
-    private ArrayList<JButton> buttons;
+    private JButton[][] buttons = new JButton[9][7];
     private JLabel lblheader;
+    private JButton btnRules;
 
     ImageIcon base = new ImageIcon(new ImageIcon((getClass().getResource("assets/base.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
     ImageIcon trap = new ImageIcon(new ImageIcon((getClass().getResource("assets/trap.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
@@ -31,11 +32,9 @@ public class GUI extends JFrame {
 
     public GUI() {
         super("Grid Layout");
-
-        setSize(400, 600);
+        setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
 
         setup();
@@ -44,13 +43,11 @@ public class GUI extends JFrame {
 
     public void setup() {
 
-
-        buttons = new ArrayList<>(63);
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new FlowLayout());
 
         //Top Panel
-        JButton btnRules = new JButton("Rules");
+        btnRules = new JButton("Rules");
         northPanel.add(btnRules);
 
         lblheader = new JLabel("ANIMAL CHESS");
@@ -63,57 +60,98 @@ public class GUI extends JFrame {
         JPanel gl = new JPanel();
         gl.setLayout(new GridLayout(9, 7, 5, 5));
 
-        for (int i = 0; i < 63; i++) {
-            // maybe may more effecient way to do this? Better if switch pero mahaba pa rin kung ganon? HAHAHA
-            if (i==6)
-                buttons.add(new JButton(tiger2));
-            else if(i==0)
-                buttons.add(new JButton(lion2));
-            else if(i==8)
-                buttons.add(new JButton(dog2));
-            else if(i==12)
-                buttons.add(new JButton(cat2));
-            else if(i==14)
-                buttons.add(new JButton(mouse2));
-            else if(i==16)
-                buttons.add(new JButton(leopard2));
-            else if(i==18)
-                buttons.add(new JButton(wolf2));
-            else if(i==20)
-                buttons.add(new JButton(elephant2));
+        String boardlbl = "";
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (i == 0 && j == 6) {
+                    boardlbl = "Tiger";
+                    buttons[i][j] = new JButton(tiger2);
+                } else if (i == 0 && j == 0) {
+                    boardlbl = "Lion";
+                    buttons[i][j] = (new JButton(lion2));
+                } else if (i == 1 && j == 1) {
+                    boardlbl = "Dog";
+                    buttons[i][j] = (new JButton(dog2));
+                } else if (i == 1 && j == 5) {
+                    boardlbl = "Cat";
+                    buttons[i][j] = (new JButton(cat2));
+                } else if (i == 2 && j == 0) {
+                    boardlbl = "Mouse";
+                    buttons[i][j] = (new JButton(mouse2));
+                } else if (i == 2 && j == 2) {
+                    boardlbl = "Leopard";
+                    buttons[i][j] = (new JButton(leopard2));
+                } else if (i == 2 && j == 4) {
+                    boardlbl = "Wolf";
+                    buttons[i][j] = (new JButton(wolf2));
+                } else if (i == 2 && j == 6) {
+                    boardlbl = "Elephant";
+                    buttons[i][j] = (new JButton(elephant2));
+                } else if ((i == 3 || i == 4 || i == 5) && (j == 1 || j == 2 || j == 4 || j == 5)) {
+                    boardlbl = "River";
+                    buttons[i][j] = (new JButton(river));
 
-            else if (i == 22 || i == 23 || i == 25 || i == 26 ||
-                    i == 29 || i == 30 || i == 32 || i == 33 ||
-                    i == 36 || i == 37 || i == 39 || i == 40)
-                buttons.add(new JButton(river));
+                } else if (i == 6 && j == 0) {
+                    boardlbl = "Elephant";
+                    buttons[i][j] = (new JButton(elephant1));
+                } else if (i == 6 && j == 2) {
+                    boardlbl = "Wolf";
+                    buttons[i][j] = (new JButton(wolf1));
+                } else if (i == 6 && j == 4) {
+                    boardlbl = "Leopard";
+                    buttons[i][j] = (new JButton(leopard1));
+                } else if (i == 6 && j == 6) {
+                    boardlbl = "Mouse";
+                    buttons[i][j] = (new JButton(mouse1));
+                } else if (i == 7 && j == 1) {
+                    boardlbl = "Cat";
+                    buttons[i][j] = (new JButton(cat1));
+                } else if (i == 7 && j == 5) {
+                    boardlbl = "Dog";
+                    buttons[i][j] = (new JButton(dog1));
+                } else if (i == 8 && j == 0) {
+                    boardlbl = "Tiger";
+                    buttons[i][j] = (new JButton(tiger1));
+                } else if (i == 8 && j == 6) {
+                    boardlbl = "Lion";
+                    buttons[i][j] = (new JButton(lion1));
+                } else if ((i == 0 || i == 8) && (j == 2 || j == 4)) {
+                    boardlbl = "Trap";
+                    buttons[i][j] = (new JButton(trap));
+                } else if ((i == 1 || i == 7) && j == 3) {
+                    boardlbl = "Trap";
+                    buttons[i][j] = new JButton(trap);
+                } else if ((i == 0 || i == 8) && j == 3) {
+                    boardlbl = "Base";
+                    buttons[i][j] = (new JButton(base));
+                } else
+                    buttons[i][j] = (new JButton());      //Sa arraylist
 
-            else if(i==42)
-                buttons.add(new JButton(elephant1));
-            else if(i==44)
-                buttons.add(new JButton(wolf1));
-            else if(i==46)
-                buttons.add(new JButton(leopard1));
-            else if(i==48)
-                buttons.add(new JButton(mouse1));
-            else if(i==50)
-                buttons.add(new JButton(cat1));
-            else if(i==54)
-                buttons.add(new JButton(dog1));
-            else if(i==56)
-                buttons.add(new JButton(tiger1));
-            else if(i==62)
-                buttons.add(new JButton(lion1));
-
-            else if (i == 2 || i == 4 || i == 10 ||
-                    i == 52 || i == 58 || i == 60)
-                buttons.add(new JButton(trap));
-
-            else if (i == 3 || i == 59)
-                buttons.add(new JButton(base));
-            else
-                buttons.add(new JButton());      //Sa arraylist
-            gl.add(buttons.get(i));     //Adding Buttons in the grid.
+                gl.add(buttons[i][j]);     //Adding Buttons in the grid.
+                buttons[i][j].setActionCommand(boardlbl);
+                boardlbl = "";
+            }
         }
         add(gl, BorderLayout.CENTER);
+
+    }
+
+    public void setActionListener(ActionListener listener) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                buttons[i][j].addActionListener(listener);
+            }
+        }
+        btnRules.addActionListener(listener);
+    }
+
+    public void instructionAlert() {
+        JLabel msg = new JLabel("You need to listen to me first. DI MO TO KAYA IPLAY.");
+
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
+        p.add(msg);
+
+        JOptionPane.showMessageDialog(null, p, "Instructions", JOptionPane.INFORMATION_MESSAGE);
     }
 }
