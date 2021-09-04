@@ -6,14 +6,16 @@
  * easily crossing the other side. Traps are also strategically placed to make the gameplay more enthralling.
  * </p>
  *
- * @author Deculawan, Ryan<br>Uy, Samuel Jedidiah
+ * @author Deculawan, Ryan Jay<br>Uy, Samuel Jedidiah
  * @version 1.0
  * @since 2021-07-24
  */
 
-public class AnimalChess {
-    public static void main(String[] args) {
-        new GUI();
+public class AnimalChess
+{
+    public static void main(String[] args)
+    {
+        //new GUI();
         GameBoard board = new GameBoard();
         Move move = new Move();
 

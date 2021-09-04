@@ -1,7 +1,8 @@
 /**
  * This class represent each block in the game. It may also contain an Animal object or a Special object.
  */
-public class BlockCoords {
+public class BlockCoords
+{
     private Animal piece;
     private Special special;
     private int x;
@@ -15,7 +16,8 @@ public class BlockCoords {
      * @param y     Y coordinate of the block
      * @param piece Animal class
      */
-    public BlockCoords(int x, int y, Animal piece) {
+    public BlockCoords(int x, int y, Animal piece)
+    {
         this.x = x;
         this.y = y;
         this.piece = piece;
