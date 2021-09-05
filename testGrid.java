@@ -2,13 +2,35 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class testGrid extends JFrame
 {
-    private ArrayList<JButton> buttons;
+    private JButton[][] buttons = new JButton[9][7];
     private JLabel lblheader;
     private JButton btnRules;
+
+    ImageIcon base = new ImageIcon(new ImageIcon((getClass().getResource("assets/base.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon trap = new ImageIcon(new ImageIcon((getClass().getResource("assets/trap.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon river = new ImageIcon(new ImageIcon((getClass().getResource("assets/river.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+
+    ImageIcon cat1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/cat1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon dog1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/dog1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon elephant1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/elephant1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon leopard1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/leopard1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon lion1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/lion1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon mouse1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/mouse1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon tiger1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/tiger1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon wolf1 = new ImageIcon(new ImageIcon((getClass().getResource("assets/wolf1.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+
+    ImageIcon cat2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/cat2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon dog2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/dog2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon elephant2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/elephant2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon leopard2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/leopard2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon lion2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/lion2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon mouse2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/mouse2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon tiger2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/tiger2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+    ImageIcon wolf2 = new ImageIcon(new ImageIcon((getClass().getResource("assets/wolf2.png"))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+
 
     public testGrid()
     {
@@ -24,7 +46,7 @@ public class testGrid extends JFrame
 
     public void setup()
     {
-        buttons = new ArrayList<>(63);
+
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new FlowLayout());
 
@@ -43,36 +65,137 @@ public class testGrid extends JFrame
         gl.setLayout(new GridLayout(9,7,5,5));
 
         String boardlbl = "";
-        for(int i = 0;i<63;i++)
+        for(int i = 0;i<9;i++)
         {
-            if(i == 0 ||i == 6 ||i == 8 ||i == 12 ||
-                    i == 14 ||i == 16 ||i == 18 ||i == 20)
-                boardlbl+="Animal";
+            for(int j = 0;j<7;j++)
+            {
+                if (i == 0 && j == 6)
+                {
+                    boardlbl = "Tiger1";
+                    buttons[i][j] = new JButton(tiger2);
+                }
+                else if (i == 0 && j == 0)
+                {
+                    boardlbl = "Lion1";
+                    buttons[i][j] = (new JButton(lion2));
+                }
+                else if (i == 1 && j == 1)
+                {
+                    boardlbl = "Dog1";
+                    buttons[i][j] = (new JButton(dog2));
+                }
+                else if (i == 1 && j == 5)
+                {
+                    boardlbl = "Cat1";
+                    buttons[i][j] = (new JButton(cat2));
+                }
+                else if (i == 2 && j == 0)
+                {
+                    boardlbl = "Mouse1";
+                    buttons[i][j] = (new JButton(mouse2));
+                }
+                else if (i == 2 && j == 2)
+                {
+                    boardlbl = "Leopard1";
+                    buttons[i][j] = (new JButton(leopard2));
+                }
+                else if (i == 2 && j == 4)
+                {
+                    boardlbl = "Wolf1";
+                    buttons[i][j] = (new JButton(wolf2));
+                }
+                else if (i == 2 && j == 6)
+                {
+                    boardlbl = "Elephant1";
+                    buttons[i][j] = (new JButton(elephant2));
+                }
+                else if((i == 3 || i == 4 || i == 5) && (j == 1 || j == 2 || j == 4 || j == 5))
+                {
+                    boardlbl = "River";
+                    buttons[i][j] = (new JButton(river));
 
-            else if(i == 22 ||i == 23 ||i == 25 ||i == 26 ||
-                    i == 29 ||i == 30 ||i == 32 ||i == 33 ||
-                    i == 36 ||i == 37 ||i == 39 ||i == 40)
-                boardlbl+="River";
+                }
 
-            else if(i == 42 ||i == 44 ||i == 46 ||i == 48 ||
-                    i == 50 ||i == 54 ||i == 56 ||i == 62)
-                boardlbl+="Animal";
+                else if (i == 6 && j == 0)
+                {
+                    boardlbl = "Elephant2";
+                    buttons[i][j] = (new JButton(elephant1));
+                }
+                else if (i == 6 && j == 2)
+                {
+                    boardlbl = "Wolf2";
+                    buttons[i][j] = (new JButton(wolf1));
+                }
+                else if (i == 6 && j == 4)
+                {
+                    boardlbl = "Leopard2";
+                    buttons[i][j] = (new JButton(leopard1));
+                }
+                else if (i == 6 && j == 6)
+                {
+                    boardlbl = "Mouse2";
+                    buttons[i][j] = (new JButton(mouse1));
+                }
+                else if (i == 7 && j == 1)
+                {
+                    boardlbl = "Cat2";
+                    buttons[i][j] = (new JButton(cat1));
+                }
+                else if (i == 7 && j == 5)
+                {
+                    boardlbl = "Dog2";
+                    buttons[i][j] = (new JButton(dog1));
+                }
+                else if (i == 8 && j == 0)
+                {
+                    boardlbl = "Tiger2";
+                    buttons[i][j] = (new JButton(tiger1));
+                }
+                else if (i == 8 && j == 6)
+                {
+                    boardlbl = "Lion2";
+                    buttons[i][j] = (new JButton(lion1));
+                }
+                else if ((i == 0 || i == 8) && (j == 2 || j == 4))
+                {
+                    boardlbl = "Trap";
+                    buttons[i][j] =(new JButton(trap));
+                }
+                else if((i == 1 || i == 7) && j == 3)
+                {
+                    boardlbl = "Trap";
+                    buttons[i][j] = new JButton(trap);
+                }
+                else if ((i == 0 || i == 8) && j == 3)
+                {
+                    boardlbl = "Base";
+                    buttons[i][j] = (new JButton(base));
+                }
+                else
+                    buttons[i][j] = (new JButton());      //Sa arraylist
 
-            else if(i == 2 ||i == 4 ||i == 10 ||
-                    i == 52 ||i == 58 ||i == 60)
-                boardlbl+="Trap.";
-            else if(i==3 || i==59)
-                boardlbl+="Base";
-
-            buttons.add(new JButton(boardlbl));      //Sa arraylist
-            gl.add(buttons.get(i));     //Adding Buttons in the grid.
-            boardlbl ="";
+                gl.add(buttons[i][j]);     //Adding Buttons in the grid.
+                buttons[i][j].setActionCommand(boardlbl);
+                boardlbl = "";
+            }
         }
         add(gl,BorderLayout.CENTER);
+
  }
     public void setActionListener(ActionListener listener)
     {
+        for(int i=0;i<9;i++)
+        {
+            for (int j = 0; j < 7; j++) {
+                buttons[i][j].addActionListener(listener);
+            }
+        }
         btnRules.addActionListener(listener);
+    }
+
+    public JButton getButton(int i, int j)
+    {
+        return buttons[i][j];
     }
 
     public void instructionAlert()
@@ -86,9 +209,42 @@ public class testGrid extends JFrame
         JOptionPane.showMessageDialog(null,p,"Instructions",JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public void emptyButtonAlert()
+    {
+        JLabel msg = new JLabel("Invalid Move!");
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
+        p.add(msg);
+
+        JOptionPane.showMessageDialog(null,p,"Warning!",JOptionPane.ERROR_MESSAGE);
+    }
+
+    /* I separated them muna. Nahihilo kase.*/
+    public void disablePlayer2(boolean enabled)
+    {
+        for(int i = 0;i < 9;i++)
+        {
+            for (int j=0;i<7;j++)
+            {
+                if (buttons[i][j].getActionCommand().contains("1"))  //the pieces on the top. -- Player 2.
+                    buttons[i][j].setEnabled(enabled);
+            }
+        }
+    }
+
+    public void disablePlayer1(boolean enabled)
+    {
+        for(int i = 0;i < 9;i++)
+        {
+            for (int j=0;i<7;j++)
+            {
+                if (buttons[i][j].getActionCommand().contains("2"))  //the pieces on the Bottom. -- Player 1.
+                    buttons[i][j].setEnabled(enabled);
+            }
+        }
+    }
     public static void main(String[] args) {
 
         testGrid GUI = new testGrid();
-        controlGrid control = new controlGrid(GUI);
     }
 }
