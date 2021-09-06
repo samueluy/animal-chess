@@ -9,7 +9,7 @@ public class Special {
     private String symbol;
     private boolean bBlue;
     private boolean free = true;
-    ImageIcon image;
+    private ImageIcon image;
 
     /**
      * @param type   1: Den; 2: Trap; 3: River
@@ -85,5 +85,9 @@ public class Special {
         catch(Exception e){
             System.out.println("Error! \"" + source + " \"not found");
         }
+    }
+
+    public ImageIcon getImage(){
+        return this.image;
     }
 }

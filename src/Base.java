@@ -4,8 +4,8 @@ public class Base extends Special{
         setSymbol("@"); // temporary
 
         if(bBlue)
-            setImage("assets/lion1.png");
+            setImage("assets/base.png");
         else
-            setImage("assets/lion2.png");
+            setImage("assets/base.png");
     }
 }

@@ -5,8 +5,8 @@ public class Mouse extends Animal{
         setSymbol("M"); // temporary
 
         if(isBlue)
-            setImage("assets/mouse1");
+            setImage("assets/mouse1.png");
         else
-            setImage("assets/mouse2");
+            setImage("assets/mouse2.png");
     }
 }

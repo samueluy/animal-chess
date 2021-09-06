@@ -90,4 +90,8 @@ public class Animal
     public boolean isBlue() {
         return bBlue;
     }
+
+    public ImageIcon getImage(){
+        return this.image;
+    }
 }
