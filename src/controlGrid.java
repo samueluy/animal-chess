@@ -6,8 +6,9 @@ public class controlGrid implements ActionListener
 {
     private testGrid view;
     private GameBoard model;
+    private BlockCoords[][] board;
 
-    controlGrid()// Soon, add the model as an attribute and a parameter.
+    controlGrid()
     {
         view = new testGrid();
         model = new GameBoard();
@@ -29,11 +30,17 @@ public class controlGrid implements ActionListener
     {
         boolean firstClick = true;
         boolean secondClick = true;
+<<<<<<< HEAD
 
         BlockCoords[][] board = model.getBlock();
         int x,y;
+=======
+        board = model.getBlock();
+        int x = 0, y = 0;
+>>>>>>> 34af47522f1d3ba61ba96a2fba15969648cd0e58
         int flag = 1;
 
+        JButton switcher;
         Object[] directions = {"Up", "Down", "Left", "Right"};
         if(e.getActionCommand().equals("Rules"))
         {
@@ -51,11 +58,11 @@ public class controlGrid implements ActionListener
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
                     {
                         //If the button clicked contains something, store x, y.
-                        System.out.println(i+" "+j);
-                        if(board[i][j].getTemp() != null) {
+                        if(board[i][j].getTemp() != ".") {
                             if (!(board[i][j].getTemp().contains(""))) {
                                 x = i;
                                 y = j;
+                                System.out.println(x+" " +y);
                             }
                             flag = 0;
                         }
@@ -68,6 +75,7 @@ public class controlGrid implements ActionListener
             /*Adjusting pos*/
             int choice = JOptionPane.showOptionDialog(null,"Choose a Direction :>","Direction",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions,directions[0]);
+<<<<<<< HEAD
             if(choice != -1) {
                 System.out.println("This piece will move "+ directions[choice]+" soon!");
                 switch(choice){
@@ -98,11 +106,21 @@ public class controlGrid implements ActionListener
         directionPanel.add(DownButton);
         directionPanel.add(LeftButton);
         directionPanel.add(RightButton);
+=======
 
-        p.add(directionPanel,BorderLayout.CENTER);
+            if(choice == 0)
+            {
+                if(board[x][y+1].getTemp() == null)
+                {
+>>>>>>> 34af47522f1d3ba61ba96a2fba15969648cd0e58
 
-        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
+                    switcher = view.getButton(x,y+1); //board[x][y + 1];
+
+                }
+            }
+        }
     }
+
     //Only for firstclick
     public void enableButtons()
     {
