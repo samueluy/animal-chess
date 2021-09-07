@@ -78,30 +78,7 @@ public class controlGrid implements ActionListener
         }
     }
 
-    public void moveChoice()
-    {
-        JLabel msg = new JLabel("Choose direction");
-        JPanel p = new JPanel();
-        p.setLayout(new BorderLayout());
-        p.add(msg, BorderLayout.NORTH);
 
-        JPanel directionPanel = new JPanel();
-        directionPanel.setLayout(new FlowLayout());
-
-        JButton upButton = new JButton("Up");
-        JButton DownButton = new JButton("Down");
-        JButton LeftButton = new JButton("Left");
-        JButton RightButton = new JButton("Right");
-
-        directionPanel.add(upButton);
-        directionPanel.add(DownButton);
-        directionPanel.add(LeftButton);
-        directionPanel.add(RightButton);
-
-        p.add(directionPanel,BorderLayout.CENTER);
-
-        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
-    }
     //Only for firstclick
     public void enableButtons()
     {
