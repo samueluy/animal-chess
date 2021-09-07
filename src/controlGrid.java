@@ -28,11 +28,11 @@ public class controlGrid implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         boolean firstClick = true;
-
         boolean secondClick = true;
         BlockCoords[][] board = model.getBlock();
-        int x = 0,y = 0;
         int flag = 1;
+        int x=0,y=0;
+        int i=0, j = 0;
 
         Object[] directions = {"Up", "Down", "Left", "Right"};
         if(e.getActionCommand().equals("Rules"))
@@ -43,9 +43,9 @@ public class controlGrid implements ActionListener
         else
         {
             //// Searching for the coordinate that was clicked.
-            for(int i=0;i<9;i++)
+            for(i=0;i<9;i++)
             {
-                for(int j = 0;j<7;j++)
+                for(j=0;j<7;j++)
                 {
                     ///Changing Or Invalidating Move
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
@@ -56,7 +56,6 @@ public class controlGrid implements ActionListener
                             System.out.println(board[i][j].getTemp());
                             x = i;
                             y = j;
-
                             flag = 0;
                         }
                         //If the button clicked contains something, store x, y.
@@ -70,15 +69,44 @@ public class controlGrid implements ActionListener
                 /*Adjusting pos*/
                 int choice = JOptionPane.showOptionDialog(null, "Choose a Direction :>", "Direction",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions, directions[0]);
-                if (choice != -1)
-                    System.out.println("This piece will move " + directions[choice] + " soon!");
+                if (choice != -1){
+                    switch (choice) {
+                        case 0 -> view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
+                        case 1 -> view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
+                        case 2 -> view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
+                        case 3 -> view.move(view.getButton(x, y), view.getButton(x, y + 1)); // right
+                    }
+                }
                 else
                     System.out.println("Panget mo kabonding.");
             }
         }
     }
 
+    public void moveChoice()
+    {
+        JLabel msg = new JLabel("Choose direction");
+        JPanel p = new JPanel();
+        p.setLayout(new BorderLayout());
+        p.add(msg, BorderLayout.NORTH);
 
+        JPanel directionPanel = new JPanel();
+        directionPanel.setLayout(new FlowLayout());
+
+        JButton upButton = new JButton("Up");
+        JButton DownButton = new JButton("Down");
+        JButton LeftButton = new JButton("Left");
+        JButton RightButton = new JButton("Right");
+
+        directionPanel.add(upButton);
+        directionPanel.add(DownButton);
+        directionPanel.add(LeftButton);
+        directionPanel.add(RightButton);
+
+        p.add(directionPanel,BorderLayout.CENTER);
+
+        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
+    }
     //Only for firstclick
     public void enableButtons()
     {
