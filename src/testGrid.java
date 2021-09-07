@@ -180,8 +180,15 @@ public class testGrid extends JFrame
             }
         }
     }
-    public static void main(String[] args) {
 
+    // TEMPORARY
+    public void move(JButton from, JButton to) {
+        to.setIcon(from.getIcon());
+        from.setIcon(null);
+    }
+
+
+    public static void main(String[] args) {
         testGrid GUI = new testGrid();
     }
 }

@@ -28,8 +28,8 @@ public class controlGrid implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         boolean firstClick = true;
-
         boolean secondClick = true;
+
         BlockCoords[][] board = model.getBlock();
         int x,y;
         int flag = 1;
@@ -68,11 +68,14 @@ public class controlGrid implements ActionListener
             /*Adjusting pos*/
             int choice = JOptionPane.showOptionDialog(null,"Choose a Direction :>","Direction",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions,directions[0]);
-            if(choice != -1)
+            if(choice != -1) {
                 System.out.println("This piece will move "+ directions[choice]+" soon!");
+                switch(choice){
+                    case 0: view.move(view.getButton(0,0), view.getButton(0,0));
+                }
+            }
             else
                 System.out.println("Panget mo kabonding.");
-
         }
     }
 
