@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * This class represents each block which has a special trait.
@@ -9,7 +10,7 @@ public class Special {
     private String symbol;
     private boolean bBlue;
     private boolean free = true;
-    private ImageIcon image;
+    private URL imageURL;
 
     /**
      * @param type   1: Den; 2: Trap; 3: River
@@ -36,6 +37,8 @@ public class Special {
     public Special(boolean isBlue){
         this.bBlue = isBlue;
     }
+
+    public Special(){}
 
     /**
      * Returns the type of Special object
@@ -80,14 +83,14 @@ public class Special {
 
     public void setImage(String source){ // to use try catch
         try{
-            this.image = new ImageIcon(new ImageIcon((getClass().getResource(source))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+            this.imageURL = (getClass().getResource(source));
         }
         catch(Exception e){
             System.out.println("Error! \"" + source + " \"not found");
         }
     }
 
-    public ImageIcon getImage(){
-        return this.image;
+    public URL getImageURL(){
+        return this.imageURL;
     }
 }

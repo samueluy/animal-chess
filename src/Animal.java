@@ -2,6 +2,7 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * This class represents each piece of the game.
@@ -12,7 +13,7 @@ public class Animal
     private boolean bAlive = true;
     private boolean bBlue;
     private String symbol; // temp
-    ImageIcon image;
+    private URL imageURL;
 
     /**
      * @param rank   Given rank of a piece
@@ -72,7 +73,7 @@ public class Animal
      */
     public void setImage(String source){ // to use try catch
         try{
-            this.image = new ImageIcon(new ImageIcon((getClass().getResource(source))).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+            this.imageURL = (getClass().getResource(source));
         }
         catch(Exception e){
             System.out.println("Error! \"" + source + " \"not found");
@@ -91,7 +92,7 @@ public class Animal
         return bBlue;
     }
 
-    public ImageIcon getImage(){
-        return this.image;
+    public URL getImageURL(){
+        return this.imageURL;
     }
 }
