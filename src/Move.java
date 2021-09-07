@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Move {
     Scanner in = new Scanner(System.in);
     private Animal piece;
-    private GameBoard board;
+    private GameBoard board = new GameBoard();
 
     /**
      * Ask the player for an input to determine which piece he/she desires to move and to where
@@ -265,5 +265,9 @@ public class Move {
         }
 
         return true;
+    }
+
+    public GameBoard getBoard() {
+        return board;
     }
 }

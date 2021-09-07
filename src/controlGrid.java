@@ -5,22 +5,21 @@ import java.awt.event.*;
 public class controlGrid implements ActionListener
 {
     private testGrid view;
-    private GameBoard model;
+    private Move model;
 
     controlGrid()// Soon, add the model as an attribute and a parameter.
     {
         view = new testGrid();
-        model = new GameBoard();
-        Move move = new Move();
+        model = new Move();
 
-        model.createBoard();
-        model.display();
+        model.getBoard().createBoard();
+        model.getBoard().display();
 
         view.setActionListener(this);
 
-        while (!model.checkWin()) {
-            move.move(model, model.isPlayer());
-            model.display();
+        while (!model.getBoard().checkWin()) {
+            model.move(model.getBoard(), model.getBoard().isPlayer());
+            model.getBoard().display();
         }
     }
 
@@ -29,7 +28,7 @@ public class controlGrid implements ActionListener
     {
         boolean firstClick = true;
         boolean secondClick = true;
-        BlockCoords[][] board = model.getBlock();
+        BlockCoords[][] board = model.getBoard().getBlock();
         int flag = 1;
         int x=0,y=0;
         int i=0, j = 0;
@@ -71,10 +70,17 @@ public class controlGrid implements ActionListener
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions, directions[0]);
                 if (choice != -1){
                     switch (choice) {
-                        case 0 -> view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
-                        case 1 -> view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
-                        case 2 -> view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
-                        case 3 -> view.move(view.getButton(x, y), view.getButton(x, y + 1)); // right
+                        case 0: view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
+                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x-1][y]);
+                                break;
+                        case 1: view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
+                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x+1][y]);
+                                break;
+                        case 2: view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
+                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x][y-1]);
+                        case 3: view.move(view.getButton(x, y), view.getButton(x, y + 1)); // right
+                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x][y+1]);
+                                break;
                     }
                 }
                 else
@@ -112,11 +118,11 @@ public class controlGrid implements ActionListener
     {
         ///How do I know yung turn shiet.
         //Turn of Player 1
-        if(model.isPlayer()) {
+        if(model.getBoard().isPlayer()) {
             view.disablePlayer1(true);  //Enable Player 1 buttons
             view.disablePlayer2(false);
         }
-        else if(!(model.isPlayer())) {
+        else if(!(model.getBoard().isPlayer())) {
             view.disablePlayer2(true); // Enable Player 2 Buttons
             view.disablePlayer1(false);
         }
