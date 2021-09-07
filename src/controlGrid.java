@@ -6,17 +6,16 @@ public class controlGrid implements ActionListener
 {
     private testGrid view;
     private GameBoard model;
-    private BlockCoords[][] board;
 
-    controlGrid()
+    controlGrid()// Soon, add the model as an attribute and a parameter.
     {
         view = new testGrid();
         model = new GameBoard();
         Move move = new Move();
-        
+
         model.createBoard();
         model.display();
-        
+
         view.setActionListener(this);
 
         while (!model.checkWin()) {
@@ -29,18 +28,12 @@ public class controlGrid implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         boolean firstClick = true;
-        boolean secondClick = true;
-<<<<<<< HEAD
 
+        boolean secondClick = true;
         BlockCoords[][] board = model.getBlock();
-        int x,y;
-=======
-        board = model.getBlock();
-        int x = 0, y = 0;
->>>>>>> 34af47522f1d3ba61ba96a2fba15969648cd0e58
+        int x = 0,y = 0;
         int flag = 1;
 
-        JButton switcher;
         Object[] directions = {"Up", "Down", "Left", "Right"};
         if(e.getActionCommand().equals("Rules"))
         {
@@ -57,33 +50,31 @@ public class controlGrid implements ActionListener
                     ///Changing Or Invalidating Move
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
                     {
-                        //If the button clicked contains something, store x, y.
-                        if(board[i][j].getTemp() != ".") {
-                            if (!(board[i][j].getTemp().contains(""))) {
-                                x = i;
-                                y = j;
-                                System.out.println(x+" " +y);
-                            }
+                        //Prevents the player from choosing water or the base.
+                        if(board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("=")) )
+                        {
+                            System.out.println(board[i][j].getTemp());
+                            x = i;
+                            y = j;
+
                             flag = 0;
                         }
+                        //If the button clicked contains something, store x, y.
                     }
                 }
             }
             if(flag == 1)
                 view.emptyButtonAlert();
-
-            /*Adjusting pos*/
-            int choice = JOptionPane.showOptionDialog(null,"Choose a Direction :>","Direction",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions,directions[0]);
-<<<<<<< HEAD
-            if(choice != -1) {
-                System.out.println("This piece will move "+ directions[choice]+" soon!");
-                switch(choice){
-                    case 0: view.move(view.getButton(0,0), view.getButton(0,0));
-                }
-            }
             else
-                System.out.println("Panget mo kabonding.");
+            {
+                /*Adjusting pos*/
+                int choice = JOptionPane.showOptionDialog(null, "Choose a Direction :>", "Direction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions, directions[0]);
+                if (choice != -1)
+                    System.out.println("This piece will move " + directions[choice] + " soon!");
+                else
+                    System.out.println("Panget mo kabonding.");
+            }
         }
     }
 
@@ -106,21 +97,11 @@ public class controlGrid implements ActionListener
         directionPanel.add(DownButton);
         directionPanel.add(LeftButton);
         directionPanel.add(RightButton);
-=======
 
-            if(choice == 0)
-            {
-                if(board[x][y+1].getTemp() == null)
-                {
->>>>>>> 34af47522f1d3ba61ba96a2fba15969648cd0e58
+        p.add(directionPanel,BorderLayout.CENTER);
 
-                    switcher = view.getButton(x,y+1); //board[x][y + 1];
-
-                }
-            }
-        }
+        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
     }
-
     //Only for firstclick
     public void enableButtons()
     {
