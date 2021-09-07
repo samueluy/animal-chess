@@ -6,17 +6,16 @@ public class controlGrid implements ActionListener
 {
     private testGrid view;
     private GameBoard model;
-    private BlockCoords[][] board;
 
-    controlGrid()
+    controlGrid()// Soon, add the model as an attribute and a parameter.
     {
         view = new testGrid();
         model = new GameBoard();
         Move move = new Move();
-        
+
         model.createBoard();
         model.display();
-        
+
         view.setActionListener(this);
 
         while (!model.checkWin()) {
@@ -31,11 +30,10 @@ public class controlGrid implements ActionListener
         boolean firstClick = true;
 
         boolean secondClick = true;
-        board = model.getBlock();
-        int x = 0, y = 0;
+        BlockCoords[][] board = model.getBlock();
+        int x = 0,y = 0;
         int flag = 1;
 
-        JButton switcher;
         Object[] directions = {"Up", "Down", "Left", "Right"};
         if(e.getActionCommand().equals("Rules"))
         {
@@ -52,37 +50,58 @@ public class controlGrid implements ActionListener
                     ///Changing Or Invalidating Move
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
                     {
-                        //If the button clicked contains something, store x, y.
-                        if(board[i][j].getTemp() != ".") {
-                            if (!(board[i][j].getTemp().contains(""))) {
-                                x = i;
-                                y = j;
-                                System.out.println(x+" " +y);
-                            }
+                        //Prevents the player from choosing water or the base.
+                        if(board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("=")) )
+                        {
+                            System.out.println(board[i][j].getTemp());
+                            x = i;
+                            y = j;
+
                             flag = 0;
                         }
+                        //If the button clicked contains something, store x, y.
                     }
                 }
             }
             if(flag == 1)
                 view.emptyButtonAlert();
-
-            /*Adjusting pos*/
-            int choice = JOptionPane.showOptionDialog(null,"Choose a Direction :>","Direction",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions,directions[0]);
-
-            if(choice == 0)
+            else
             {
-                if(board[x][y+1].getTemp() == null)
-                {
-
-                    switcher = view.getButton(x,y+1); //board[x][y + 1];
-
-                }
+                /*Adjusting pos*/
+                int choice = JOptionPane.showOptionDialog(null, "Choose a Direction :>", "Direction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions, directions[0]);
+                if (choice != -1)
+                    System.out.println("This piece will move " + directions[choice] + " soon!");
+                else
+                    System.out.println("Panget mo kabonding.");
             }
         }
     }
 
+    public void moveChoice()
+    {
+        JLabel msg = new JLabel("Choose direction");
+        JPanel p = new JPanel();
+        p.setLayout(new BorderLayout());
+        p.add(msg, BorderLayout.NORTH);
+
+        JPanel directionPanel = new JPanel();
+        directionPanel.setLayout(new FlowLayout());
+
+        JButton upButton = new JButton("Up");
+        JButton DownButton = new JButton("Down");
+        JButton LeftButton = new JButton("Left");
+        JButton RightButton = new JButton("Right");
+
+        directionPanel.add(upButton);
+        directionPanel.add(DownButton);
+        directionPanel.add(LeftButton);
+        directionPanel.add(RightButton);
+
+        p.add(directionPanel,BorderLayout.CENTER);
+
+        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
+    }
     //Only for firstclick
     public void enableButtons()
     {
