@@ -14,24 +14,19 @@ public class Move {
      * @param board  GameBoard object
      * @param player Current player move
      */
-    public void move(GameBoard board, boolean player) {
-        System.out.print("Enter piece character: ");
-        String symbol = in.nextLine();
-        System.out.print("Enter direction (U,D,L,R): ");
-        String direction = in.nextLine();
-
+    public void move(GameBoard board, boolean player, int direction) {
         boolean validPiece = false;
         for (int row = 0; row < board.getBlock().length; row++) {
             for (int col = 0; col < board.getBlock()[row].length; col++) {
                 if (board.getBlock()[row][col].getPiece() != null) {
-                    if (board.getBlock()[row][col].getPiece().getSymbol()
+                  /*  if (board.getBlock()[row][col].getPiece().getSymbol()
                             .equals(symbol) &&
                             board.getBlock()[row][col].getPiece().isBlue() ==
-                                    player) {
+                                    player) {*/
                         validPiece = true;
                         boolean hasMoved = false;
                         switch (direction) {
-                            case "U":
+                            case 0:
                                 if (checkBounds(board, row - 1, col)) {
                                     if (board.getBlock()[row - 1][col]
                                             .getSpecial() != null) {
@@ -60,7 +55,7 @@ public class Move {
                                 }
                                 break;
 
-                            case "D":
+                            case 1:
                                 if (checkBounds(board, row + 1, col)) {
                                     if (board.getBlock()[row + 1][col]
                                             .getSpecial() != null) {
@@ -92,7 +87,7 @@ public class Move {
 
                                 break;
 
-                            case "L":
+                            case 2:
                                 if (checkBounds(board, row, col - 1)) {
                                     if (board.getBlock()[row][col - 1]
                                             .getSpecial() != null) {
@@ -122,7 +117,7 @@ public class Move {
 
                                 break;
 
-                            case "R":
+                            case 3:
                                 if (checkBounds(board, row, col + 1)) {
                                     if (board.getBlock()[row][col + 1]
                                             .getSpecial() != null) {
@@ -161,7 +156,7 @@ public class Move {
                                 System.out.println("Invalid input");
                                 board.setPlayer(!board.isPlayer());
                         }
-                    }
+                    //}
                 }
             }
         }

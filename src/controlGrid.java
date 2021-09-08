@@ -17,15 +17,18 @@ public class controlGrid implements ActionListener
 
         view.setActionListener(this);
 
+        /*
         while (!model.getBoard().checkWin()) {
             model.move(model.getBoard(), model.getBoard().isPlayer());
             model.getBoard().display();
         }
+         */
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        BlockCoords modelSwitcher;
         boolean firstClick = true;
         boolean secondClick = true;
         BlockCoords[][] board = model.getBoard().getBlock();
@@ -72,6 +75,14 @@ public class controlGrid implements ActionListener
                     switch (choice) {
                         case 0: view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
                                 model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x-1][y]);
+                                //Model Change
+                                modelSwitcher = model.getBoard().getBlock()[x-1][y];
+                                model.getBoard().getBlock()[x-1][y] = model.getBoard().getBlock()[x][y];
+                                model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                model.move(model.getBoard(), model.getBoard().isPlayer(), choice);
+                                model.getBoard().display();
+                              //  model.hasMoved = true;
+
                                 break;
                         case 1: view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
                                 model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x+1][y]);

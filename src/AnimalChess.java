@@ -20,7 +20,7 @@ public class AnimalChess {
         board.createBoard();
         board.display();
         while (!board.checkWin()) {
-            move.move(board, board.isPlayer());
+          //  move.move(board, board.isPlayer());
             board.display();
         }
     }
