@@ -37,6 +37,29 @@ public class GameBoard {
             block[6][4] = new BlockCoords(6, 4, new Animal(5, "L", true));
             block[2][2] = new BlockCoords(2, 2, new Animal(5, "L", false));
 
+            block[7][5] = new BlockCoords(7,5,new Animal(4,"D",true));
+            block[1][1] = new BlockCoords(1,1,new Animal(4,"D",false));
+            block[7][1] = new BlockCoords(7,1,new Animal(2,"C",true));
+            block[1][5] = new BlockCoords(1,5,new Animal(2,"C",false));
+
+            block[6][6] = new BlockCoords(6,6,new Animal(1,"M",true));
+            block[2][0] = new BlockCoords(2,0,new Animal(1,"M",false));
+            block[6][2] = new BlockCoords(6,2,new Animal(3,"W",true));
+            block[2][4] = new BlockCoords(2,4,new Animal(3,"W",false));
+
+            block[6][0] = new BlockCoords(6,0,new Animal(8,"E",true));
+            block[2][6] = new BlockCoords(2,6,new Animal(8,"E",false));
+            block[8][6] = new BlockCoords(8,6,new Animal(7,"Li",true));
+            block[0][0] = new BlockCoords(0,0,new Animal(7,"Li",false));
+
+            /*
+
+        buttons[2][6] = new JButton(elephant2);
+        buttons[6][0] = new JButton(elephant1);
+
+        buttons[0][0] = new JButton(lion2);
+        buttons[8][6] = new JButton(lion1);
+        */
             // Special blocks
             block[3][1] = new BlockCoords(3, 1, new Special(3, "="));
             block[3][2] = new BlockCoords(3, 2, new Special(3, "="));

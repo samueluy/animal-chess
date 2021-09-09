@@ -73,57 +73,118 @@ public class controlGrid implements ActionListener
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, directions, directions[0]);
                 if (choice != -1){
                     switch (choice) {
-                        case 0: view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
-                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x-1][y]);
-                                //Model Change
-                                modelSwitcher = model.getBoard().getBlock()[x-1][y];
-                                model.getBoard().getBlock()[x-1][y] = model.getBoard().getBlock()[x][y];
-                                model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                model.move(model.getBoard(), model.getBoard().isPlayer(), choice);
-                                model.getBoard().display();
-                              //  model.hasMoved = true;
+                        case 0:
+                            ///If there is water in front.
+                                if(x-1 >=0)
+                                {
+                                    if (model.getBoard().getBlock()[x - 1][y].getTemp() != null && model.getBoard().getBlock()[x - 1][y].getTemp().contains("=")) {
+                                        //Tiger Move Special Condition:
+                                        if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                                            view.move(view.getButton(x, y), view.getButton(x - 4, y)); // up
+                                            modelSwitcher = model.getBoard().getBlock()[x - 4][y];
+                                            model.getBoard().getBlock()[x - 4][y] = model.getBoard().getBlock()[x][y];
+                                            model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                        } else {
+                                            //Turn should not change. Displat invalid move.
+                                            view.emptyButtonAlert();
+                                        }
+                                    } else {
+                                        view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
+                                        modelSwitcher = model.getBoard().getBlock()[x - 1][y];
+                                        model.getBoard().getBlock()[x - 1][y] = model.getBoard().getBlock()[x][y];
+                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                    }
+                                }
+                                else
+                                    view.emptyButtonAlert();
+                            break;
+                        /*
+                         * why it worked: THE POINTERS WAS CHANGED. MEANING THE GUI ALSO CHANGED CUZ IT RELIES ON POINTERS.
+                         * */
 
-                                break;
-                        case 1: view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
-                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x+1][y]);
-                                break;
-                        case 2: view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
-                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x][y-1]);
-                        case 3: view.move(view.getButton(x, y), view.getButton(x, y + 1)); // right
-                                model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[x][y+1]);
+                        case 1:
+                            if(x+1 < 9) {
+                                if (model.getBoard().getBlock()[x + 1][y].getTemp() != null && model.getBoard().getBlock()[x + 1][y].getTemp().contains("=")) {
+                                    //Tiger Move Special Condition:
+                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                                        view.move(view.getButton(x, y), view.getButton(x + 4, y)); // down
+                                        modelSwitcher = model.getBoard().getBlock()[x + 4][y];
+                                        model.getBoard().getBlock()[x + 4][y] = model.getBoard().getBlock()[x][y];
+                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                    } else {
+                                        //Turn should not change. Displat invalid move.
+                                        view.emptyButtonAlert();
+                                    }
+                                } else {
+                                    view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
+                                    modelSwitcher = model.getBoard().getBlock()[x + 1][y];
+                                    model.getBoard().getBlock()[x + 1][y] = model.getBoard().getBlock()[x][y];
+                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                }
+                            }
+                            else
+                                view.emptyButtonAlert();
+                            break;
+                        case 2:
+                            if(y-1 >= 0)
+                            {
+                                if (model.getBoard().getBlock()[x][y - 1].getTemp() != null && model.getBoard().getBlock()[x][y - 1].getTemp().contains("=")) {
+                                    //Tiger Move Special Condition:
+                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                                        view.move(view.getButton(x, y), view.getButton(x, y - 3)); // left
+                                        modelSwitcher = model.getBoard().getBlock()[x][y - 3];
+                                        model.getBoard().getBlock()[x][y - 3] = model.getBoard().getBlock()[x][y];
+                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                    } else {
+                                        //Turn should not change. Displat invalid move.
+                                        view.emptyButtonAlert();
+                                    }
+                                } else {
+                                    view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
+                                    modelSwitcher = model.getBoard().getBlock()[x][y - 1];
+                                    model.getBoard().getBlock()[x][y - 1] = model.getBoard().getBlock()[x][y];
+                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                }
+                            }
+                            else
+                                view.emptyButtonAlert();
+                            break;
+
+                        case 3:
+                            if(y+1 < 7) {
+                                if (model.getBoard().getBlock()[x][y + 1].getTemp() != null && model.getBoard().getBlock()[x][y + 1].getTemp().contains("=")) {
+                                    //Tiger Move Special Condition:
+                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                                        view.move(view.getButton(x, y), view.getButton(x, y + 3)); // Right
+                                        modelSwitcher = model.getBoard().getBlock()[x][y + 3];
+                                        model.getBoard().getBlock()[x][y + 3] = model.getBoard().getBlock()[x][y];
+                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                    } else {
+                                        //Turn should not change. Displat invalid move.
+                                        view.emptyButtonAlert();
+                                    }
+                                } else {
+                                    view.move(view.getButton(x, y), view.getButton(x, y + 1)); // left
+                                    modelSwitcher = model.getBoard().getBlock()[x][y + 1];
+                                    model.getBoard().getBlock()[x][y + 1] = model.getBoard().getBlock()[x][y];
+                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                                }
+                            }
+                            else
+                                view.emptyButtonAlert();
                                 break;
                     }
+                    model.getBoard().display();
                 }
                 else
-                    System.out.println("Panget mo kabonding.");
+                    System.out.println("Bad!");
             }
         }
     }
+    /*
+    * Restriction: River movement. Tiger Special Ability.
+    * */
 
-    public void moveChoice()
-    {
-        JLabel msg = new JLabel("Choose direction");
-        JPanel p = new JPanel();
-        p.setLayout(new BorderLayout());
-        p.add(msg, BorderLayout.NORTH);
-
-        JPanel directionPanel = new JPanel();
-        directionPanel.setLayout(new FlowLayout());
-
-        JButton upButton = new JButton("Up");
-        JButton DownButton = new JButton("Down");
-        JButton LeftButton = new JButton("Left");
-        JButton RightButton = new JButton("Right");
-
-        directionPanel.add(upButton);
-        directionPanel.add(DownButton);
-        directionPanel.add(LeftButton);
-        directionPanel.add(RightButton);
-
-        p.add(directionPanel,BorderLayout.CENTER);
-
-        JOptionPane.showOptionDialog(null,p,"Direction",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{},null);
-    }
     //Only for firstclick
     public void enableButtons()
     {
