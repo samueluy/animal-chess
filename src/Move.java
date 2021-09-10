@@ -54,7 +54,6 @@ public class Move {
                                     }
                                 }
                                 break;
-
                             case 1:
                                 if (checkBounds(board, row + 1, col)) {
                                     if (board.getBlock()[row + 1][col]
@@ -86,7 +85,6 @@ public class Move {
                                 }
 
                                 break;
-
                             case 2:
                                 if (checkBounds(board, row, col - 1)) {
                                     if (board.getBlock()[row][col - 1]
@@ -114,7 +112,6 @@ public class Move {
                                                             1]);
                                     }
                                 }
-
                                 break;
 
                             case 3:
@@ -149,7 +146,6 @@ public class Move {
                                         }
                                     }
                                 }
-
                                 break;
 
                             default:
@@ -240,7 +236,10 @@ public class Move {
 
             if (board.getBlock()[newRow][newCol].getSpecial() !=
                     null) { // Check if special block
-                if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
+            if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("T") ||
+               board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("Li")||
+               board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M"));
+                else if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
                         .equals("=")) {
                     System.out.println("Invalid move");
                     board.setPlayer(
@@ -301,6 +300,12 @@ public class Move {
                     view.move(view.getButton(x, y), view.getButton(newX2, y)); // up
                     modelSwitcher = model.getBoard().getBlock()[newX2][newY2];
                     model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
+                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                }
+                else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1)); // up
+                    modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
+                    model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                     model.getBoard().getBlock()[x][y] = modelSwitcher;
                 }
                 else
