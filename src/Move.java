@@ -1,11 +1,7 @@
-import java.util.Scanner;
-
 /**
  * This class contains all the methods which will allow a player to move their pieces
  */
 public class Move {
-    Scanner in = new Scanner(System.in);
-    private Animal piece;
     private GameBoard board = new GameBoard();
 
     /**
@@ -297,28 +293,24 @@ public class Move {
             if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
                 //Tiger/Lion Move Special Condition:
                 if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                    view.move(view.getButton(x, y), view.getButton(newX2, y)); // up
-                    modelSwitcher = model.getBoard().getBlock()[newX2][newY2];
+                    view.move(view.getButton(x, y), view.getButton(newX2, newY2));
                     model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
-                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                 }
                 //Mouse Move Special Condition
-                else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){
-                    view.move(view.getButton(x, y), view.getButton(newX1, newY1)); // up
-                    modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
+                else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                     model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                 }
                 else
                     //Turn should not change. Display invalid move.
                     view.emptyButtonAlert();
             }
             else {
-                view.move(view.getButton(x, y), view.getButton(newX1, newY1)); // up
-                modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
+                view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                model.getBoard().getBlock()[x][y] = modelSwitcher;
-                //model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[newX1][newY1]);
+                model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
             }
         }
         else
