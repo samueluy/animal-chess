@@ -183,12 +183,8 @@ public class testGrid extends JFrame
 
     // TEMPORARY
     public void move(JButton from, JButton to) {
-        JButton switcher = to; 
         to.setIcon(from.getIcon());
-
         from.setIcon(null);
-
-        from = switcher;
     }
 
 

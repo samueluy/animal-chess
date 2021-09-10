@@ -84,7 +84,7 @@ public class controlGrid implements ActionListener
                          * */
 
                         case 1:
-                            if(x+1>=9)///If there is water in front.
+                            if(x+1<9)///If there is water in front.
                                 model.fullMove(model, view, x, y, choice);
                             else
                                 view.emptyButtonAlert();

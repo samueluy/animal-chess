@@ -214,51 +214,52 @@ public class Move {
      */
     public boolean checkValid(GameBoard board, int oldRow, int oldCol,
                               int newRow, int newCol, boolean player) {
-        if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                board.getBlock()[newRow][newCol].getPiece() != null) {
-            if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
-                    board.getBlock()[newRow][newCol].getPiece().getRank()) {
-                System.out.println("Invalid move");
-                board.setPlayer(
-                        !board.isPlayer()); // Reset player move if invalid
-                return false;
+        if(checkBounds(board, newRow,newCol)){
+            if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
+                    board.getBlock()[newRow][newCol].getPiece() != null) {
+                if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
+                        board.getBlock()[newRow][newCol].getPiece().getRank()) {
+                    System.out.println("Invalid move");
+                    board.setPlayer(
+                            !board.isPlayer()); // Reset player move if invalid
+                    return false;
+                }
+            }
+
+            if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
+                    board.getBlock()[newRow][newCol].getPiece() !=
+                            null) { // Animal same player condition; can not eat own piece
+                if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() ==
+                        board.getBlock()[newRow][newCol].getPiece().isBlue()) {
+                    System.out.println("Invalid move");
+                    board.setPlayer(
+                            !board.isPlayer()); // Reset player move if invalid
+                    return false;
+                }
+            }
+
+            if (board.getBlock()[newRow][newCol].getSpecial() !=
+                    null) { // Check if special block
+                if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
+                        .equals("=")) {
+                    System.out.println("Invalid move");
+                    board.setPlayer(
+                            !board.isPlayer()); // Reset player move if invalid
+                    return false;
+                }
+            }
+
+            if (board.getBlock()[newRow][newCol].getSpecial() !=
+                    null) { // Can not take own den
+                if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
+                        player) {
+                    System.out.println("Invalid move");
+                    board.setPlayer(
+                            !board.isPlayer()); // Reset player move if invalid
+                    return false;
+                }
             }
         }
-
-        if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                board.getBlock()[newRow][newCol].getPiece() !=
-                        null) { // Animal same player condition; can not eat own piece
-            if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() ==
-                    board.getBlock()[newRow][newCol].getPiece().isBlue()) {
-                System.out.println("Invalid move");
-                board.setPlayer(
-                        !board.isPlayer()); // Reset player move if invalid
-                return false;
-            }
-        }
-
-        if (board.getBlock()[newRow][newCol].getSpecial() !=
-                null) { // Check if special block
-            if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
-                    .equals("=")) {
-                System.out.println("Invalid move");
-                board.setPlayer(
-                        !board.isPlayer()); // Reset player move if invalid
-                return false;
-            }
-        }
-
-        if (board.getBlock()[newRow][newCol].getSpecial() !=
-                null) { // Can not take own den
-            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
-                    player) {
-                System.out.println("Invalid move");
-                board.setPlayer(
-                        !board.isPlayer()); // Reset player move if invalid
-                return false;
-            }
-        }
-
         return true;
     }
 
@@ -292,9 +293,10 @@ public class Move {
             newY2=y+3;
         }
         BlockCoords modelSwitcher;
+        if(checkValid(model.getBoard(), x, y, newX1, newY1, model.getBoard().isPlayer())){
+            System.out.println("in");
             if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
                 //Tiger Move Special Condition:
-                System.out.println(newX1 +" "+ newX2);
                 if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
                     view.move(view.getButton(x, y), view.getButton(newX2, y)); // up
                     modelSwitcher = model.getBoard().getBlock()[newX2][newY2];
@@ -311,6 +313,9 @@ public class Move {
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                 model.getBoard().getBlock()[x][y] = modelSwitcher;
             }
+        }
+        else
+            view.emptyButtonAlert();
     }
 
     public GameBoard getBoard() {
