@@ -74,102 +74,31 @@ public class controlGrid implements ActionListener
                 if (choice != -1){
                     switch (choice) {
                         case 0:
-                            ///If there is water in front.
-                                if(x-1 >=0)
-                                {
-                                    if (model.getBoard().getBlock()[x - 1][y].getTemp() != null && model.getBoard().getBlock()[x - 1][y].getTemp().contains("=")) {
-                                        //Tiger Move Special Condition:
-                                        if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                                            view.move(view.getButton(x, y), view.getButton(x - 4, y)); // up
-                                            modelSwitcher = model.getBoard().getBlock()[x - 4][y];
-                                            model.getBoard().getBlock()[x - 4][y] = model.getBoard().getBlock()[x][y];
-                                            model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                        } else {
-                                            //Turn should not change. Displat invalid move.
-                                            view.emptyButtonAlert();
-                                        }
-                                    } else {
-                                        view.move(view.getButton(x, y), view.getButton(x - 1, y)); // up
-                                        modelSwitcher = model.getBoard().getBlock()[x - 1][y];
-                                        model.getBoard().getBlock()[x - 1][y] = model.getBoard().getBlock()[x][y];
-                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                    }
-                                }
-                                else
-                                    view.emptyButtonAlert();
+                            if(x-1>=0)///If there is water in front.
+                                model.fullMove(model, view, x, y, choice);
+                            else
+                                view.emptyButtonAlert();
                             break;
                         /*
                          * why it worked: THE POINTERS WAS CHANGED. MEANING THE GUI ALSO CHANGED CUZ IT RELIES ON POINTERS.
                          * */
 
                         case 1:
-                            if(x+1 < 9) {
-                                if (model.getBoard().getBlock()[x + 1][y].getTemp() != null && model.getBoard().getBlock()[x + 1][y].getTemp().contains("=")) {
-                                    //Tiger Move Special Condition:
-                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                                        view.move(view.getButton(x, y), view.getButton(x + 4, y)); // down
-                                        modelSwitcher = model.getBoard().getBlock()[x + 4][y];
-                                        model.getBoard().getBlock()[x + 4][y] = model.getBoard().getBlock()[x][y];
-                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                    } else {
-                                        //Turn should not change. Displat invalid move.
-                                        view.emptyButtonAlert();
-                                    }
-                                } else {
-                                    view.move(view.getButton(x, y), view.getButton(x + 1, y)); // down
-                                    modelSwitcher = model.getBoard().getBlock()[x + 1][y];
-                                    model.getBoard().getBlock()[x + 1][y] = model.getBoard().getBlock()[x][y];
-                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                }
-                            }
+                            if(x+1>=9)///If there is water in front.
+                                model.fullMove(model, view, x, y, choice);
                             else
                                 view.emptyButtonAlert();
                             break;
                         case 2:
                             if(y-1 >= 0)
-                            {
-                                if (model.getBoard().getBlock()[x][y - 1].getTemp() != null && model.getBoard().getBlock()[x][y - 1].getTemp().contains("=")) {
-                                    //Tiger Move Special Condition:
-                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                                        view.move(view.getButton(x, y), view.getButton(x, y - 3)); // left
-                                        modelSwitcher = model.getBoard().getBlock()[x][y - 3];
-                                        model.getBoard().getBlock()[x][y - 3] = model.getBoard().getBlock()[x][y];
-                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                    } else {
-                                        //Turn should not change. Displat invalid move.
-                                        view.emptyButtonAlert();
-                                    }
-                                } else {
-                                    view.move(view.getButton(x, y), view.getButton(x, y - 1)); // left
-                                    modelSwitcher = model.getBoard().getBlock()[x][y - 1];
-                                    model.getBoard().getBlock()[x][y - 1] = model.getBoard().getBlock()[x][y];
-                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                }
-                            }
+                                model.fullMove(model, view, x, y, choice);
                             else
                                 view.emptyButtonAlert();
                             break;
 
                         case 3:
-                            if(y+1 < 7) {
-                                if (model.getBoard().getBlock()[x][y + 1].getTemp() != null && model.getBoard().getBlock()[x][y + 1].getTemp().contains("=")) {
-                                    //Tiger Move Special Condition:
-                                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                                        view.move(view.getButton(x, y), view.getButton(x, y + 3)); // Right
-                                        modelSwitcher = model.getBoard().getBlock()[x][y + 3];
-                                        model.getBoard().getBlock()[x][y + 3] = model.getBoard().getBlock()[x][y];
-                                        model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                    } else {
-                                        //Turn should not change. Displat invalid move.
-                                        view.emptyButtonAlert();
-                                    }
-                                } else {
-                                    view.move(view.getButton(x, y), view.getButton(x, y + 1)); // left
-                                    modelSwitcher = model.getBoard().getBlock()[x][y + 1];
-                                    model.getBoard().getBlock()[x][y + 1] = model.getBoard().getBlock()[x][y];
-                                    model.getBoard().getBlock()[x][y] = modelSwitcher;
-                                }
-                            }
+                            if(y+1 < 7)
+                                model.fullMove(model, view, x, y, choice);
                             else
                                 view.emptyButtonAlert();
                                 break;

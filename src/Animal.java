@@ -12,7 +12,7 @@ public class Animal
     private int nRank;
     private boolean bAlive = true;
     private boolean bBlue;
-    private String symbol; // temp
+    private String symbol;
     private URL imageURL;
 
     /**

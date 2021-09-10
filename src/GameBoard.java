@@ -32,25 +32,25 @@ public class GameBoard {
                 block[row][col] = new BlockCoords(row, col);
             }
             // Animal blocks
-            block[8][0] = new BlockCoords(8, 0, new Animal(6, "T", true));
-            block[0][6] = new BlockCoords(0, 6, new Animal(6, "T", false));
-            block[6][4] = new BlockCoords(6, 4, new Animal(5, "L", true));
-            block[2][2] = new BlockCoords(2, 2, new Animal(5, "L", false));
+            block[8][0] = new BlockCoords(8, 0, new Tiger(true));
+            block[0][6] = new BlockCoords(0, 6, new Tiger(false));
+            block[6][4] = new BlockCoords(6, 4, new Leopard(true));
+            block[2][2] = new BlockCoords(2, 2, new Leopard(false));
 
-            block[7][5] = new BlockCoords(7,5,new Animal(4,"D",true));
-            block[1][1] = new BlockCoords(1,1,new Animal(4,"D",false));
-            block[7][1] = new BlockCoords(7,1,new Animal(2,"C",true));
-            block[1][5] = new BlockCoords(1,5,new Animal(2,"C",false));
+            block[7][5] = new BlockCoords(7,5,new Dog(true));
+            block[1][1] = new BlockCoords(1,1,new Dog(false));
+            block[7][1] = new BlockCoords(7,1,new Cat(true));
+            block[1][5] = new BlockCoords(1,5,new Cat(false));
 
-            block[6][6] = new BlockCoords(6,6,new Animal(1,"M",true));
-            block[2][0] = new BlockCoords(2,0,new Animal(1,"M",false));
-            block[6][2] = new BlockCoords(6,2,new Animal(3,"W",true));
-            block[2][4] = new BlockCoords(2,4,new Animal(3,"W",false));
+            block[6][6] = new BlockCoords(6,6,new Mouse(true));
+            block[2][0] = new BlockCoords(2,0,new Mouse(false));
+            block[6][2] = new BlockCoords(6,2,new Wolf(true));
+            block[2][4] = new BlockCoords(2,4,new Wolf(false));
 
-            block[6][0] = new BlockCoords(6,0,new Animal(8,"E",true));
-            block[2][6] = new BlockCoords(2,6,new Animal(8,"E",false));
-            block[8][6] = new BlockCoords(8,6,new Animal(7,"Li",true));
-            block[0][0] = new BlockCoords(0,0,new Animal(7,"Li",false));
+            block[6][0] = new BlockCoords(6,0,new Elephant(true));
+            block[2][6] = new BlockCoords(2,6,new Elephant(false));
+            block[8][6] = new BlockCoords(8,6,new Lion(true));
+            block[0][0] = new BlockCoords(0,0,new Lion(false));
 
             /*
 

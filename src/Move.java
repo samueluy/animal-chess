@@ -262,6 +262,57 @@ public class Move {
         return true;
     }
 
+    public void fullMove(Move model, testGrid view, int x, int y, int choice){
+        int newX1=0;
+        int newX2=0;
+        int newY1=0;
+        int newY2=0;
+        if(choice == 0){
+            newX1=x-1;
+            newX2=x-4;
+            newY1=y;
+            newY2=y;
+        }
+        else if(choice==1){
+            newX1=x+1;
+            newX2=x+4;
+            newY1=y;
+            newY2=y;
+        }
+        else if(choice==2){
+            newX1=x;
+            newX2=x;
+            newY1=y-1;
+            newY2=y-3;
+        }
+        else if(choice==3){
+            newX1=x;
+            newX2=x;
+            newY1=y+1;
+            newY2=y+3;
+        }
+        BlockCoords modelSwitcher;
+            if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
+                //Tiger Move Special Condition:
+                System.out.println(newX1 +" "+ newX2);
+                if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                    view.move(view.getButton(x, y), view.getButton(newX2, y)); // up
+                    modelSwitcher = model.getBoard().getBlock()[newX2][newY2];
+                    model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
+                    model.getBoard().getBlock()[x][y] = modelSwitcher;
+                }
+                else
+                    //Turn should not change. Display invalid move.
+                    view.emptyButtonAlert();
+            }
+            else {
+                view.move(view.getButton(x, y), view.getButton(newX1, newY1)); // up
+                modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
+                model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
+                model.getBoard().getBlock()[x][y] = modelSwitcher;
+            }
+    }
+
     public GameBoard getBoard() {
         return board;
     }

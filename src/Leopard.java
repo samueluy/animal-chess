@@ -2,7 +2,7 @@ public class Leopard extends Animal{
     public Leopard(boolean isBlue) {
         super(isBlue);
         setRank(5);
-        setSymbol("l"); // temporary
+        setSymbol("L"); // temporary
 
         if(isBlue)
             setImage("assets/leopard1.png");
