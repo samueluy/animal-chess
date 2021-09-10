@@ -161,10 +161,38 @@ public class testGrid extends JFrame
     {
         for(int i = 0;i < 9;i++)
         {
-            for (int j=0;i<7;j++)
+            for (int j=0;j<7;j++)
             {
-                if (buttons[i][j].getActionCommand().contains("1"))  //the pieces on the top. -- Player 2.
+                if(buttons[i][j].getIcon() == tiger2)//the pieces on the top. -- Player 2.
                     buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == elephant2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == lion2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == dog2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == wolf2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == cat2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == mouse2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == leopard2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == trap2)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == base2)
+                    buttons[i][j].setEnabled(enabled);
+
             }
         }
     }
@@ -173,9 +201,36 @@ public class testGrid extends JFrame
     {
         for(int i = 0;i < 9;i++)
         {
-            for (int j=0;i<7;j++)
+            for (int j=0;j<7;j++)
             {
-                if (buttons[i][j].getActionCommand().contains("2"))  //the pieces on the Bottom. -- Player 1.
+                if(buttons[i][j].getIcon() == tiger1)//the pieces on the top. -- Player 2.
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == elephant1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == lion1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == dog1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == wolf1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == cat1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == mouse1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == leopard1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == trap1)
+                    buttons[i][j].setEnabled(enabled);
+
+                else if(buttons[i][j].getIcon() == base1)
                     buttons[i][j].setEnabled(enabled);
             }
         }
