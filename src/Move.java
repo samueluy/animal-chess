@@ -183,7 +183,6 @@ public class Move {
                 newCol >= board.getBlock()[newRow].length ||
                 newCol < 0) {
             System.out.println("Invalid move");
-            board.setPlayer(!board.isPlayer()); // Reset player move if invalid
             return false;
         }
         return true;
@@ -212,8 +211,6 @@ public class Move {
                 if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
                         board.getBlock()[newRow][newCol].getPiece().getRank()) {
                     System.out.println("Invalid move");
-                    board.setPlayer(
-                            !board.isPlayer()); // Reset player move if invalid
                     return false;
                 }
             }
@@ -224,8 +221,6 @@ public class Move {
                 if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() ==
                         board.getBlock()[newRow][newCol].getPiece().isBlue()) {
                     System.out.println("Invalid move");
-                    board.setPlayer(
-                            !board.isPlayer()); // Reset player move if invalid
                     return false;
                 }
             }
@@ -238,8 +233,6 @@ public class Move {
                 else if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
                         .equals("=")) {
                     System.out.println("Invalid move");
-                    board.setPlayer(
-                            !board.isPlayer()); // Reset player move if invalid
                     return false;
                 }
             }
@@ -249,8 +242,6 @@ public class Move {
                 if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
                         player) {
                     System.out.println("Invalid move");
-                    board.setPlayer(
-                            !board.isPlayer()); // Reset player move if invalid
                     return false;
                 }
             }
@@ -287,18 +278,19 @@ public class Move {
             newY1=y+1;
             newY2=y+3;
         }
-        BlockCoords modelSwitcher;
         if(checkValid(model.getBoard(), x, y, newX1, newY1, model.getBoard().isPlayer())){
             System.out.println("in");
             if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
                 //Tiger/Lion Move Special Condition:
                 if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
                     view.move(view.getButton(x, y), view.getButton(newX2, newY2));
                     model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                 }
                 //Mouse Move Special Condition
                 else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
+                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                     model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
@@ -308,6 +300,7 @@ public class Move {
                     view.emptyButtonAlert();
             }
             else {
+                model.getBoard().setPlayer(!model.getBoard().isPlayer());
                 view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                 model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);

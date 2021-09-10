@@ -11,12 +11,23 @@ public class controlGrid implements ActionListener
     {
         view = new testGrid();
         model = new Move();
-
         model.getBoard().createBoard();
-        model.getBoard().display();
 
-        view.setActionListener(this);
-
+        int start=1;
+        int first = chooseWhoGoesFirst();
+        switch(first){
+            case 1: model.getBoard().setPlayer(false);
+                break;
+            case 2: model.getBoard().setPlayer(true);
+                break;
+            default: start=0;
+        }
+        if(start==1){
+            model.getBoard().display();
+            view.setActionListener(this);
+        }
+        else
+            System.out.println("ERROR!");
         /*
         while (!model.getBoard().checkWin()) {
             model.move(model.getBoard(), model.getBoard().isPlayer());
@@ -53,7 +64,8 @@ public class controlGrid implements ActionListener
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
                     {
                         //Prevents the player from choosing water or the base.
-                        if(board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("=")) )
+                        if(board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("="))
+                        && board[i][j].getPiece().isBlue() == model.getBoard().isPlayer())
                         {
                             System.out.println(board[i][j].getTemp());
                             x = i;
@@ -138,64 +150,57 @@ public class controlGrid implements ActionListener
         If equal
             Choose again.
     * */
-    public int chooseWhoGoesFirst()
-    {
-        JPanel p = new JPanel();
-        p.setLayout(new BorderLayout());
+public int chooseWhoGoesFirst() {
+    JPanel p = new JPanel();
+    p.setLayout(new BorderLayout());
 
-        JPanel choices = new JPanel();
-        choices.setLayout(new GridLayout(1,8,5,5));
+    JPanel choices = new JPanel();
+    choices.setLayout(new GridLayout(1, 8, 5, 5));
 
-        Integer[] ranks = {1, 2, 3, 4, 5, 6, 7};
+    Integer[] ranks = {1, 2, 3, 4, 5, 6, 7};
 
-        for (int i = 0; i < ranks.length; i++)
-        {
-            int index = (int) (Math.random() * ranks.length);
-            int temp = ranks[i];
-            ranks[i] = ranks[index];
-            ranks[index] = temp;
-        }
-
-        String[] animals = {"Mouse","Cat","Wolf","Dog","Leopard","Tiger","Lion","Elephant"};
-        ///Create Buttons in a option dialog and randomize the numbers. setvisible to false and reveal once clicked with another dialog.
-
-        Object[] options = {" "," "," "," "," "," "," "," "};
-
-        //Player 1. Bottom Pieces.
-        int flag = 0;
-        while(flag == 0) {
-            int choice1 = JOptionPane.showOptionDialog(null, "Choose an Animal", "Turn Setup",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-            int choice2 = JOptionPane.showOptionDialog(null, "Choose an Animal", "Turn Setup",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-            choice1 = (int) (Math.random() * 7);
-            choice2 = (int) (Math.random() * 7);
-
-            if (choice1 > choice2) {
-                JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nPlayer 1 moves first!"
-                        , "Results", JOptionPane.PLAIN_MESSAGE, null);
-                flag = 1;
-                return 1;
-            }
-            else if (choice1 < choice2) {
-                JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nPlayer 2 moves first!"
-                        , "Results", JOptionPane.PLAIN_MESSAGE, null);
-                flag = 1;
-                return 2;
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nTie game! Pick again!"
-                        , "Results", JOptionPane.PLAIN_MESSAGE, null);
-            }
-        }
-        return -1;
+    for (int i = 0; i < ranks.length; i++) {
+        int index = (int) (Math.random() * ranks.length);
+        int temp = ranks[i];
+        ranks[i] = ranks[index];
+        ranks[index] = temp;
     }
 
-    public static void main(String[] args) {
+    String[] animals = {"Mouse", "Cat", "Wolf", "Dog", "Leopard", "Tiger", "Lion", "Elephant"};
+    ///Create Buttons in a option dialog and randomize the numbers. setvisible to false and reveal once clicked with another dialog.
 
-        controlGrid app = new controlGrid();
-        int playerFirst = app.chooseWhoGoesFirst();
+    Object[] options = {" ", " ", " ", " ", " ", " ", " ", " "};
+
+    //Player 1. Bottom Pieces.
+    int flag = 0;
+    while (flag == 0) {
+        int choice1 = JOptionPane.showOptionDialog(null, "Choose an Animal", "Turn Setup",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        int choice2 = JOptionPane.showOptionDialog(null, "Choose an Animal", "Turn Setup",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        choice1 = (int) (Math.random() * 7);
+        choice2 = (int) (Math.random() * 7);
+
+        if (choice1 > choice2) {
+            JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nPlayer 1 moves first!"
+                    , "Results", JOptionPane.PLAIN_MESSAGE, null);
+            flag = 1;
+            return 2;
+        } else if (choice1 < choice2) {
+            JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nPlayer 2 moves first!"
+                    , "Results", JOptionPane.PLAIN_MESSAGE, null);
+            flag = 1;
+            return 1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Player 1 picked " + animals[choice1] + " and Player 2 picked " + animals[choice2] + " \nTie game! Pick again!"
+                    , "Results", JOptionPane.PLAIN_MESSAGE, null);
+        }
     }
+    return -1;
 }
+
+public static void main(String[] args) {
+    controlGrid app = new controlGrid();
+}}
