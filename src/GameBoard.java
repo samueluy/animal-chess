@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * This class is the main board of the game.
  */
@@ -52,31 +54,30 @@ public class GameBoard {
             block[8][6] = new BlockCoords(8,6,new Lion(true));
             block[0][0] = new BlockCoords(0,0,new Lion(false));
 
-            /*
-
-        buttons[2][6] = new JButton(elephant2);
-        buttons[6][0] = new JButton(elephant1);
-
-        buttons[0][0] = new JButton(lion2);
-        buttons[8][6] = new JButton(lion1);
-        */
             // Special blocks
-            block[3][1] = new BlockCoords(3, 1, new Special(3, "="));
-            block[3][2] = new BlockCoords(3, 2, new Special(3, "="));
-            block[4][1] = new BlockCoords(4, 1, new Special(3, "="));
-            block[4][2] = new BlockCoords(4, 2, new Special(3, "="));
-            block[5][1] = new BlockCoords(5, 1, new Special(3, "="));
-            block[5][2] = new BlockCoords(5, 2, new Special(3, "="));
+            block[3][1] = new BlockCoords(3, 1, new River());
+            block[3][2] = new BlockCoords(3, 2, new River());
+            block[4][1] = new BlockCoords(4, 1, new River());
+            block[4][2] = new BlockCoords(4, 2, new River());
+            block[5][1] = new BlockCoords(5, 1, new River());
+            block[5][2] = new BlockCoords(5, 2, new River());
 
-            block[3][4] = new BlockCoords(3, 4, new Special(3, "="));
-            block[3][5] = new BlockCoords(3, 5, new Special(3, "="));
-            block[4][4] = new BlockCoords(4, 4, new Special(3, "="));
-            block[4][5] = new BlockCoords(4, 5, new Special(3, "="));
-            block[5][4] = new BlockCoords(5, 4, new Special(3, "="));
-            block[5][5] = new BlockCoords(5, 5, new Special(3, "="));
+            block[3][4] = new BlockCoords(3, 4, new River());
+            block[3][5] = new BlockCoords(3, 5, new River());
+            block[4][4] = new BlockCoords(4, 4, new River());
+            block[4][5] = new BlockCoords(4, 5, new River());
+            block[5][4] = new BlockCoords(5, 4, new River());
+            block[5][5] = new BlockCoords(5, 5, new River());
 
-            block[8][3] = new BlockCoords(8, 3, new Special(1, "@", true));
-            block[0][3] = new BlockCoords(0, 3, new Special(1, "@", false));
+            block[8][3] = new BlockCoords(8, 3, new Base(true));
+            block[0][3] = new BlockCoords(0, 3, new Base(false));
+
+            block[0][2] = new BlockCoords(0, 2, new Trap(false));
+            block[0][4] = new BlockCoords(0, 4, new Trap(false));
+            block[8][2] = new BlockCoords(8, 2, new Trap(true));
+            block[8][4] = new BlockCoords(8, 4, new Trap(true));
+            block[1][3] = new BlockCoords(1, 3, new Trap(false));
+            block[7][3] = new BlockCoords(7, 3, new Trap(true));
         }
     }
 

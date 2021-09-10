@@ -212,7 +212,7 @@ public class Move {
                               int newRow, int newCol, boolean player) {
         if(checkBounds(board, newRow,newCol)){
             if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                    board.getBlock()[newRow][newCol].getPiece() != null) {
+                board.getBlock()[newRow][newCol].getPiece() != null) {
                 if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
                         board.getBlock()[newRow][newCol].getPiece().getRank()) {
                     System.out.println("Invalid move");
@@ -235,7 +235,7 @@ public class Move {
             }
 
             if (board.getBlock()[newRow][newCol].getSpecial() !=
-                    null) { // Check if special block
+                null) { // Check if special block
             if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("T") ||
                board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("Li")||
                board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M"));
@@ -295,13 +295,14 @@ public class Move {
         if(checkValid(model.getBoard(), x, y, newX1, newY1, model.getBoard().isPlayer())){
             System.out.println("in");
             if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
-                //Tiger Move Special Condition:
+                //Tiger/Lion Move Special Condition:
                 if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
                     view.move(view.getButton(x, y), view.getButton(newX2, y)); // up
                     modelSwitcher = model.getBoard().getBlock()[newX2][newY2];
                     model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
                     model.getBoard().getBlock()[x][y] = modelSwitcher;
                 }
+                //Mouse Move Special Condition
                 else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1)); // up
                     modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
@@ -317,6 +318,7 @@ public class Move {
                 modelSwitcher = model.getBoard().getBlock()[newX1][newY1];
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                 model.getBoard().getBlock()[x][y] = modelSwitcher;
+                //model.updatePos(model.getBoard().getBlock()[x][y], model.getBoard().getBlock()[newX1][newY1]);
             }
         }
         else
