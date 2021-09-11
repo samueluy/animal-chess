@@ -122,23 +122,23 @@ public class Move {
                         case 0: if(board.getBlock()[oldRow-1][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow-2][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow-3][oldCol].getPiece() != null ||
-                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow-4][oldCol].getPiece().getRank()))
+                                (board.getBlock()[oldRow-4][oldCol].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow-4][oldCol].getPiece().getRank())))
                                     return false;
                             break;
                         case 1: if((board.getBlock()[oldRow+1][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow+2][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow+3][oldCol].getPiece() != null) ||
-                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow+4][oldCol].getPiece().getRank()))
+                                (board.getBlock()[oldRow+4][oldCol].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow+4][oldCol].getPiece().getRank())))
                                     return false;
                             break;
                         case 2:if(board.getBlock()[oldRow][oldCol-1].getPiece() != null ||
                                 board.getBlock()[oldRow][oldCol-2].getPiece() != null ||
-                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol-3].getPiece().getRank()))
+                                (board.getBlock()[oldRow][oldCol-3].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol-3].getPiece().getRank())))
                                     return false;
                             break;
                         case 3:if(board.getBlock()[oldRow][oldCol+1].getPiece() != null ||
                                 board.getBlock()[oldRow][oldCol+2].getPiece() != null ||
-                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol+3].getPiece().getRank()))
+                                (board.getBlock()[oldRow][oldCol+3].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol+3].getPiece().getRank())))
                                     return false;
                             break;
                     }
