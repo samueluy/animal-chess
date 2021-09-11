@@ -8,9 +8,10 @@ public class testGrid extends JFrame
     private JButton[][] buttons = new JButton[9][7];
     private JLabel lblheader;
     private JButton btnRules;
+    private JButton btnRestart;
 
-    PieceIcon base1 = new PieceIcon(new Base(false));
-    PieceIcon base2 = new PieceIcon(new Base(true));
+    PieceIcon base1 = new PieceIcon(new Base(true));
+    PieceIcon base2 = new PieceIcon(new Base(false));
 
     PieceIcon cat1 = new PieceIcon(new Cat(true));
     PieceIcon cat2 = new PieceIcon(new Cat(false));
@@ -57,7 +58,7 @@ public class testGrid extends JFrame
         lblheader = new JLabel("ANIMAL CHESS");
         northPanel.add(lblheader);
 
-        JButton btnRestart = new JButton("Restart");
+        btnRestart = new JButton("Restart");
         northPanel.add(btnRestart);
         add(northPanel, BorderLayout.NORTH);
 
@@ -65,8 +66,8 @@ public class testGrid extends JFrame
         gl.setLayout(new GridLayout(9, 7, 5, 5));
 
         // set bases
-        buttons[0][3] = new JButton(base1);
-        buttons[8][3] = new JButton(base2);
+        buttons[0][3] = new JButton(base2);
+        buttons[8][3] = new JButton(base1);
 
         // set animals
         buttons[0][6] = new JButton(tiger2);
@@ -75,8 +76,8 @@ public class testGrid extends JFrame
         buttons[8][6] = new JButton(lion1);
         buttons[1][1] = new JButton(dog2);
         buttons[7][5] = new JButton(dog1);
-        buttons[1][5] = new JButton(cat1);
-        buttons[7][1] = new JButton(cat2);
+        buttons[1][5] = new JButton(cat2);
+        buttons[7][1] = new JButton(cat1);
         buttons[2][0] = new JButton(mouse2);
         buttons[6][6] = new JButton(mouse1);
         buttons[2][2] = new JButton(leopard2);
@@ -101,20 +102,19 @@ public class testGrid extends JFrame
         buttons[5][5] = new JButton(river);
 
         // set traps/*
-        buttons[0][2] = new JButton(trap1);
-        buttons[0][4] = new JButton(trap1);
+        buttons[0][2] = new JButton(trap2);
+        buttons[0][4] = new JButton(trap2);
         buttons[8][2] = new JButton(trap1);
         buttons[8][4] = new JButton(trap1);
         buttons[1][3] = new JButton(trap2);
-        buttons[7][3] = new JButton(trap2);
+        buttons[7][3] = new JButton(trap1);
 
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < 7; j++)
+            {
                 if(buttons[i][j] == null)
                     buttons[i][j] = (new JButton());      //Sa arraylist
                 gl.add(buttons[i][j]);     //Adding Buttons in the grid.
-                //    buttons[i][j].setActionCommand(boardlbl);
-                //  boardlbl = ""
                 add(gl, BorderLayout.CENTER);
             }
         }
@@ -128,6 +128,8 @@ public class testGrid extends JFrame
             }
         }
         btnRules.addActionListener(listener);
+        btnRestart.addActionListener(listener);
+
     }
 
     public JButton getButton(int i, int j)
@@ -138,7 +140,6 @@ public class testGrid extends JFrame
     public void instructionAlert()
     {
         JLabel msg = new JLabel("You need to listen to me first. DI MO TO KAYA IPLAY.");
-
         JPanel p = new JPanel();
         p.setLayout(new FlowLayout());
         p.add(msg);
@@ -161,38 +162,59 @@ public class testGrid extends JFrame
     {
         for(int i = 0;i < 9;i++)
         {
-            for (int j=0;j<7;j++)
+            for (int j=0;j<7;j++) {
+                if (buttons[i][j].getIcon() == tiger1)//the pieces on the top. -- Player 2.
             {
-                if(buttons[i][j].getIcon() == tiger2)//the pieces on the top. -- Player 2.
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == elephant2)
+                else if(buttons[i][j].getIcon() == elephant1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == lion2)
+                else if(buttons[i][j].getIcon() == lion1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == dog2)
+                else if(buttons[i][j].getIcon() == dog1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == wolf2)
+                else if(buttons[i][j].getIcon() == wolf1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == cat2)
+                else if(buttons[i][j].getIcon() == cat1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == mouse2)
+                else if(buttons[i][j].getIcon() == mouse1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == leopard2)
+                else if(buttons[i][j].getIcon() == leopard1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == trap2)
+                else if(buttons[i][j].getIcon() == trap1) {
                     buttons[i][j].setEnabled(enabled);
+                buttons[i][j].setBackground(Color.BLUE);
+                }
 
-                else if(buttons[i][j].getIcon() == base2)
+                else if(buttons[i][j].getIcon() == base1) {
                     buttons[i][j].setEnabled(enabled);
-
+                buttons[i][j].setBackground(Color.BLUE);
+                }
+                else
+                    buttons[i][j].setBackground(new JButton().getBackground());
             }
         }
     }
@@ -201,37 +223,59 @@ public class testGrid extends JFrame
     {
         for(int i = 0;i < 9;i++)
         {
-            for (int j=0;j<7;j++)
+            for (int j=0;j<7;j++) {
+                if (buttons[i][j].getIcon() == tiger2)//the pieces on the top. -- Player 2.
             {
-                if(buttons[i][j].getIcon() == tiger1)//the pieces on the top. -- Player 2.
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == elephant1)
+                else if(buttons[i][j].getIcon() == elephant2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == lion1)
+                else if(buttons[i][j].getIcon() == lion2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == dog1)
+                else if(buttons[i][j].getIcon() == dog2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == wolf1)
+                else if(buttons[i][j].getIcon() == wolf2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == cat1)
+                else if(buttons[i][j].getIcon() == cat2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == mouse1)
+                else if(buttons[i][j].getIcon() == mouse2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == leopard1)
+                else if(buttons[i][j].getIcon() == leopard2) {
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == trap1)
+                else if(buttons[i][j].getIcon() == trap2){
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
 
-                else if(buttons[i][j].getIcon() == base1)
+                else if(buttons[i][j].getIcon() == base2){
                     buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.RED);
+                }
+                else
+                    buttons[i][j].setBackground(new JButton().getBackground());
             }
         }
     }
