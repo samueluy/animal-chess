@@ -58,6 +58,16 @@ public class Move {
     public boolean checkValid(GameBoard board, int oldRow, int oldCol,
                               int newRow, int newCol, boolean player) {
         if(checkBounds(board, newRow,newCol)){
+            if(board.getBlock()[oldRow][oldCol].getPiece() != null){ // Untrap piece
+                if((board.getBlock()[oldRow][oldCol].getPiece().isTrapped()))
+                    board.getBlock()[oldRow][oldCol].getPiece().setTrapped(false);
+            }
+            
+            if(board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getSpecial() != null){ // check if position will be trapped
+                if(board.getBlock()[newRow][newCol].getSpecial().getSymbol().contains("+"))
+                    board.getBlock()[oldRow][oldCol].getPiece().setTrapped(true);
+            }
+
             if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
                 board.getBlock()[newRow][newCol].getPiece() != null) {
 
@@ -68,6 +78,7 @@ public class Move {
                     System.out.println("Invalid move");
                     return false;
                 }
+                else if(board.getBlock()[newRow][newCol].getPiece().isTrapped()); // can take trapped animal
                 else if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
                         board.getBlock()[newRow][newCol].getPiece().getRank()) {
                     System.out.println("Invalid move");

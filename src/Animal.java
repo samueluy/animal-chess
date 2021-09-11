@@ -12,6 +12,7 @@ public class Animal
     private int nRank;
     private boolean bAlive = true;
     private boolean bBlue;
+    private boolean trapped = false;
     private String symbol;
     private URL imageURL;
 
@@ -90,6 +91,14 @@ public class Animal
      */
     public boolean isBlue() {
         return bBlue;
+    }
+
+    public boolean isTrapped(){
+        return trapped;
+    }
+
+    public void setTrapped(boolean trapped){
+        this.trapped=trapped;
     }
 
     public URL getImageURL(){
