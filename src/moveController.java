@@ -2,7 +2,7 @@
  * This class contains all the methods which will allow a player to move their pieces
  */
 public class moveController {
-    private GameBoard board = new GameBoard();
+    private final GameBoard board = new GameBoard();
     private int flag;
     /**
      * Ask the player for an input to determine which piece he/she desires to move and to where
@@ -58,7 +58,7 @@ public class moveController {
                             oldPiece.getPiece().getSymbol().contains("M")) ;
                 } else if (newPiece.getSpecial() == null && // dry diver mouse
                         oldPiece.getPiece().getSymbol().contains("M")) {
-                    oldPiece.getPiece().setDiverMouse(false);
+                    ((Mouse) oldPiece.getPiece()).setDiverMouse(false);
                 }
             }
             if (oldPiece.getPiece() != null && newPiece.getSpecial() != null) { // Check if piece moves to special block
@@ -66,7 +66,7 @@ public class moveController {
                     oldPiece.getPiece().setTrapped(true);
                 else if (newPiece.getSpecial().getSymbol().contains("=") && // set as diver mouse
                         oldPiece.getPiece().getSymbol().contains("M"))
-                    oldPiece.getPiece().setDiverMouse(true);
+                    ((Mouse) oldPiece.getPiece()).setDiverMouse(true);
             }
 
             if (oldPiece.getPiece() != null &&
@@ -74,14 +74,14 @@ public class moveController {
                 if (oldPiece.getPiece().getSymbol().contains("M") && // Mouse takes Elephant/Mouse condition
                         (newPiece.getPiece().getSymbol().contains("M") ||
                                 newPiece.getPiece().getSymbol().contains("E"))) {
-                    if (oldPiece.getPiece().isDiverMouse()) { // Mouse can't take Elephant when diver
-                        if (newPiece.getPiece().isDiverMouse()) ;
+                    if (((Mouse) oldPiece.getPiece()).isDiverMouse()) { // Mouse can't take Elephant when diver
+                        if (!newPiece.getPiece().getSymbol().contains("E") && ((Mouse) newPiece.getPiece()).isDiverMouse());
                         else {
                             System.out.println("Invalid move");
                             return false;
                         }
                     } else if (oldPiece.getPiece().getSymbol().contains("M") && newPiece.getPiece().getSymbol().contains("M")) {
-                        if (!oldPiece.getPiece().isDiverMouse() && newPiece.getPiece().isDiverMouse()) {
+                        if (!((Mouse) oldPiece.getPiece()).isDiverMouse() && ((Mouse) newPiece.getPiece()).isDiverMouse()) {
                             System.out.println("Invalid move");
                             return false;
                         }
@@ -228,15 +228,15 @@ public class moveController {
         }
     }
 
+    public GameBoard getBoard() {
+        return board;
+    }
+
     public int getFlag() {
         return flag;
     }
 
     public void setFlag(int flag) {
         this.flag = flag;
-    }
-
-    public GameBoard getBoard() {
-        return board;
     }
 }

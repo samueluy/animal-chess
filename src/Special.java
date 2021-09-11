@@ -3,11 +3,11 @@ import java.net.URL;
 /**
  * This class represents each block which has a special trait.
  */
-public class Special {
-    private int type;
-    private String symbol;
+public abstract class Special {
     private boolean bBlue;
     private final boolean free = true;
+    private int type;
+    private String symbol;
     private URL imageURL;
 
     /**
@@ -37,6 +37,10 @@ public class Special {
     public Special() {
     }
 
+    public URL getImageURL() {
+        return this.imageURL;
+    }
+
     /**
      * Returns the type of Special object
      *
@@ -54,12 +58,6 @@ public class Special {
     public String getSymbol() {
         return symbol;
     }
-
-    // temp
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
     /**
      * Returns which side the Special object belongs to
      *
@@ -68,15 +66,17 @@ public class Special {
     public boolean isBlue() {
         return bBlue;
     }
+
+    // temp
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     public void setImage(String source) { // to use try catch
         try {
             this.imageURL = (getClass().getResource(source));
         } catch (Exception e) {
             System.out.println("Error! \"" + source + " \"not found");
         }
-    }
-
-    public URL getImageURL() {
-        return this.imageURL;
     }
 }

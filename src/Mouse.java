@@ -1,6 +1,5 @@
 public class Mouse extends Animal {
-    boolean diverMouse;
-
+    private boolean diverMouse;
     public Mouse(boolean isBlue) {
         super(isBlue);
         setRank(1);
@@ -10,5 +9,11 @@ public class Mouse extends Animal {
             setImage("assets/mouse1.png");
         else
             setImage("assets/mouse2.png");
+    }
+    public void setDiverMouse(boolean diver){
+        this.diverMouse = diver;
+    }
+    public boolean isDiverMouse(){
+        return diverMouse;
     }
 }

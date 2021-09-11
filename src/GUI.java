@@ -29,12 +29,15 @@ public class GUI extends JFrame {
     private JButton btnRules;
     private JButton btnRestart;
 
+    public JButton getButton(int i, int j) {
+        return buttons[i][j];
+    }
+
     public GUI() {
         super("Grid Layout");
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
 
         setup();
         setVisible(true);
@@ -112,19 +115,13 @@ public class GUI extends JFrame {
         }
     }
 
-    public void setActionListener(ActionListener listener) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
-                buttons[i][j].addActionListener(listener);
-            }
-        }
-        btnRules.addActionListener(listener);
-        btnRestart.addActionListener(listener);
+    public void emptyButtonAlert() {
+        JLabel msg = new JLabel("Invalid Move!");
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
+        p.add(msg);
 
-    }
-
-    public JButton getButton(int i, int j) {
-        return buttons[i][j];
+        JOptionPane.showMessageDialog(null, p, "Warning!", JOptionPane.ERROR_MESSAGE);
     }
 
     public void instructionAlert() {
@@ -138,56 +135,6 @@ public class GUI extends JFrame {
         p.add(label, BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(null, p, "Instructions", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    public void emptyButtonAlert() {
-        JLabel msg = new JLabel("Invalid Move!");
-        JPanel p = new JPanel();
-        p.setLayout(new FlowLayout());
-        p.add(msg);
-
-        JOptionPane.showMessageDialog(null, p, "Warning!", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /* I separated them muna. Nahihilo kase.*/
-    public void disablePlayer2(boolean enabled) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (buttons[i][j].getIcon() == tiger1)//the pieces on the top. -- Player 2.
-                {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == elephant1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == lion1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == dog1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == wolf1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == cat1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == mouse1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == leopard1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == trap1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else if (buttons[i][j].getIcon() == base1) {
-                    buttons[i][j].setEnabled(enabled);
-                    buttons[i][j].setBackground(Color.BLUE);
-                } else
-                    buttons[i][j].setBackground(new JButton().getBackground());
-            }
-        }
     }
 
     public void disablePlayer1(boolean enabled) {
@@ -229,6 +176,58 @@ public class GUI extends JFrame {
             }
         }
     }
+
+    public void disablePlayer2(boolean enabled) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (buttons[i][j].getIcon() == tiger1)//the pieces on the top. -- Player 2.
+                {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == elephant1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == lion1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == dog1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == wolf1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == cat1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == mouse1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == leopard1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == trap1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else if (buttons[i][j].getIcon() == base1) {
+                    buttons[i][j].setEnabled(enabled);
+                    buttons[i][j].setBackground(Color.BLUE);
+                } else
+                    buttons[i][j].setBackground(new JButton().getBackground());
+            }
+        }
+    }
+
+    public void setActionListener(ActionListener listener) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                buttons[i][j].addActionListener(listener);
+            }
+        }
+        btnRules.addActionListener(listener);
+        btnRestart.addActionListener(listener);
+    }
+
+    /* I separated them muna. Nahihilo kase.*/
 
     // TEMPORARY
     public void move(JButton from, JButton to) {

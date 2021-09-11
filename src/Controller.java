@@ -10,22 +10,21 @@ public class Controller implements ActionListener {
 
     Controller()// Soon, add the model as an attribute and a parameter.
     {
-        view = new GUI();
         model = new moveController();
         model.getBoard().createBoard();
+        view = new GUI();
         int start = 1;
         first = chooseWhoGoesFirst();
         switch (first) {
-            case 1:
+            case 1 -> {
                 model.getBoard().setPlayer(false);
                 view.disablePlayer1(true);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 model.getBoard().setPlayer(true);
                 view.disablePlayer2(true);
-                break;
-            default:
-                start = 0;
+            }
+            default -> start = 0;
         }
         if (start == 1) {
             model.getBoard().display();
@@ -34,10 +33,6 @@ public class Controller implements ActionListener {
             System.out.println("ERROR!");
         }
 
-    }
-
-    public static void main(String[] args) {
-        Controller animalChess = new Controller();
     }
 
     @Override
@@ -150,57 +145,6 @@ public class Controller implements ActionListener {
         }
     }
 
-    private int gameOver() {//8 3 0 3
-        JPanel p = new JPanel();
-        JLabel msg;
-        p.setLayout(new FlowLayout());
-        if (model.getBoard().getBlock()[8][3].getTemp().contains("@"))
-            msg = new JLabel("Player 1 Won!");
-        else
-            msg = new JLabel("Player 2 Won!");
-        p.add(msg);
-
-        String[] options = {"Yes", "No"};
-        int choice = JOptionPane.showOptionDialog(null, p, "Do you want to Play Again?",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-        if (choice == 1) {
-            choice = JOptionPane.showOptionDialog(null, "Are you sure?", "Game Over",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        }
-
-        if (choice == 1) {
-            choice = JOptionPane.showOptionDialog(null, "I'm sorry. My master told me you don't have a choice.\n Do you want to play Again?", "Game Over",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        }
-
-        while (choice == 1)
-            choice = JOptionPane.showOptionDialog(null, "Do you want to Play Again?", "Game Over!",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        return 0;
-    }
-
-    public void enableButtons(boolean turn) {
-        ///How do I know yung turn shiet.
-        //Turn of Player 1
-        if (turn) {
-            view.disablePlayer2(false);
-            view.disablePlayer1(true);  //Enable Player 1 buttons
-        } else {
-            view.disablePlayer1(false);
-            view.disablePlayer2(true); // Enable Player 2 Buttons
-        }
-    }
-
-    /*
-    Player neeeds to choose an Animal Piece.
-        -- Player1 will choose from a list of Buttons and There should be no Icons.
-        -- Player2 Chooses.
-
-        -- Ranks of the chosen are compared.
-        If equal
-            Choose again.
-    * */
     public int chooseWhoGoesFirst() {
         JPanel p = new JPanel();
         p.setLayout(new BorderLayout());
@@ -250,6 +194,49 @@ public class Controller implements ActionListener {
             }
         }
         return -1;
+    }
+
+    public void enableButtons(boolean turn) {
+        if (turn) {
+            view.disablePlayer2(false);
+            view.disablePlayer1(true);  //Enable Player 1 buttons
+        } else {
+            view.disablePlayer1(false);
+            view.disablePlayer2(true); // Enable Player 2 Buttons
+        }
+    }
+
+    private int gameOver() {
+        JPanel p = new JPanel();
+        JLabel msg;
+        p.setLayout(new FlowLayout());
+        if (model.getBoard().getBlock()[8][3].getTemp().contains("@"))
+            msg = new JLabel("Player 1 Won!");
+        else
+            msg = new JLabel("Player 2 Won!");
+        p.add(msg);
+
+        String[] options = {"Yes", "No"};
+        int choice = JOptionPane.showOptionDialog(null, p, "Do you want to Play Again?",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        if (choice == 1) {
+            choice = JOptionPane.showOptionDialog(null, "Are you sure?", "Game Over",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        }
+
+        if (choice == 1) {
+            choice = JOptionPane.showOptionDialog(null, "I'm sorry. My master told me you don't have a choice.\n Do you want to play Again?", "Game Over",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        }
+
+        while (choice == 1)
+            choice = JOptionPane.showOptionDialog(null, "Do you want to Play Again?", "Game Over!",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        return 0;
+    }
+    public static void main(String[] args) {
+        Controller animalChess = new Controller();
     }
 }
 

@@ -1,16 +1,13 @@
-// to make abstract
-
 import java.net.URL;
 
 /**
- * This class represents each piece of the game.
+ * This class represents the Animal pieces of the game.
  */
-public class Animal {
-    private int nRank;
-    private final boolean bAlive = true;
+public abstract class Animal {
     private final boolean bBlue;
-    private boolean trapped = false;
     private boolean diverMouse = false;
+    private boolean trapped = false;
+    private int nRank;
     private String symbol;
     private URL imageURL;
 
@@ -29,6 +26,10 @@ public class Animal {
         this.bBlue = isBlue;
     }
 
+    public URL getImageURL() {
+        return this.imageURL;
+    }
+
     /**
      * This method returns the rank of an animal
      *
@@ -36,15 +37,6 @@ public class Animal {
      */
     public int getRank() {
         return nRank;
-    }
-
-    /**
-     * This method sets the rank of an animal
-     *
-     * @param rank
-     */
-    public void setRank(int rank) {
-        this.nRank = rank;
     }
 
     /**
@@ -56,8 +48,25 @@ public class Animal {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    /**
+     * This method returns which player owns the piece
+     *
+     * @return
+     */
+    public boolean isBlue() {
+        return bBlue;
+    }
+
+    public boolean isDiverMouse() {
+        return diverMouse;
+    }
+
+    public boolean isTrapped() {
+        return trapped;
+    }
+
+    public void setDiverMouse(boolean diver) {
+        this.diverMouse = diver;
     }
 
     /**
@@ -74,31 +83,19 @@ public class Animal {
     }
 
     /**
-     * This method returns which player owns the piece
+     * This method sets the rank of an animal
      *
-     * @return
+     * @param rank
      */
-    public boolean isBlue() {
-        return bBlue;
+    public void setRank(int rank) {
+        this.nRank = rank;
     }
 
-    public boolean isTrapped() {
-        return trapped;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public void setTrapped(boolean trapped) {
         this.trapped = trapped;
-    }
-
-    public URL getImageURL() {
-        return this.imageURL;
-    }
-
-    public boolean isDiverMouse() {
-        return diverMouse;
-    }
-
-    public void setDiverMouse(boolean diver) {
-        this.diverMouse = diver;
     }
 }

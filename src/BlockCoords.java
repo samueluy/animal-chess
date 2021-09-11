@@ -3,9 +3,9 @@
  */
 public class BlockCoords {
     private Animal piece;
+    private final int x;
+    private final int y;
     private Special special;
-    private int x;
-    private int y;
     private String temp;
 
     /**
@@ -48,21 +48,21 @@ public class BlockCoords {
     }
 
     /**
-     * Returns the String representation of a block
-     *
-     * @return
-     */
-    public String getTemp() {
-        return temp;
-    }
-
-    /**
      * Returns an Animal object inside the block
      *
      * @return
      */
     public Animal getPiece() {
         return piece;
+    }
+
+    /**
+     * Returns the String representation of a block
+     *
+     * @return
+     */
+    public String getTemp() {
+        return temp;
     }
 
     /**
