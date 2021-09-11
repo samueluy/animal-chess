@@ -14,14 +14,14 @@ public class controlGrid implements ActionListener
         model.getBoard().createBoard();
 
         int start=1;
-        /*int first = chooseWhoGoesFirst();
+        int first = chooseWhoGoesFirst();
         switch(first){
             case 1: model.getBoard().setPlayer(false);
                 break;
             case 2: model.getBoard().setPlayer(true);
                 break;
             default: start=0;
-        }*/
+        }
         if(start==1){
             model.getBoard().display();
             view.setActionListener(this);
