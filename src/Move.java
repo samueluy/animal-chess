@@ -70,7 +70,6 @@ public class Move {
 
                 else if(newPiece.getSpecial()==null && // dry diver mouse
                         oldPiece.getPiece().getSymbol().contains("M")){
-                    System.out.println("dry");
                     oldPiece.getPiece().setDiverMouse(false);
                 }
             }
@@ -123,22 +122,24 @@ public class Move {
                         case 0: if(board.getBlock()[oldRow-1][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow-2][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow-3][oldCol].getPiece() != null ||
-                                board.getBlock()[oldRow-4][oldCol].getPiece() != null)
-                            return false;
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow-4][oldCol].getPiece().getRank()))
+                                    return false;
                             break;
-                        case 1: if(board.getBlock()[oldRow+1][oldCol].getPiece() != null ||
+                        case 1: if((board.getBlock()[oldRow+1][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow+2][oldCol].getPiece() != null ||
-                                board.getBlock()[oldRow+3][oldCol].getPiece() != null ||
-                                board.getBlock()[oldRow+4][oldCol].getPiece() != null)
-                            return false;
+                                board.getBlock()[oldRow+3][oldCol].getPiece() != null) ||
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow+4][oldCol].getPiece().getRank()))
+                                    return false;
                             break;
                         case 2:if(board.getBlock()[oldRow][oldCol-1].getPiece() != null ||
-                                board.getBlock()[oldRow][oldCol-2].getPiece() != null)
-                            return false;
+                                board.getBlock()[oldRow][oldCol-2].getPiece() != null ||
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol-3].getPiece().getRank()))
+                                    return false;
                             break;
                         case 3:if(board.getBlock()[oldRow][oldCol+1].getPiece() != null ||
-                                board.getBlock()[oldRow][oldCol+2].getPiece() != null)
-                            return false;
+                                board.getBlock()[oldRow][oldCol+2].getPiece() != null ||
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol+3].getPiece().getRank()))
+                                    return false;
                             break;
                     }
                 }
@@ -198,26 +199,11 @@ public class Move {
                     model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                 }
-                //Mouse Move Special Condition
-                /*else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
-                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
-                    model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                    if((x==3&&y==1) || (x==3&&y==2) || (x==4&&y==1) || (x==4&&y==2) || (x==5&&y==1) || (x==5&&y==2) ||
-                            (x==3&&y==4) || (x==3&&y==5) || (x==4&&y==4) || (x==4&&y==5) || (x==5&&y==4) || (x==5&&y==5)){
-                        view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
-                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y, new River());
-                    }
-                    else{
-                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
-                        view.move(view.getButton(x, y), view.getButton(newX1, newY1));
-                    }
-                }*/
                 else
                     //Turn should not change. Display invalid move.
                     view.emptyButtonAlert();
             }
             else if(model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
-                System.out.println("Inside");
                 model.getBoard().setPlayer(!model.getBoard().isPlayer());
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                 if((x==3&&y==1) || (x==3&&y==2) || (x==4&&y==1) || (x==4&&y==2) || (x==5&&y==1) || (x==5&&y==2) ||
@@ -226,13 +212,11 @@ public class Move {
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y, new River());
                 }
                 else{
-                    System.out.println("here");
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                 }
             }
             else {
-
                 model.getBoard().setPlayer(!model.getBoard().isPlayer());
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
                 if((x==0&&y==2) ||(x==0&&y==4) || (x==1&&y==3)) {
