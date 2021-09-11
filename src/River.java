@@ -1,6 +1,6 @@
-public class River extends Special{
+public class River extends Special {
     public River() {
-     //  super();
+        //  super();
         setSymbol("="); // temporary
         setImage("assets/river.png");
     }

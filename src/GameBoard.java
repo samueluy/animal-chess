@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 /**
  * This class is the main board of the game.
  */
@@ -17,15 +15,6 @@ public class GameBoard {
     }
 
     /**
-     * Sets a boolean which determines player turn
-     *
-     * @param player
-     */
-    public void setPlayer(boolean player) {
-        this.player = player;
-    }
-
-    /**
      * Creates a new board with each piece in its standard location
      */
     public void createBoard() {
@@ -39,20 +28,20 @@ public class GameBoard {
             block[6][4] = new BlockCoords(6, 4, new Leopard(true));
             block[2][2] = new BlockCoords(2, 2, new Leopard(false));
 
-            block[7][5] = new BlockCoords(7,5,new Dog(true));
-            block[1][1] = new BlockCoords(1,1,new Dog(false));
-            block[7][1] = new BlockCoords(7,1,new Cat(true));
-            block[1][5] = new BlockCoords(1,5,new Cat(false));
+            block[7][5] = new BlockCoords(7, 5, new Dog(true));
+            block[1][1] = new BlockCoords(1, 1, new Dog(false));
+            block[7][1] = new BlockCoords(7, 1, new Cat(true));
+            block[1][5] = new BlockCoords(1, 5, new Cat(false));
 
-            block[6][6] = new BlockCoords(6,6,new Mouse(true));
-            block[2][0] = new BlockCoords(2,0,new Mouse(false));
-            block[6][2] = new BlockCoords(6,2,new Wolf(true));
-            block[2][4] = new BlockCoords(2,4,new Wolf(false));
+            block[6][6] = new BlockCoords(6, 6, new Mouse(true));
+            block[2][0] = new BlockCoords(2, 0, new Mouse(false));
+            block[6][2] = new BlockCoords(6, 2, new Wolf(true));
+            block[2][4] = new BlockCoords(2, 4, new Wolf(false));
 
-            block[6][0] = new BlockCoords(6,0,new Elephant(true));
-            block[2][6] = new BlockCoords(2,6,new Elephant(false));
-            block[8][6] = new BlockCoords(8,6,new Lion(true));
-            block[0][0] = new BlockCoords(0,0,new Lion(false));
+            block[6][0] = new BlockCoords(6, 0, new Elephant(true));
+            block[2][6] = new BlockCoords(2, 6, new Elephant(false));
+            block[8][6] = new BlockCoords(8, 6, new Lion(true));
+            block[0][0] = new BlockCoords(0, 0, new Lion(false));
 
             // Special blocks
             block[3][1] = new BlockCoords(3, 1, new River());
@@ -151,5 +140,14 @@ public class GameBoard {
      */
     public boolean isPlayer() {
         return player;
+    }
+
+    /**
+     * Sets a boolean which determines player turn
+     *
+     * @param player
+     */
+    public void setPlayer(boolean player) {
+        this.player = player;
     }
 }

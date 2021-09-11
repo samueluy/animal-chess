@@ -1,17 +1,10 @@
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
-    private JButton[][] buttons = new JButton[9][7];
-    private JLabel lblheader;
-    private JButton btnRules;
-    private JButton btnRestart;
-
     PieceIcon base1 = new PieceIcon(new Base(true));
     PieceIcon base2 = new PieceIcon(new Base(false));
-
     PieceIcon cat1 = new PieceIcon(new Cat(true));
     PieceIcon cat2 = new PieceIcon(new Cat(false));
     PieceIcon dog1 = new PieceIcon(new Dog(false));
@@ -28,11 +21,13 @@ public class GUI extends JFrame {
     PieceIcon tiger2 = new PieceIcon(new Tiger(true));
     PieceIcon wolf1 = new PieceIcon(new Wolf(false));
     PieceIcon wolf2 = new PieceIcon(new Wolf(true));
-
     PieceIcon trap1 = new PieceIcon(new Trap(false));
     PieceIcon trap2 = new PieceIcon(new Trap(true));
-
     PieceIcon river = new PieceIcon(new River());
+    private final JButton[][] buttons = new JButton[9][7];
+    private JLabel lblheader;
+    private JButton btnRules;
+    private JButton btnRestart;
 
     public GUI() {
         super("Grid Layout");
@@ -134,13 +129,13 @@ public class GUI extends JFrame {
 
     public void instructionAlert() {
         String msg = "Here are some instructions:<br> <br>• Pieces can move one space horizontally or vertically; and<br> • Pieces may land on and capture an opponent’s piece that has equal or lower rank.<br> <br>However the following exceptions apply:<br> <br>Movement<br>• The mouse is the only animal that is allowed to move on the river .<br>• Both the lion and the tiger can jump from the land before the river to the land after the river, horizontally or vertically, <br>   as long as there is no mouse along the way.<br><br>• A player may not move his own piece to his own animal den<br> <br>Capturing an opponent’s piece<br>• A player may capture an opponent’s piece with a higher rank that is on one of his traps.<br>• An elephant may not capture a mouse while the mouse can capture an elephant.<br>• A mouse on ther river may not capture an elephant or another mouse on land.<br>• A mouse on the river may capture another mouse on the river.<br>• A mouse on land may not capture a mouse on the river.<br> <br>To help You play the game, We will remind you if you ever made an invalid move :><br> <br>Have fun!";
-        String text = "<html><div style = 'text-align: left;'>"+ msg+"</div></html>";
+        String text = "<html><div style = 'text-align: left;'>" + msg + "</div></html>";
 
         JLabel label = new JLabel(text);
 
         JPanel p = new JPanel();
         p.setLayout(new BorderLayout());
-        p.add(label,BorderLayout.CENTER);
+        p.add(label, BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(null, p, "Instructions", JOptionPane.INFORMATION_MESSAGE);
     }

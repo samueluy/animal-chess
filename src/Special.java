@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 
 /**
@@ -9,7 +7,7 @@ public class Special {
     private int type;
     private String symbol;
     private boolean bBlue;
-    private boolean free = true;
+    private final boolean free = true;
     private URL imageURL;
 
     /**
@@ -17,8 +15,7 @@ public class Special {
      * @param symbol String representation of a Special object
      * @param isBlue Which color/team the Special object belongs to
      */
-    public Special(int type, String symbol, boolean isBlue)
-    {
+    public Special(int type, String symbol, boolean isBlue) {
         this.type = type;
         this.symbol = symbol;
         this.bBlue = isBlue;
@@ -28,17 +25,17 @@ public class Special {
      * @param type   1: Den; 2: Trap; 3: River
      * @param symbol String representation of a Special object
      */
-    public Special(int type, String symbol)
-    {
+    public Special(int type, String symbol) {
         this.type = type;
         this.symbol = symbol;
     }
 
-    public Special(boolean isBlue){
+    public Special(boolean isBlue) {
         this.bBlue = isBlue;
     }
 
-    public Special(){}
+    public Special() {
+    }
 
     /**
      * Returns the type of Special object
@@ -58,6 +55,11 @@ public class Special {
         return symbol;
     }
 
+    // temp
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     /**
      * Returns which side the Special object belongs to
      *
@@ -66,31 +68,15 @@ public class Special {
     public boolean isBlue() {
         return bBlue;
     }
-
-    /**
-     * Returns if the Special object is taken or not
-     *
-     * @return
-     */
-    public boolean isFree() {
-        return free;
-    }
-
-    // temp
-    public void setSymbol(String symbol){
-        this.symbol = symbol;
-    }
-
-    public void setImage(String source){ // to use try catch
-        try{
+    public void setImage(String source) { // to use try catch
+        try {
             this.imageURL = (getClass().getResource(source));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error! \"" + source + " \"not found");
         }
     }
 
-    public URL getImageURL(){
+    public URL getImageURL() {
         return this.imageURL;
     }
 }

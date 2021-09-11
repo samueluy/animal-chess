@@ -48,24 +48,6 @@ public class BlockCoords {
     }
 
     /**
-     * Returns the X coordinate of a block
-     *
-     * @return
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Returns the Y coordinate of a block
-     *
-     * @return
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
      * Returns the String representation of a block
      *
      * @return
@@ -84,47 +66,20 @@ public class BlockCoords {
     }
 
     /**
-     * Returns a Special object inside the block
-     *
-     * @return
-     */
-    public Special getSpecial() {
-        return special;
-    }
-
-    /**
-     * Sets the X coordinate of a block
-     *
-     * @param coord X Coordinate of the block
-     */
-    public void setX(int coord) {
-        this.x = coord;
-    }
-
-    /**
-     * Sets the Y coordinate of a block
-     *
-     * @param coord Y Coordinate of the block
-     */
-    public void setY(int coord) {
-        this.y = coord;
-    }
-
-    /**
-     * Sets the String representation of a block
-     *
-     * @param character String representation of the block
-     */
-    public void setTemp(String character) {
-        this.temp = character;
-    }
-
-    /**
      * Sets an Animal object inside the block
      *
      * @param animal Animal object
      */
     public void setPiece(Animal animal) {
         this.piece = animal;
+    }
+
+    /**
+     * Returns a Special object inside the block
+     *
+     * @return
+     */
+    public Special getSpecial() {
+        return special;
     }
 }

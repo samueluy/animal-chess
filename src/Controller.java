@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controller implements ActionListener {
-    private GUI view;
-    private moveController model;
+    private final GUI view;
+    private final moveController model;
     private int first;
 
     Controller()// Soon, add the model as an attribute and a parameter.
@@ -14,42 +15,42 @@ public class Controller implements ActionListener {
         model.getBoard().createBoard();
         int start = 1;
         first = chooseWhoGoesFirst();
-        switch(first){
-            case 1: model.getBoard().setPlayer(false);
+        switch (first) {
+            case 1:
+                model.getBoard().setPlayer(false);
                 view.disablePlayer1(true);
                 break;
-            case 2: model.getBoard().setPlayer(true);
+            case 2:
+                model.getBoard().setPlayer(true);
                 view.disablePlayer2(true);
                 break;
-            default: start=0;
+            default:
+                start = 0;
         }
         if (start == 1) {
             model.getBoard().display();
             view.setActionListener(this);
-        }
-        else {
+        } else {
             System.out.println("ERROR!");
         }
 
     }
 
+    public static void main(String[] args) {
+        Controller animalChess = new Controller();
+    }
+
     @Override
-    public void actionPerformed (ActionEvent e)
-    {
-        BlockCoords modelSwitcher;
-        boolean firstClick = true;
-        boolean secondClick = true;
+    public void actionPerformed(ActionEvent e) {
         BlockCoords[][] board = model.getBoard().getBlock();
         int flag = 1;
         int x = 0, y = 0;
-        int i = 0, j = 0;
+        int i, j;
 
         Object[] directions = {"Up", "Down", "Left", "Right"};
         if (e.getActionCommand().equals("Rules")) {
             view.instructionAlert();
-        }
-        else if(e.getActionCommand().equals("Restart"))
-        {
+        } else if (e.getActionCommand().equals("Restart")) {
             view.setVisible(false);
             view.dispose();
             new Controller();
@@ -57,10 +58,8 @@ public class Controller implements ActionListener {
         ///Dont forget if Restart is clicked!
         else {
             //// Searching for the coordinate that was clicked.
-            for(i=0;i<9;i++)
-            {
-                for(j=0;j<7;j++)
-                {
+            for (i = 0; i < 9; i++) {
+                for (j = 0; j < 7; j++) {
                     ///Changing Or Invalidating Move
                     if (e.getSource().equals(view.getButton(i, j))) /// Get the button that was pressed
                     {
@@ -125,25 +124,22 @@ public class Controller implements ActionListener {
                     flag = 1;
                 }
                 ///Check If there is a winner
-                if(model.getBoard().checkWin())
-                {
+                if (model.getBoard().checkWin()) {
                         /*Stop the game.
                         Execute DIALOG in the screen
                         * */
-                    if(gameOver() == 0)
-                    {
+                    if (gameOver() == 0) {
                         view.setVisible(false);
                         view.dispose();
                         //Restart.
                         new Controller();
                     }
                 }
-                if(flag != 1 && model.getFlag() != 1) {
+                if (flag != 1 && model.getFlag() != 1) {
                     if (first == 1) {
                         enableButtons(false);
                         first = 2;
-                    }
-                    else {
+                    } else {
                         enableButtons(true);
                         first = 1;
                     }
@@ -154,49 +150,43 @@ public class Controller implements ActionListener {
         }
     }
 
-    private int gameOver()
-    {//8 3 0 3
+    private int gameOver() {//8 3 0 3
         JPanel p = new JPanel();
         JLabel msg;
         p.setLayout(new FlowLayout());
-        if(model.getBoard().getBlock()[8][3].getTemp().contains("@"))
+        if (model.getBoard().getBlock()[8][3].getTemp().contains("@"))
             msg = new JLabel("Player 1 Won!");
         else
             msg = new JLabel("Player 2 Won!");
         p.add(msg);
 
         String[] options = {"Yes", "No"};
-        int choice = JOptionPane.showOptionDialog(null,p, "Do you want to Play Again?",
+        int choice = JOptionPane.showOptionDialog(null, p, "Do you want to Play Again?",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
-        if(choice == 1)
-        {
+        if (choice == 1) {
             choice = JOptionPane.showOptionDialog(null, "Are you sure?", "Game Over",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         }
 
-        if(choice == 1)
-        {
+        if (choice == 1) {
             choice = JOptionPane.showOptionDialog(null, "I'm sorry. My master told me you don't have a choice.\n Do you want to play Again?", "Game Over",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         }
 
-        while(choice == 1)
+        while (choice == 1)
             choice = JOptionPane.showOptionDialog(null, "Do you want to Play Again?", "Game Over!",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         return 0;
     }
-    public void enableButtons (boolean turn)
-    {
+
+    public void enableButtons(boolean turn) {
         ///How do I know yung turn shiet.
         //Turn of Player 1
-        if (turn)
-        {
+        if (turn) {
             view.disablePlayer2(false);
             view.disablePlayer1(true);  //Enable Player 1 buttons
-        }
-        else
-        {
+        } else {
             view.disablePlayer1(false);
             view.disablePlayer2(true); // Enable Player 2 Buttons
         }
@@ -211,7 +201,7 @@ public class Controller implements ActionListener {
         If equal
             Choose again.
     * */
-    public int chooseWhoGoesFirst () {
+    public int chooseWhoGoesFirst() {
         JPanel p = new JPanel();
         p.setLayout(new BorderLayout());
 
@@ -260,11 +250,6 @@ public class Controller implements ActionListener {
             }
         }
         return -1;
-    }
-
-    public static void main (String[]args){
-        Controller animalChess = new Controller();
-
     }
 }
 
