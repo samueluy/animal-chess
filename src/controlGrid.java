@@ -70,7 +70,7 @@ public class controlGrid implements ActionListener
                             System.out.println(board[i][j].getTemp());
                             x = i;
                             y = j;
-                            flag = 0;
+                        flag = 0;
                         }
                         //If the button clicked contains something, store x, y.
                     }
