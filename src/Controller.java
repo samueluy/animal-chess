@@ -3,12 +3,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * <h1>CCPROG3: MP PHASE 1</h1>
+ * The AnimalChess program is a modified version of the classic game of Chess.
+ * <p>Two players are to fight to take control of their opponent's den! Each animal has a rank which determines its
+ * power to capture other animal. There is a river in the center of the board which prevents most of the pieces from
+ * easily crossing the other side. Traps are also strategically placed to make the gameplay more enthralling.
+ * </p>
+ *
+ * @author Deculawan, Ryan Jay<br>Uy, Samuel Jedidiah
+ * @version 1.0
+ * @since 2021-07-24
+ */
+
 public class Controller implements ActionListener {
     private final GUI view;
     private final moveController model;
     private int first;
 
-    Controller()// Soon, add the model as an attribute and a parameter.
+    Controller()
     {
         model = new moveController();
         model.getBoard().createBoard();
@@ -79,7 +92,7 @@ public class Controller implements ActionListener {
                     switch (choice) {
                         case 0:
                             if (x - 1 >= 0)///If there is water in front.
-                                model.fullMove(model, view, x, y, choice);
+                                model.fullMove(view, x, y, choice);
                             else {
                                 view.emptyButtonAlert();
                                 flag = 1;
@@ -88,7 +101,7 @@ public class Controller implements ActionListener {
 
                         case 1:
                             if (x + 1 < 9)///If there is water in front.
-                                model.fullMove(model, view, x, y, choice);
+                                model.fullMove(view, x, y, choice);
                             else {
                                 view.emptyButtonAlert();
                                 flag = 1;
@@ -96,7 +109,7 @@ public class Controller implements ActionListener {
                             break;
                         case 2:
                             if (y - 1 >= 0)
-                                model.fullMove(model, view, x, y, choice);
+                                model.fullMove(view, x, y, choice);
                             else {
                                 view.emptyButtonAlert();
                                 flag = 1;
@@ -105,7 +118,7 @@ public class Controller implements ActionListener {
 
                         case 3:
                             if (y + 1 < 7)
-                                model.fullMove(model, view, x, y, choice);
+                                model.fullMove(view, x, y, choice);
                             else {
                                 view.emptyButtonAlert();
                                 flag = 1;
@@ -145,6 +158,10 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Draw lots game to determine who will play first
+     * @return side who gets to move first
+     */
     public int chooseWhoGoesFirst() {
         JPanel p = new JPanel();
         p.setLayout(new BorderLayout());
@@ -196,6 +213,10 @@ public class Controller implements ActionListener {
         return -1;
     }
 
+    /**
+     * Enable the buttons in the board for the current player
+     * @param turn current player who is playing
+     */
     public void enableButtons(boolean turn) {
         if (turn) {
             view.disablePlayer2(false);
@@ -206,6 +227,10 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * This method is used to determine if the game is over
+     * @return if the game is over
+     */
     private int gameOver() {
         JPanel p = new JPanel();
         JLabel msg;
@@ -236,7 +261,7 @@ public class Controller implements ActionListener {
         return 0;
     }
     public static void main(String[] args) {
-        Controller animalChess = new Controller();
+        new Controller();
     }
 }
 

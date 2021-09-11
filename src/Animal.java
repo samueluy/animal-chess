@@ -22,6 +22,10 @@ public abstract class Animal {
         this.bBlue = isBlue;
     }
 
+    /**
+     *
+     * @param isBlue For which player owns the piece
+     */
     public Animal(boolean isBlue) {
         this.bBlue = isBlue;
     }
@@ -33,7 +37,7 @@ public abstract class Animal {
     /**
      * This method returns the rank of an animal
      *
-     * @return
+     * @return rank of the animal
      */
     public int getRank() {
         return nRank;
@@ -42,7 +46,7 @@ public abstract class Animal {
     /**
      * This method returns the string representation of the animal
      *
-     * @return
+     * @return string representation of the animal
      */
     public String getSymbol() {
         return symbol;
@@ -51,28 +55,24 @@ public abstract class Animal {
     /**
      * This method returns which player owns the piece
      *
-     * @return
+     * @return the side of the piece
      */
     public boolean isBlue() {
         return bBlue;
     }
 
-    public boolean isDiverMouse() {
-        return diverMouse;
-    }
-
+    /**
+     *
+     * @return if the piece is currently trapped
+     */
     public boolean isTrapped() {
         return trapped;
-    }
-
-    public void setDiverMouse(boolean diver) {
-        this.diverMouse = diver;
     }
 
     /**
      * This method sets an image to an animal
      *
-     * @param source Location of image file
+     * @param source location of image file
      */
     public void setImage(String source) { // to use try catch
         try {
@@ -85,16 +85,24 @@ public abstract class Animal {
     /**
      * This method sets the rank of an animal
      *
-     * @param rank
+     * @param rank sets the rank of the animal
      */
     public void setRank(int rank) {
         this.nRank = rank;
     }
 
+    /**
+     *
+     * @param symbol sets the string representation of the animal
+     */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
+    /**
+     *
+     * @param trapped sets if the current piece is trapped
+     */
     public void setTrapped(boolean trapped) {
         this.trapped = trapped;
     }

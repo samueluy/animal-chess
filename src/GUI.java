@@ -107,8 +107,7 @@ public class GUI extends JFrame {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 7; j++) {
-                if (buttons[i][j] == null)
-                    buttons[i][j] = (new JButton());      //Sa arraylist
+                if (buttons[i][j] == null) buttons[i][j] = (new JButton());      //Sa arraylist
                 gl.add(buttons[i][j]);     //Adding Buttons in the grid.
                 add(gl, BorderLayout.CENTER);
             }
@@ -171,8 +170,7 @@ public class GUI extends JFrame {
                 } else if (buttons[i][j].getIcon() == base2) {
                     buttons[i][j].setEnabled(enabled);
                     buttons[i][j].setBackground(Color.RED);
-                } else
-                    buttons[i][j].setBackground(new JButton().getBackground());
+                } else buttons[i][j].setBackground(new JButton().getBackground());
             }
         }
     }
@@ -211,8 +209,7 @@ public class GUI extends JFrame {
                 } else if (buttons[i][j].getIcon() == base1) {
                     buttons[i][j].setEnabled(enabled);
                     buttons[i][j].setBackground(Color.BLUE);
-                } else
-                    buttons[i][j].setBackground(new JButton().getBackground());
+                } else buttons[i][j].setBackground(new JButton().getBackground());
             }
         }
     }

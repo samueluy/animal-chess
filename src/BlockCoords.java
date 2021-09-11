@@ -50,7 +50,7 @@ public class BlockCoords {
     /**
      * Returns an Animal object inside the block
      *
-     * @return
+     * @return Animal object inside the block
      */
     public Animal getPiece() {
         return piece;
@@ -59,10 +59,19 @@ public class BlockCoords {
     /**
      * Returns the String representation of a block
      *
-     * @return
+     * @return String representation of a block
      */
     public String getTemp() {
         return temp;
+    }
+
+    /**
+     * Returns a Special object inside the block
+     *
+     * @return Special object inside the block
+     */
+    public Special getSpecial() {
+        return special;
     }
 
     /**
@@ -72,14 +81,5 @@ public class BlockCoords {
      */
     public void setPiece(Animal animal) {
         this.piece = animal;
-    }
-
-    /**
-     * Returns a Special object inside the block
-     *
-     * @return
-     */
-    public Special getSpecial() {
-        return special;
     }
 }

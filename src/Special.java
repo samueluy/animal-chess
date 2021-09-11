@@ -11,67 +11,57 @@ public abstract class Special {
     private URL imageURL;
 
     /**
-     * @param type   1: Den; 2: Trap; 3: River
-     * @param symbol String representation of a Special object
-     * @param isBlue Which color/team the Special object belongs to
+     * Initialize Special piece with size
+     * @param isBlue Side of special piece
      */
-    public Special(int type, String symbol, boolean isBlue) {
-        this.type = type;
-        this.symbol = symbol;
-        this.bBlue = isBlue;
-    }
-
-    /**
-     * @param type   1: Den; 2: Trap; 3: River
-     * @param symbol String representation of a Special object
-     */
-    public Special(int type, String symbol) {
-        this.type = type;
-        this.symbol = symbol;
-    }
-
     public Special(boolean isBlue) {
         this.bBlue = isBlue;
     }
 
+    /**
+     * Initialize Special piece
+     */
     public Special() {
     }
 
+    /**
+     * Retrieve the URL of the image used
+     * @return URL of image
+     */
     public URL getImageURL() {
         return this.imageURL;
     }
 
     /**
-     * Returns the type of Special object
+     * Returns the string representation of the Special object
      *
-     * @return
-     */
-    public int getType() {
-        return type;
-    }
-
-    /**
-     * Returns the String representation of the Special object
-     *
-     * @return
+     * @return String representation of the piece
      */
     public String getSymbol() {
         return symbol;
     }
+
     /**
      * Returns which side the Special object belongs to
      *
-     * @return
+     * @return For which player owns the piece
      */
     public boolean isBlue() {
         return bBlue;
     }
 
-    // temp
+    /**
+     * Sets the string representation of the Special object
+     * @param symbol Character to be used
+     */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
+    /**
+     * Sets an image to the button
+     * @param source image URL
+     */
     public void setImage(String source) { // to use try catch
         try {
             this.imageURL = (getClass().getResource(source));

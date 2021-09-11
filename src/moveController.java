@@ -20,9 +20,7 @@ public class moveController {
      * @return
      */
     public boolean checkBounds(GameBoard board, int newRow, int newCol) {
-        if (newRow < 0 || newRow >= board.getBlock().length ||
-                newCol >= board.getBlock()[newRow].length ||
-                newCol < 0) {
+        if (newRow < 0 || newRow >= board.getBlock().length || newCol >= board.getBlock()[newRow].length || newCol < 0) {
             System.out.println("Invalid move");
             return false;
         }
@@ -44,36 +42,31 @@ public class moveController {
      * @param player Current player moving
      * @return
      */
-    public boolean checkValid(GameBoard board, int oldRow, int oldCol,
-                              int newRow, int newCol, boolean player, int direction) {
+    public boolean checkValid(GameBoard board, int oldRow, int oldCol, int newRow, int newCol, boolean player, int direction) {
         BlockCoords oldPiece = board.getBlock()[oldRow][oldCol];
         BlockCoords newPiece = board.getBlock()[newRow][newCol];
         if (checkBounds(board, newRow, newCol)) {
             if (oldPiece.getPiece() != null) { // Untrap piece
-                if ((oldPiece.getPiece().isTrapped()))
-                    oldPiece.getPiece().setTrapped(false);
+                if ((oldPiece.getPiece().isTrapped())) oldPiece.getPiece().setTrapped(false);
 
-                if (newPiece.getPiece() != null) {// cant take mouse if
-                    if (oldPiece.getPiece().getSymbol().contains("E") ||
-                            oldPiece.getPiece().getSymbol().contains("M")) ;
-                } else if (newPiece.getSpecial() == null && // dry diver mouse
+                if (newPiece.getPiece() != null) {  //Can't cant mouse
+                    if (oldPiece.getPiece().getSymbol().contains("E") || oldPiece.getPiece().getSymbol().contains("M"));
+                } else if (newPiece.getSpecial() == null && // Undive mouse
                         oldPiece.getPiece().getSymbol().contains("M")) {
                     ((Mouse) oldPiece.getPiece()).setDiverMouse(false);
                 }
             }
             if (oldPiece.getPiece() != null && newPiece.getSpecial() != null) { // Check if piece moves to special block
-                if (newPiece.getSpecial().getSymbol().contains("+")) // check if position will be trapped
+                if (newPiece.getSpecial().getSymbol().contains("+")) // Check if position will be trapped
                     oldPiece.getPiece().setTrapped(true);
-                else if (newPiece.getSpecial().getSymbol().contains("=") && // set as diver mouse
+                else if (newPiece.getSpecial().getSymbol().contains("=") && // Set as diver mouse
                         oldPiece.getPiece().getSymbol().contains("M"))
                     ((Mouse) oldPiece.getPiece()).setDiverMouse(true);
             }
 
-            if (oldPiece.getPiece() != null &&
-                    newPiece.getPiece() != null) {
+            if (oldPiece.getPiece() != null && newPiece.getPiece() != null) {
                 if (oldPiece.getPiece().getSymbol().contains("M") && // Mouse takes Elephant/Mouse condition
-                        (newPiece.getPiece().getSymbol().contains("M") ||
-                                newPiece.getPiece().getSymbol().contains("E"))) {
+                        (newPiece.getPiece().getSymbol().contains("M") || newPiece.getPiece().getSymbol().contains("E"))) {
                     if (((Mouse) oldPiece.getPiece()).isDiverMouse()) { // Mouse can't take Elephant when diver
                         if (!newPiece.getPiece().getSymbol().contains("E") && ((Mouse) newPiece.getPiece()).isDiverMouse());
                         else {
@@ -90,15 +83,13 @@ public class moveController {
                         newPiece.getPiece().getSymbol().contains("M")) {
                     System.out.println("Invalid move");
                     return false;
-                } else if (newPiece.getPiece().isTrapped()) // can take trapped animal
+                } else if (newPiece.getPiece().isTrapped()) // Can take trapped animal
                     oldPiece.getPiece().setTrapped(true);
-                else if (oldPiece.getPiece().getRank() <
-                        newPiece.getPiece().getRank()) {
+                else if (oldPiece.getPiece().getRank() < newPiece.getPiece().getRank()) {
                     System.out.println("Invalid move");
                     return false;
                 }
-                if (oldPiece.getPiece().isBlue() ==
-                        newPiece.getPiece().isBlue()) {
+                if (oldPiece.getPiece().isBlue() == newPiece.getPiece().isBlue()) {
                     System.out.println("Invalid move");
                     return false;
                 }
@@ -106,43 +97,38 @@ public class moveController {
 
             if (newPiece.getSpecial() != null && newPiece.getSpecial().getSymbol().contains("=")) { // Check if river block
                 if (oldPiece.getPiece().getSymbol().contains("M")) ;
-                else if (oldPiece.getPiece().getSymbol().contains("T") ||
-                        oldPiece.getPiece().getSymbol().contains("Li")) {
+                else if (oldPiece.getPiece().getSymbol().contains("T") || oldPiece.getPiece().getSymbol().contains("Li")) {
                     switch (direction) {
                         case 0:
-                            if (board.getBlock()[oldRow - 1][oldCol].getPiece() != null ||
-                                    board.getBlock()[oldRow - 2][oldCol].getPiece() != null ||
-                                    board.getBlock()[oldRow - 3][oldCol].getPiece() != null ||
-                                    (board.getBlock()[oldRow - 4][oldCol].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow - 4][oldCol].getPiece().getRank())))
+                            if (board.getBlock()[oldRow - 1][oldCol].getPiece() != null || board.getBlock()[oldRow - 2][oldCol].getPiece() != null ||
+                                board.getBlock()[oldRow - 3][oldCol].getPiece() != null || (board.getBlock()[oldRow - 4][oldCol].getPiece() != null &&
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow - 4][oldCol].getPiece().getRank())))
                                 return false;
                             break;
                         case 1:
-                            if ((board.getBlock()[oldRow + 1][oldCol].getPiece() != null ||
-                                    board.getBlock()[oldRow + 2][oldCol].getPiece() != null ||
-                                    board.getBlock()[oldRow + 3][oldCol].getPiece() != null) ||
-                                    (board.getBlock()[oldRow + 4][oldCol].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow + 4][oldCol].getPiece().getRank())))
+                            if ((board.getBlock()[oldRow + 1][oldCol].getPiece() != null || board.getBlock()[oldRow + 2][oldCol].getPiece() != null ||
+                                board.getBlock()[oldRow + 3][oldCol].getPiece() != null) || (board.getBlock()[oldRow + 4][oldCol].getPiece() != null &&
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow + 4][oldCol].getPiece().getRank())))
                                 return false;
                             break;
                         case 2:
-                            if (board.getBlock()[oldRow][oldCol - 1].getPiece() != null ||
-                                    board.getBlock()[oldRow][oldCol - 2].getPiece() != null ||
-                                    (board.getBlock()[oldRow][oldCol - 3].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol - 3].getPiece().getRank())))
+                            if (board.getBlock()[oldRow][oldCol - 1].getPiece() != null || board.getBlock()[oldRow][oldCol - 2].getPiece() != null ||
+                                (board.getBlock()[oldRow][oldCol - 3].getPiece() != null &&
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol - 3].getPiece().getRank())))
                                 return false;
                             break;
                         case 3:
-                            if (board.getBlock()[oldRow][oldCol + 1].getPiece() != null ||
-                                    board.getBlock()[oldRow][oldCol + 2].getPiece() != null ||
-                                    (board.getBlock()[oldRow][oldCol + 3].getPiece() != null && (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol + 3].getPiece().getRank())))
+                            if (board.getBlock()[oldRow][oldCol + 1].getPiece() != null || board.getBlock()[oldRow][oldCol + 2].getPiece() != null ||
+                                (board.getBlock()[oldRow][oldCol + 3].getPiece() != null &&
+                                (oldPiece.getPiece().getRank() < board.getBlock()[oldRow][oldCol + 3].getPiece().getRank())))
                                 return false;
                             break;
                     }
-                } else if (newPiece.getSpecial().getSymbol()
-                        .equals("=")) {
+                } else if (newPiece.getSpecial().getSymbol().equals("=")) {
                     System.out.println("Invalid move");
                     return false;
                 }
-                if (!newPiece.getSpecial().getSymbol().contains("=") && newPiece.getSpecial().isBlue() ==
-                        player) { // takes same special side
+                if (!newPiece.getSpecial().getSymbol().contains("=") && newPiece.getSpecial().isBlue() == player) { // Takes same special side
                     System.out.println("Invalid move");
                     return false;
                 }
@@ -151,7 +137,14 @@ public class moveController {
         return true;
     }
 
-    public void fullMove(moveController model, GUI view, int x, int y, int choice) {
+    /**
+     * Moves GUI and console pieces
+     * @param view GUI of the game
+     * @param x X value of the piece
+     * @param y Y value of the piece
+     * @param choice Direction of movement
+     */
+    public void fullMove(GUI view, int x, int y, int choice) {
         int newX1 = 0;
         int newX2 = 0;
         int newY1 = 0;
@@ -183,9 +176,8 @@ public class moveController {
                 break;
         }
         if (checkValid(board, x, y, newX1, newY1, board.isPlayer(), choice)) {
-            if (board.getBlock()[newX1][newY1].getTemp() != null && board.getBlock()[newX1][newY1].getTemp().contains("=")
-                    && !board.getBlock()[x][y].getPiece().getSymbol().contains("M")) {
-                //Tiger/Lion Move Special Condition:
+            if (board.getBlock()[newX1][newY1].getTemp() != null && board.getBlock()[newX1][newY1].getTemp().contains("=") && !board.getBlock()[x][y].getPiece().getSymbol().contains("M")) {
+                // Tiger||Lion Move Special Condition:
                 if (board.getBlock()[x][y].getTemp().contains("T") || board.getBlock()[x][y].getTemp().contains("Li")) {
                     board.setPlayer(!board.isPlayer());
                     view.move(view.getButton(x, y), view.getButton(newX2, newY2));
@@ -196,11 +188,10 @@ public class moveController {
                     view.emptyButtonAlert();
                     flag = 1;
                 }
-            } else if (board.getBlock()[x][y].getTemp().contains("M")) { // need to generate river again
+            } else if (board.getBlock()[x][y].getTemp().contains("M")) { // Regenerate river
                 board.setPlayer(!board.isPlayer());
                 board.getBlock()[newX1][newY1] = board.getBlock()[x][y];
-                if ((x == 3 && y == 1) || (x == 3 && y == 2) || (x == 4 && y == 1) || (x == 4 && y == 2) || (x == 5 && y == 1) || (x == 5 && y == 2) ||
-                        (x == 3 && y == 4) || (x == 3 && y == 5) || (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) {
+                if ((x == 3 && y == 1) || (x == 3 && y == 2) || (x == 4 && y == 1) || (x == 4 && y == 2) || (x == 5 && y == 1) || (x == 5 && y == 2) || (x == 3 && y == 4) || (x == 3 && y == 5) || (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) {
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
                     board.getBlock()[x][y] = new BlockCoords(x, y, new River());
                 } else {
@@ -228,14 +219,26 @@ public class moveController {
         }
     }
 
+    /**
+     * Retrieves the current board of the game
+     * @return current board
+     */
     public GameBoard getBoard() {
         return board;
     }
 
+    /**
+     * Retrieves a flag value
+     * @return a flag value
+     */
     public int getFlag() {
         return flag;
     }
 
+    /**
+     * Sets a flag value
+     * @param flag value to be set to the flag value
+     */
     public void setFlag(int flag) {
         this.flag = flag;
     }

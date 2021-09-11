@@ -69,7 +69,6 @@ public class GameBoard {
             block[7][3] = new BlockCoords(7, 3, new Trap(true));
         }
     }
-
     /**
      * Displays the current state of the board
      */
@@ -77,11 +76,9 @@ public class GameBoard {
         for (int row = 0; row < block.length; row++) {
             for (int col = 0; col < block[row].length; col++) {
                 if (block[row][col].getPiece() != null) {
-                    System.out.print(block[row][col].getPiece().getSymbol() +
-                            "\t");
+                    System.out.print(block[row][col].getPiece().getSymbol() + "\t");
                 } else if (block[row][col].getSpecial() != null) {
-                    System.out
-                            .print(block[row][col].getSpecial().getSymbol() + "\t");
+                    System.out.print(block[row][col].getSpecial().getSymbol() + "\t");
                 } else {
                     System.out.print(".\t");
                 }
@@ -96,7 +93,7 @@ public class GameBoard {
      * 1. Den taken<br>
      * 2. Player has no pieces left to play
      *
-     * @return
+     * @return if the game is over
      */
     public boolean checkWin() {
         int playerOneCount = 0;
@@ -109,14 +106,11 @@ public class GameBoard {
             System.out.println("Player 1 wins!");
             return true;
         }
-        for (int row = 0; row < block.length;
-             row++) { // Check amount of pieces per player
+        for (int row = 0; row < block.length; row++) { // Check amount of pieces per player
             for (int col = 0; col < block[row].length; col++) {
                 if (block[row][col].getPiece() != null) {
-                    if (block[row][col].getPiece().isBlue())
-                        playerOneCount++;
-                    if (!block[row][col].getPiece().isBlue())
-                        playerTwoCount++;
+                    if (block[row][col].getPiece().isBlue()) playerOneCount++;
+                    if (!block[row][col].getPiece().isBlue()) playerTwoCount++;
                 }
             }
         }
@@ -136,7 +130,7 @@ public class GameBoard {
     /**
      * Returns a boolean which determines the player turn
      *
-     * @return
+     * @return current player turn
      */
     public boolean isPlayer() {
         return player;
@@ -145,7 +139,7 @@ public class GameBoard {
     /**
      * Sets a boolean which determines player turn
      *
-     * @param player
+     * @param player value to set to the turn of the player
      */
     public void setPlayer(boolean player) {
         this.player = player;
