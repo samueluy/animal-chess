@@ -13,6 +13,7 @@ public class Animal
     private boolean bAlive = true;
     private boolean bBlue;
     private boolean trapped = false;
+    private boolean diverMouse = false;
     private String symbol;
     private URL imageURL;
 
@@ -103,5 +104,13 @@ public class Animal
 
     public URL getImageURL(){
         return this.imageURL;
+    }
+
+    public void setDiverMouse(boolean diver){
+        this.diverMouse = diver;
+    }
+
+    public boolean isDiverMouse(){
+        return diverMouse;
     }
 }

@@ -56,45 +56,69 @@ public class Move {
      * @return
      */
     public boolean checkValid(GameBoard board, int oldRow, int oldCol,
-                              int newRow, int newCol, boolean player, int direction) {
+                            int newRow, int newCol, boolean player, int direction) {
+        BlockCoords oldPiece = board.getBlock()[oldRow][oldCol];
+        BlockCoords newPiece = board.getBlock()[newRow][newCol];
         if(checkBounds(board, newRow,newCol)){
-            if(board.getBlock()[oldRow][oldCol].getPiece() != null){ // Untrap piece
-                if((board.getBlock()[oldRow][oldCol].getPiece().isTrapped()))
-                    board.getBlock()[oldRow][oldCol].getPiece().setTrapped(false);
+            if(oldPiece.getPiece() != null){ // Untrap piece
+                if((oldPiece.getPiece().isTrapped()))
+                    oldPiece.getPiece().setTrapped(false);
+
+                if(newPiece.getPiece() != null) {// cant take mouse if
+                    if(oldPiece.getPiece().getSymbol().contains("E") ||
+                        oldPiece.getPiece().getSymbol().contains("M"));}
+
+                else if(newPiece.getSpecial()==null && // dry diver mouse
+                        oldPiece.getPiece().getSymbol().contains("M")){
+                    System.out.println("dry");
+                    oldPiece.getPiece().setDiverMouse(false);
+                }
             }
-            if(board.getBlock()[oldRow][oldCol].getPiece() != null && board.getBlock()[newRow][newCol].getSpecial() != null){ // check if position will be trapped
-                if(board.getBlock()[newRow][newCol].getSpecial().getSymbol().contains("+"))
-                    board.getBlock()[oldRow][oldCol].getPiece().setTrapped(true);
+            if(oldPiece.getPiece() != null && newPiece.getSpecial() != null){ // Check if piece moves to special block
+                if(newPiece.getSpecial().getSymbol().contains("+")) // check if position will be trapped
+                    oldPiece.getPiece().setTrapped(true);
+                else if(newPiece.getSpecial().getSymbol().contains("=") && // set as diver mouse
+                        oldPiece.getPiece().getSymbol().contains("M"))
+                    oldPiece.getPiece().setDiverMouse(true);
             }
 
-            if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                board.getBlock()[newRow][newCol].getPiece() != null) {
-
-                if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M") && // Mouse takes Elephant condition
-                board.getBlock()[newRow][newCol].getPiece().getSymbol().contains("E"));
-                else if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("E") && // Elephant take Mouse condition
-                        board.getBlock()[newRow][newCol].getPiece().getSymbol().contains("M")){
+            if (oldPiece.getPiece() != null &&
+                newPiece.getPiece() != null) {
+                if(oldPiece.getPiece().getSymbol().contains("M") && // Mouse takes Elephant/Mouse condition
+                    (newPiece.getPiece().getSymbol().contains("M") ||
+                    newPiece.getPiece().getSymbol().contains("E"))) {
+                    if (oldPiece.getPiece().isDiverMouse()){ // Mouse can't take Elephant when diver
+                        if(newPiece.getPiece().isDiverMouse());
+                        else{
+                            System.out.println("Invalid move");
+                            return false;
+                        }
+                    }
+                }
+                else if(oldPiece.getPiece().getSymbol().contains("E") && // Elephant take Mouse condition
+                        newPiece.getPiece().getSymbol().contains("M")){
                     System.out.println("Invalid move");
                     return false;
                 }
-                else if(board.getBlock()[newRow][newCol].getPiece().isTrapped()); // can take trapped animal
-                else if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
-                        board.getBlock()[newRow][newCol].getPiece().getRank()) {
+
+                else if(newPiece.getPiece().isTrapped()); // can take trapped animal
+                else if (oldPiece.getPiece().getRank() <
+                        newPiece.getPiece().getRank()) {
                     System.out.println("Invalid move");
                     return false;
                 }
-                if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() ==
-                        board.getBlock()[newRow][newCol].getPiece().isBlue()) {
+                if (oldPiece.getPiece().isBlue() ==
+                        newPiece.getPiece().isBlue()) {
                     System.out.println("Invalid move");
                     return false;
                 }
             }
 
-            if (board.getBlock()[newRow][newCol].getSpecial() !=
+            if (newPiece.getSpecial() !=
                 null) { // Check if river block
-            if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M"));
-            else if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("T") ||
-                    board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("Li")){
+            if(oldPiece.getPiece().getSymbol().contains("M"));
+            else if(oldPiece.getPiece().getSymbol().contains("T") ||
+                    oldPiece.getPiece().getSymbol().contains("Li")){
                 switch(direction){
                     case 0: if(board.getBlock()[oldRow-1][oldCol].getPiece() != null ||
                                 board.getBlock()[oldRow-2][oldCol].getPiece() != null ||
@@ -118,12 +142,12 @@ public class Move {
                         break;
                 }
             }
-                else if (board.getBlock()[newRow][newCol].getSpecial().getSymbol()
+                else if (newPiece.getSpecial().getSymbol()
                         .equals("=")) {
                     System.out.println("Invalid move");
                     return false;
                 }
-            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
+            if (newPiece.getSpecial().isBlue() ==
                 player){
                 System.out.println("Invalid move");
                 return false;

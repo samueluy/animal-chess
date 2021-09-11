@@ -1,4 +1,5 @@
 public class Mouse extends Animal{
+    boolean diverMouse;
     public Mouse(boolean isBlue) {
         super(isBlue);
         setRank(1);
