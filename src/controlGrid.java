@@ -14,14 +14,14 @@ public class controlGrid implements ActionListener
         model.getBoard().createBoard();
 
         int start=1;
-        int first = chooseWhoGoesFirst();
+        /*int first = chooseWhoGoesFirst();
         switch(first){
             case 1: model.getBoard().setPlayer(false);
                 break;
             case 2: model.getBoard().setPlayer(true);
                 break;
             default: start=0;
-        }
+        }*/
         if(start==1){
             model.getBoard().display();
             view.setActionListener(this);
@@ -63,9 +63,9 @@ public class controlGrid implements ActionListener
                     ///Changing Or Invalidating Move
                     if (e.getSource().equals(view.getButton(i,j))) /// Get the button that was pressed
                     {
-                        //Prevents the player from choosing water or the base.
+                        //Prevents the player from choosing water, base, or trap.
                         if(board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("="))
-                        && board[i][j].getPiece().isBlue() == model.getBoard().isPlayer())
+                        && !(board[i][j].getTemp().contains("+")) && board[i][j].getPiece().isBlue() == model.getBoard().isPlayer())
                         {
                             System.out.println(board[i][j].getTemp());
                             x = i;

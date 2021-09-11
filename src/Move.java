@@ -10,154 +10,6 @@ public class Move {
      * @param board  GameBoard object
      * @param player Current player move
      */
-    public void move(GameBoard board, boolean player, int direction) {
-        boolean validPiece = false;
-        for (int row = 0; row < board.getBlock().length; row++) {
-            for (int col = 0; col < board.getBlock()[row].length; col++) {
-                if (board.getBlock()[row][col].getPiece() != null) {
-                  /*  if (board.getBlock()[row][col].getPiece().getSymbol()
-                            .equals(symbol) &&
-                            board.getBlock()[row][col].getPiece().isBlue() ==
-                                    player) {*/
-                        validPiece = true;
-                        boolean hasMoved = false;
-                        switch (direction) {
-                            case 0:
-                                if (checkBounds(board, row - 1, col)) {
-                                    if (board.getBlock()[row - 1][col]
-                                            .getSpecial() != null) {
-                                        if (board.getBlock()[row][col]
-                                                .getPiece().getSymbol()
-                                                .equals("T") &&
-                                                board.getBlock()[row - 1][col]
-                                                        .getSpecial()
-                                                        .getSymbol()
-                                                        .equals("=")) { // Tiger special block condition
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row -
-                                                            4][col]);
-                                            hasMoved = true;
-                                        }
-                                    }
-                                    if (!hasMoved) {
-                                        if (checkValid(board, row, col, row - 1,
-                                                col, player))
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row -
-                                                            1][col]);
-                                    }
-                                }
-                                break;
-                            case 1:
-                                if (checkBounds(board, row + 1, col)) {
-                                    if (board.getBlock()[row + 1][col]
-                                            .getSpecial() != null) {
-                                        if (board.getBlock()[row][col]
-                                                .getPiece().getSymbol()
-                                                .equals("T") &&
-                                                board.getBlock()[row + 1][col]
-                                                        .getSpecial()
-                                                        .getSymbol()
-                                                        .equals("=")) { // Tiger special block condition
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row +
-                                                            3][col]);
-                                            hasMoved = true;
-                                        }
-                                    }
-                                    if (!hasMoved) {
-                                        if (checkValid(board, row, col, row + 1,
-                                                col, player)) {
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row +
-                                                            1][col]);
-                                            row = board.getBlock().length - 1;
-                                        }
-                                    }
-                                }
-
-                                break;
-                            case 2:
-                                if (checkBounds(board, row, col - 1)) {
-                                    if (board.getBlock()[row][col - 1]
-                                            .getSpecial() != null) {
-                                        if (board.getBlock()[row][col]
-                                                .getPiece().getSymbol()
-                                                .equals("T") &&
-                                                board.getBlock()[row][col - 1]
-                                                        .getSpecial()
-                                                        .getSymbol()
-                                                        .equals("=")) { // Tiger special block condition
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row][col -
-                                                            3]);
-                                            hasMoved = true;
-                                        }
-                                    }
-                                    if (!hasMoved) {
-                                        if (checkValid(board, row, col, row,
-                                                col - 1, player))
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row][col -
-                                                            1]);
-                                    }
-                                }
-                                break;
-
-                            case 3:
-                                if (checkBounds(board, row, col + 1)) {
-                                    if (board.getBlock()[row][col + 1]
-                                            .getSpecial() != null) {
-                                        if (board.getBlock()[row][col]
-                                                .getPiece().getSymbol()
-                                                .equals("T") &&
-                                                board.getBlock()[row][col + 1]
-                                                        .getSpecial()
-                                                        .getSymbol()
-                                                        .equals("=")) { // Tiger special block condition
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row][col +
-                                                            3]);
-                                            hasMoved = true;
-                                            col = board.getBlock()[row].length -
-                                                    1;
-                                        }
-                                    }
-                                    if (!hasMoved) {
-                                        if (checkValid(board, row, col, row,
-                                                col + 1, player)) {
-                                            updatePos(
-                                                    board.getBlock()[row][col],
-                                                    board.getBlock()[row][col +
-                                                            1]);
-                                            col = board.getBlock()[row].length -
-                                                    1;
-                                        }
-                                    }
-                                }
-                                break;
-
-                            default:
-                                System.out.println("Invalid input");
-                                board.setPlayer(!board.isPlayer());
-                        }
-                    //}
-                }
-            }
-        }
-        if (!validPiece) {
-            System.out.println("Invalid input");
-            board.setPlayer(!board.isPlayer());
-        }
-        board.setPlayer(!board.isPlayer()); // Next player move
-    }
 
     /**
      * Transfers an Animal object from one block to another
@@ -208,16 +60,19 @@ public class Move {
         if(checkBounds(board, newRow,newCol)){
             if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
                 board.getBlock()[newRow][newCol].getPiece() != null) {
-                if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
+
+                if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M") && // Mouse takes Elephant condition
+                board.getBlock()[newRow][newCol].getPiece().getSymbol().contains("E"));
+                else if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("E") && // Elephant take Mouse condition
+                        board.getBlock()[newRow][newCol].getPiece().getSymbol().contains("M")){
+                    System.out.println("Invalid move");
+                    return false;
+                }
+                else if (board.getBlock()[oldRow][oldCol].getPiece().getRank() <
                         board.getBlock()[newRow][newCol].getPiece().getRank()) {
                     System.out.println("Invalid move");
                     return false;
                 }
-            }
-
-            if (board.getBlock()[oldRow][oldCol].getPiece() != null &&
-                    board.getBlock()[newRow][newCol].getPiece() !=
-                            null) { // Animal same player condition; can not eat own piece
                 if (board.getBlock()[oldRow][oldCol].getPiece().isBlue() ==
                         board.getBlock()[newRow][newCol].getPiece().isBlue()) {
                     System.out.println("Invalid move");
@@ -226,7 +81,7 @@ public class Move {
             }
 
             if (board.getBlock()[newRow][newCol].getSpecial() !=
-                null) { // Check if special block
+                null) { // Check if river block
             if(board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("T") ||
                board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("Li")||
                board.getBlock()[oldRow][oldCol].getPiece().getSymbol().contains("M"));
@@ -235,15 +90,11 @@ public class Move {
                     System.out.println("Invalid move");
                     return false;
                 }
-            }
-
-            if (board.getBlock()[newRow][newCol].getSpecial() !=
-                    null) { // Can not take own den
-                if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
-                        player) {
-                    System.out.println("Invalid move");
-                    return false;
-                }
+            if (board.getBlock()[newRow][newCol].getSpecial().isBlue() ==
+                player){
+                System.out.println("Invalid move");
+                return false;
+                    }
             }
         }
         return true;
