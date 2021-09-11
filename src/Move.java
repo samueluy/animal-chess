@@ -60,17 +60,12 @@ public class Move {
         BlockCoords oldPiece = board.getBlock()[oldRow][oldCol];
         BlockCoords newPiece = board.getBlock()[newRow][newCol];
         if(checkBounds(board, newRow,newCol)){
-            if(oldPiece.getPiece() != null){ // Untrap piece
-                if((oldPiece.getPiece().isTrapped()))
+            if(oldPiece.getPiece() != null){
+                if((oldPiece.getPiece().isTrapped())) // Untrap piece
                     oldPiece.getPiece().setTrapped(false);
-
-                if(newPiece.getPiece() != null) {// cant take mouse if
-                    if(oldPiece.getPiece().getSymbol().contains("E") ||
-                        oldPiece.getPiece().getSymbol().contains("M"));}
 
                 else if(newPiece.getSpecial()==null && // dry diver mouse
                         oldPiece.getPiece().getSymbol().contains("M")){
-                    System.out.println("dry");
                     oldPiece.getPiece().setDiverMouse(false);
                 }
             }
@@ -100,7 +95,6 @@ public class Move {
                     System.out.println("Invalid move");
                     return false;
                 }
-
                 else if(newPiece.getPiece().isTrapped()); // can take trapped animal
                 else if (oldPiece.getPiece().getRank() <
                         newPiece.getPiece().getRank()) {
@@ -113,7 +107,6 @@ public class Move {
                     return false;
                 }
             }
-
             if (newPiece.getSpecial() !=
                 null) { // Check if river block
             if(oldPiece.getPiece().getSymbol().contains("M"));
@@ -147,11 +140,11 @@ public class Move {
                     System.out.println("Invalid move");
                     return false;
                 }
-            if (newPiece.getSpecial().isBlue() ==
+            if (!(newPiece.getSpecial().getSymbol().contains("=")) && newPiece.getSpecial().isBlue() ==
                 player){
                 System.out.println("Invalid move");
                 return false;
-                    }
+                }
             }
         }
         return true;
@@ -189,52 +182,64 @@ public class Move {
                 break;
         }
         if(checkValid(model.getBoard(), x, y, newX1, newY1, model.getBoard().isPlayer(), choice)){
-            System.out.println("in");
-            if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null && model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")) {
-                //Tiger/Lion Move Special Condition:
-                if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
-                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
-                    view.move(view.getButton(x, y), view.getButton(newX2, newY2));
-                    model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
-                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+            int flag=0;
+            if (model.getBoard().getBlock()[newX1][newY1].getTemp() != null) {
+                if(model.getBoard().getBlock()[newX1][newY1].getTemp().contains("=")){   //Tiger/Lion Special Condition:
+                    if (model.getBoard().getBlock()[x][y].getTemp().contains("T") || model.getBoard().getBlock()[x][y].getTemp().contains("Li")) {
+                        model.getBoard().setPlayer(!model.getBoard().isPlayer());
+                        view.move(view.getButton(x, y), view.getButton(newX2, newY2));
+                        model.getBoard().getBlock()[newX2][newY2] = model.getBoard().getBlock()[x][y];
+                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+                        flag=1;
+                    }
                 }
                 //Mouse Move Special Condition
-                else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
-                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
-                    model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                    if((x==3&&y==1) || (x==3&&y==2) || (x==4&&y==1) || (x==4&&y==2) || (x==5&&y==1) || (x==5&&y==2) ||
-                        (x==3&&y==4) || (x==3&&y==5) || (x==4&&y==4) || (x==4&&y==5) || (x==5&&y==4) || (x==5&&y==5)){
-                        view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
-                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y, new River());
-                    }
-                    else{
-                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
-                        view.move(view.getButton(x, y), view.getButton(newX1, newY1));
-                    }
-                }
                 else
                     //Turn should not change. Display invalid move.
                     view.emptyButtonAlert();
             }
-            else {
+            if(model.getBoard().getBlock()[x][y].getTemp() != null && model.getBoard().getBlock()[x][y].getTemp().contains("M")){
                 model.getBoard().setPlayer(!model.getBoard().isPlayer());
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                if((x==0&&y==2) ||(x==0&&y==4) || (x==1&&y==3)) {
-                    view.move(view.getButton(x, y), view.getButton(newX1, newY1), 2);
-                    model.getBoard().getBlock()[x][y] = new BlockCoords(x, y, new Trap(false));
-                }
-                else if((x==8&&y==2) || (x==8&&y==4) || (x==7&&y==3)) {
-                    view.move(view.getButton(x, y), view.getButton(newX1, newY1), 3);
-                    model.getBoard().getBlock()[x][y] = new BlockCoords(1, 3, new Trap(true));
+                if((x==3&&y==1) || (x==3&&y==2) || (x==4&&y==1) || (x==4&&y==2) || (x==5&&y==1) || (x==5&&y==2) ||
+                        (x==3&&y==4) || (x==3&&y==5) || (x==4&&y==4) || (x==4&&y==5) || (x==5&&y==4) || (x==5&&y==5)){
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y, new River());
                 }
                 else{
                     model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                 }
             }
+            else{
+                if(flag==0) {
+                    model.getBoard().setPlayer(!model.getBoard().isPlayer());
+                    model.getBoard().getBlock()[newX1][newY1] =
+                            model.getBoard().getBlock()[x][y];
+                    if ((x == 0 && y == 2) || (x == 0 && y == 4) ||
+                            (x == 1 && y == 3)) {
+                        view.move(view.getButton(x, y),
+                                view.getButton(newX1, newY1), 2);
+                        model.getBoard().getBlock()[x][y] =
+                                new BlockCoords(x, y, new Trap(false));
+                    } else if ((x == 8 && y == 2) || (x == 8 && y == 4) ||
+                            (x == 7 && y == 3)) {
+                        view.move(view.getButton(x, y),
+                                view.getButton(newX1, newY1), 3);
+                        model.getBoard().getBlock()[x][y] =
+                                new BlockCoords(1, 3, new Trap(true));
+                    } else {
+                        model.getBoard().getBlock()[x][y] =
+                                new BlockCoords(x, y);
+                        view.move(view.getButton(x, y),
+                                view.getButton(newX1, newY1));
+                    }
+                }
+            }
         }
-        else
+        else {
             view.emptyButtonAlert();
+        }
     }
 
     public GameBoard getBoard() {
