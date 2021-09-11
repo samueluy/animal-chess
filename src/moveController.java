@@ -12,17 +12,6 @@ public class moveController {
      */
 
     /**
-     * Transfers an Animal object from one block to another
-     *
-     * @param from Block object where the piece is originally located
-     * @param to   Block object where the piece desires to go
-     */
-    public void updatePos(BlockCoords from, BlockCoords to) {
-        to.setPiece(from.getPiece());
-        from.setPiece(null);
-    }
-
-    /**
      * Checks if a move that will be made is within the bounds of the board
      *
      * @param board  GameBoard object
