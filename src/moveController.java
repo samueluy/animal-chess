@@ -93,11 +93,11 @@ public class moveController {
                             return false;
                         }
                     }
-                }
-                else if(oldPiece.getPiece().getSymbol().contains("M") && newPiece.getPiece().getSymbol().contains("M")){
-                    if(!oldPiece.getPiece().isDiverMouse() && newPiece.getPiece().isDiverMouse()){
-                        System.out.println("Invalid move");
-                        return false;
+                    else if(oldPiece.getPiece().getSymbol().contains("M") && newPiece.getPiece().getSymbol().contains("M")){
+                        if(!oldPiece.getPiece().isDiverMouse() && newPiece.getPiece().isDiverMouse()){
+                            System.out.println("Invalid move");
+                            return false;
+                        }
                     }
                 }
                 else if(oldPiece.getPiece().getSymbol().contains("E") && // Elephant take Mouse condition
