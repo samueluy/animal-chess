@@ -1,7 +1,7 @@
 /**
  * This class contains all the methods which will allow a player to move their pieces
  */
-public class Move {
+public class moveController {
     private GameBoard board = new GameBoard();
     private int flag;
     /**
@@ -94,6 +94,12 @@ public class Move {
                         }
                     }
                 }
+                else if(oldPiece.getPiece().getSymbol().contains("M") && newPiece.getPiece().getSymbol().contains("M")){
+                    if(!oldPiece.getPiece().isDiverMouse() && newPiece.getPiece().isDiverMouse()){
+                        System.out.println("Invalid move");
+                        return false;
+                    }
+                }
                 else if(oldPiece.getPiece().getSymbol().contains("E") && // Elephant take Mouse condition
                         newPiece.getPiece().getSymbol().contains("M")){
                     System.out.println("Invalid move");
@@ -159,7 +165,7 @@ public class Move {
         return true;
     }
 
-    public void fullMove(Move model, testGrid view, int x, int y, int choice){
+    public void fullMove(moveController model, GUI view, int x, int y, int choice){
         int newX1=0;
         int newX2=0;
         int newY1=0;

@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Controller implements ActionListener {
-    private testGrid view;
-    private Move model;
+    private GUI view;
+    private moveController model;
     private int first;
 
     Controller()// Soon, add the model as an attribute and a parameter.
     {
-        view = new testGrid();
-        model = new Move();
+        view = new GUI();
+        model = new moveController();
         model.getBoard().createBoard();
         int start = 1;
         first = chooseWhoGoesFirst();

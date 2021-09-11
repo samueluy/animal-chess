@@ -15,7 +15,7 @@ public class AnimalChess {
     public static void main(String[] args) {
         new GUI();
         GameBoard board = new GameBoard();
-        Move move = new Move();
+        moveController move = new moveController();
 
         board.createBoard();
         board.display();
