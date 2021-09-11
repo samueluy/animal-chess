@@ -242,6 +242,23 @@ public class testGrid extends JFrame
         from.setIcon(null);
     }
 
+    public void move(JButton from, JButton to, int type){ // to reset special blocks
+        to.setIcon(from.getIcon());
+        switch(type){
+            case 0: from.setIcon(base1);
+                    break;
+            case 1: from.setIcon(base2);
+                    break;
+            case 2: from.setIcon(trap1);
+                    break;
+            case 3: from.setIcon(trap2);
+                    break;
+            case 4: from.setIcon(river);
+                    break;
+        }
+
+    }
+
 
     public static void main(String[] args) {
         testGrid GUI = new testGrid();

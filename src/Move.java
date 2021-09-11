@@ -201,9 +201,16 @@ public class Move {
                 //Mouse Move Special Condition
                 else if (model.getBoard().getBlock()[x][y].getTemp().contains("M")){ // need to generate river again
                     model.getBoard().setPlayer(!model.getBoard().isPlayer());
-                    view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                     model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+                    if((x==3&&y==1) || (x==3&&y==2) || (x==4&&y==1) || (x==4&&y==2) || (x==5&&y==1) || (x==5&&y==2) ||
+                        (x==3&&y==4) || (x==3&&y==5) || (x==4&&y==4) || (x==4&&y==5) || (x==5&&y==4) || (x==5&&y==5)){
+                        view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
+                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y, new River());
+                    }
+                    else{
+                        model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+                        view.move(view.getButton(x, y), view.getButton(newX1, newY1));
+                    }
                 }
                 else
                     //Turn should not change. Display invalid move.
@@ -211,9 +218,19 @@ public class Move {
             }
             else {
                 model.getBoard().setPlayer(!model.getBoard().isPlayer());
-                view.move(view.getButton(x, y), view.getButton(newX1, newY1));
                 model.getBoard().getBlock()[newX1][newY1] = model.getBoard().getBlock()[x][y];
-                model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+                if((x==0&&y==2) ||(x==0&&y==4) || (x==1&&y==3)) {
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1), 2);
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(x, y, new Trap(false));
+                }
+                else if((x==8&&y==2) || (x==8&&y==4) || (x==7&&y==3)) {
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1), 3);
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(1, 3, new Trap(true));
+                }
+                else{
+                    model.getBoard().getBlock()[x][y] = new BlockCoords(x,y);
+                    view.move(view.getButton(x, y), view.getButton(newX1, newY1));
+                }
             }
         }
         else

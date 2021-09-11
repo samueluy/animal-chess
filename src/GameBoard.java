@@ -74,9 +74,9 @@ public class GameBoard {
 
             block[0][2] = new BlockCoords(0, 2, new Trap(false));
             block[0][4] = new BlockCoords(0, 4, new Trap(false));
+            block[1][3] = new BlockCoords(1, 3, new Trap(false));
             block[8][2] = new BlockCoords(8, 2, new Trap(true));
             block[8][4] = new BlockCoords(8, 4, new Trap(true));
-            block[1][3] = new BlockCoords(1, 3, new Trap(false));
             block[7][3] = new BlockCoords(7, 3, new Trap(true));
         }
     }
