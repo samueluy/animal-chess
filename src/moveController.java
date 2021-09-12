@@ -49,8 +49,7 @@ public class moveController {
                 if ((oldPiece.getPiece().isTrapped())) oldPiece.getPiece().setTrapped(false);
 
                 if (newPiece.getPiece() != null) {  //Can't cant mouse
-                    if (oldPiece.getPiece().getSymbol().contains("E") || oldPiece.getPiece().getSymbol().contains("M"))
-                        ;
+                    if (oldPiece.getPiece().getSymbol().contains("E") || oldPiece.getPiece().getSymbol().contains("M"));
                 } else if (newPiece.getSpecial() == null && // Undive mouse
                         oldPiece.getPiece().getSymbol().contains("M")) {
                     ((Mouse) oldPiece.getPiece()).setDiverMouse(false);
@@ -68,8 +67,8 @@ public class moveController {
                 if (oldPiece.getPiece().getSymbol().contains("M") && // Mouse takes Elephant/Mouse condition
                         (newPiece.getPiece().getSymbol().contains("M") || newPiece.getPiece().getSymbol().contains("E"))) {
                     if (((Mouse) oldPiece.getPiece()).isDiverMouse()) { // Mouse can't take Elephant when diver
-                        if (!newPiece.getPiece().getSymbol().contains("E") && ((Mouse) newPiece.getPiece()).isDiverMouse())
-                            ;
+                        if (!newPiece.getPiece().getSymbol().contains("E") && ((Mouse) newPiece.getPiece()).isDiverMouse());
+
                         else {
                             System.out.println("Invalid move");
                             return false;
