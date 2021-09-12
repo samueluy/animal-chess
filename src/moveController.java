@@ -34,7 +34,6 @@ public class moveController {
      * 3. Piece moves to a river (exception made for Tiger and Mouse)<br>
      * 4. Piece takes its own (color/team) den
      *
-     * @param board  GameBoard object
      * @param oldRow Row coordinate where the animal object is currently located
      * @param oldCol Column coordinate where the animal object is currently located
      * @param newRow Row coordinate where the animal object desires to go
@@ -42,7 +41,7 @@ public class moveController {
      * @param player Current player moving
      * @return
      */
-    public boolean checkValid(GameBoard board, int oldRow, int oldCol, int newRow, int newCol, boolean player, int direction) {
+    public boolean checkValid(int oldRow, int oldCol, int newRow, int newCol, boolean player, int direction) {
         BlockCoords oldPiece = board.getBlock()[oldRow][oldCol];
         BlockCoords newPiece = board.getBlock()[newRow][newCol];
         if (checkBounds(board, newRow, newCol)) {
@@ -89,7 +88,7 @@ public class moveController {
                     System.out.println("Invalid move");
                     return false;
                 }
-                else if(((Mouse) newPiece.getPiece()).isDiverMouse()){
+                else if(newPiece.getPiece() instanceof Mouse && ((Mouse) newPiece.getPiece()).isDiverMouse()){
                     System.out.println("Invalid move");
                     return false;
                 }
@@ -179,7 +178,7 @@ public class moveController {
                 newY2 = y + 3;
                 break;
         }
-        if (checkValid(board, x, y, newX1, newY1, board.isPlayer(), choice)) {
+        if (checkValid(x, y, newX1, newY1, board.isPlayer(), choice)) {
             if (board.getBlock()[newX1][newY1].getTemp() != null && board.getBlock()[newX1][newY1].getTemp().contains("=") && !board.getBlock()[x][y].getPiece().getSymbol().contains("M")) {
                 // Tiger||Lion Move Special Condition:
                 if (board.getBlock()[x][y].getTemp().contains("T") || board.getBlock()[x][y].getTemp().contains("Li")) {
