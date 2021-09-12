@@ -89,6 +89,10 @@ public class moveController {
                     System.out.println("Invalid move");
                     return false;
                 }
+                else if(((Mouse) newPiece.getPiece()).isDiverMouse()){
+                    System.out.println("Invalid move");
+                    return false;
+                }
                 if (oldPiece.getPiece().isBlue() == newPiece.getPiece().isBlue()) {
                     System.out.println("Invalid move");
                     return false;
