@@ -242,10 +242,10 @@ public class GUI extends JFrame {
                 from.setIcon(base2);
                 break;
             case 2:
-                from.setIcon(trap1);
+                from.setIcon(trap2);
                 break;
             case 3:
-                from.setIcon(trap2);
+                from.setIcon(trap1);
                 break;
             case 4:
                 from.setIcon(river);
