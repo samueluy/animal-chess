@@ -74,7 +74,6 @@ public class Controller implements ActionListener {
                         //Prevents the player from choosing water, base, or trap.
                         if (board[i][j].getTemp() != null && !(board[i][j].getTemp().contains("@")) && !(board[i][j].getTemp().contains("="))
                                 && !(board[i][j].getTemp().contains("+")) && board[i][j].getPiece().isBlue() == model.getBoard().isPlayer()) {
-                            System.out.println(board[i][j].getTemp());
                             x = i;
                             y = j;
                             flag = 0;
