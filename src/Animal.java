@@ -5,12 +5,10 @@ import java.net.URL;
  */
 public abstract class Animal {
     private final boolean bBlue;
-    private boolean diverMouse = false;
     private boolean trapped = false;
     private int nRank;
     private String symbol;
     private URL imageURL;
-
     /**
      * @param rank   Given rank of a piece
      * @param symbol Character to distinguish a piece
