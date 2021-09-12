@@ -131,10 +131,11 @@ public class moveController {
                     System.out.println("Invalid move");
                     return false;
                 }
-                if (!newPiece.getSpecial().getSymbol().contains("=") && newPiece.getSpecial().isBlue() == player) { // Takes same special side
-                    System.out.println("Invalid move");
-                    return false;
-                }
+            }
+            if (newPiece.getSpecial() != null && !newPiece.getSpecial().getSymbol().contains("=") &&
+                newPiece.getSpecial().isBlue() == player) { // Takes same special side
+                System.out.println("Invalid move");
+                return false;
             }
         }
         return true;
@@ -194,7 +195,9 @@ public class moveController {
             } else if (board.getBlock()[x][y].getTemp().contains("M")) { // Regenerate river
                 board.setPlayer(!board.isPlayer());
                 board.getBlock()[newX1][newY1] = board.getBlock()[x][y];
-                if ((x == 3 && y == 1) || (x == 3 && y == 2) || (x == 4 && y == 1) || (x == 4 && y == 2) || (x == 5 && y == 1) || (x == 5 && y == 2) || (x == 3 && y == 4) || (x == 3 && y == 5) || (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) {
+                if ((x == 3 && y == 1) || (x == 3 && y == 2) || (x == 4 && y == 1) || (x == 4 && y == 2) ||
+                    (x == 5 && y == 1) || (x == 5 && y == 2) || (x == 3 && y == 4) || (x == 3 && y == 5) ||
+                    (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) {
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
                     board.getBlock()[x][y] = new BlockCoords(x, y, new River());
                 } else {
