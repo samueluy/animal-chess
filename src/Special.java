@@ -5,8 +5,6 @@ import java.net.URL;
  */
 public abstract class Special {
     private boolean bBlue;
-    private final boolean free = true;
-    private int type;
     private String symbol;
     private URL imageURL;
 

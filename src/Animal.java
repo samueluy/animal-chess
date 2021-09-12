@@ -28,6 +28,10 @@ public abstract class Animal {
         this.bBlue = isBlue;
     }
 
+    /**
+     * Retrieve the URL of the image used
+     * @return URL of image
+     */
     public URL getImageURL() {
         return this.imageURL;
     }

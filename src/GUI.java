@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * GUI of the Animal Chess Game
+ */
 public class GUI extends JFrame {
     PieceIcon base1 = new PieceIcon(new Base(true));
     PieceIcon base2 = new PieceIcon(new Base(false));
@@ -29,12 +32,21 @@ public class GUI extends JFrame {
     private JButton btnRules;
     private JButton btnRestart;
 
+    /**
+     * Retrieves the button clicked
+     * @param i x value of the button pressed
+     * @param j y value of the button pressed
+     * @return button pressed
+     */
     public JButton getButton(int i, int j) {
         return buttons[i][j];
     }
 
+    /**
+     * Opens the GUI of the game
+     */
     public GUI() {
-        super("Grid Layout");
+        super("Animal Chess");
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -43,6 +55,9 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Setup the buttons in the GUI
+     */
     public void setup() {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new FlowLayout());
@@ -114,6 +129,9 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Display an alert window when button pressed is invalid
+     */
     public void emptyButtonAlert() {
         JLabel msg = new JLabel("Invalid Move!");
         JPanel p = new JPanel();
@@ -123,6 +141,9 @@ public class GUI extends JFrame {
         JOptionPane.showMessageDialog(null, p, "Warning!", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Displays an instruction screen
+     */
     public void instructionAlert() {
         String msg = "Here are some instructions:<br> <br>• Pieces can move one space horizontally or vertically; and<br> • Pieces may land on and capture an opponent’s piece that has equal or lower rank.<br> <br>However the following exceptions apply:<br> <br>Movement<br>• The mouse is the only animal that is allowed to move on the river .<br>• Both the lion and the tiger can jump from the land before the river to the land after the river, horizontally or vertically, <br>   as long as there is no mouse along the way.<br><br>• A player may not move his own piece to his own animal den<br> <br>Capturing an opponent’s piece<br>• A player may capture an opponent’s piece with a higher rank that is on one of his traps.<br>• An elephant may not capture a mouse while the mouse can capture an elephant.<br>• A mouse on ther river may not capture an elephant or another mouse on land.<br>• A mouse on the river may capture another mouse on the river.<br>• A mouse on land may not capture a mouse on the river.<br> <br>To help You play the game, We will remind you if you ever made an invalid move :><br> <br>Have fun!";
         String text = "<html><div style = 'text-align: left;'>" + msg + "</div></html>";
@@ -136,6 +157,10 @@ public class GUI extends JFrame {
         JOptionPane.showMessageDialog(null, p, "Instructions", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Disable buttons of player 1
+     * @param enabled value to set to the button
+     */
     public void disablePlayer1(boolean enabled) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 7; j++) {
@@ -175,6 +200,10 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Disable buttons of player 2
+     * @param enabled value to set to the button
+     */
     public void disablePlayer2(boolean enabled) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 7; j++) {
@@ -214,6 +243,10 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Action listener
+     * @param listener listener
+     */
     public void setActionListener(ActionListener listener) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 7; j++) {

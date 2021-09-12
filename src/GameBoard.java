@@ -2,16 +2,46 @@
  * This class is the main board of the game.
  */
 public class GameBoard {
-    BlockCoords[][] block = new BlockCoords[9][7];
+    private BlockCoords[][] block = new BlockCoords[9][7];
     private boolean player = true;
 
     /**
-     * Returns a block object
+     * Check for multiple win conditions such as:<br>
+     * 1. Den taken<br>
+     * 2. Player has no pieces left to play
      *
-     * @return
+     * @return if the game is over
      */
-    public BlockCoords[][] getBlock() {
-        return block;
+    public boolean checkWin() {
+        int playerOneCount = 0;
+        int playerTwoCount = 0;
+        if (block[8][3].getPiece() != null) { // Den taken
+            System.out.println("Player 2 wins!");
+            return true;
+        }
+        if (block[0][3].getPiece() != null) { // Den taken
+            System.out.println("Player 1 wins!");
+            return true;
+        }
+        for (int row = 0; row < block.length; row++) { // Check amount of pieces per player
+            for (int col = 0; col < block[row].length; col++) {
+                if (block[row][col].getPiece() != null) {
+                    if (block[row][col].getPiece().isBlue()) playerOneCount++;
+                    if (!block[row][col].getPiece().isBlue()) playerTwoCount++;
+                }
+            }
+        }
+        if (playerOneCount == 0) {
+            System.out.println("Player 2 wins!");
+            return true;
+        }
+
+        if (playerTwoCount == 0) {
+            System.out.println("Player 1 wins!");
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -89,42 +119,12 @@ public class GameBoard {
     }
 
     /**
-     * Check for multiple win conditions such as:<br>
-     * 1. Den taken<br>
-     * 2. Player has no pieces left to play
+     * Returns a block object
      *
-     * @return if the game is over
+     * @return block object
      */
-    public boolean checkWin() {
-        int playerOneCount = 0;
-        int playerTwoCount = 0;
-        if (block[8][3].getPiece() != null) { // Den taken
-            System.out.println("Player 2 wins!");
-            return true;
-        }
-        if (block[0][3].getPiece() != null) { // Den taken
-            System.out.println("Player 1 wins!");
-            return true;
-        }
-        for (int row = 0; row < block.length; row++) { // Check amount of pieces per player
-            for (int col = 0; col < block[row].length; col++) {
-                if (block[row][col].getPiece() != null) {
-                    if (block[row][col].getPiece().isBlue()) playerOneCount++;
-                    if (!block[row][col].getPiece().isBlue()) playerTwoCount++;
-                }
-            }
-        }
-        if (playerOneCount == 0) {
-            System.out.println("Player 2 wins!");
-            return true;
-        }
-
-        if (playerTwoCount == 0) {
-            System.out.println("Player 1 wins!");
-            return true;
-        }
-
-        return false;
+    public BlockCoords[][] getBlock() {
+        return block;
     }
 
     /**

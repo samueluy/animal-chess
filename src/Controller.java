@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * <h1>CCPROG3: MP PHASE 1</h1>
+ * CCPROG3: MP PHASE 1
  * The AnimalChess program is a modified version of the classic game of Chess.
  * <p>Two players are to fight to take control of their opponent's den! Each animal has a rank which determines its
  * power to capture other animal. There is a river in the center of the board which prevents most of the pieces from
@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * </p>
  *
  * @author Deculawan, Ryan Jay<br>Uy, Samuel Jedidiah
- * @version 1.0
+ * @version 1.1
  * @since 2021-07-24
  */
 
@@ -259,6 +259,11 @@ public class Controller implements ActionListener {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         return 0;
     }
+
+    /**
+     * Main class
+     * @param args
+     */
     public static void main(String[] args) {
         new Controller();
     }

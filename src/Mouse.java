@@ -1,3 +1,6 @@
+/**
+ * This class represents the Mouse pieces in the board
+ */
 public class Mouse extends Animal {
     private boolean diverMouse;
     /**

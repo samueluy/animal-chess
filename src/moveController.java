@@ -17,7 +17,7 @@ public class moveController {
      * @param board  GameBoard object
      * @param newRow Row coordinate where the animal object desires to go
      * @param newCol Column coordinate where the animal object desires to go
-     * @return
+     * @return if move is within the bounds of the board
      */
     public boolean checkBounds(GameBoard board, int newRow, int newCol) {
         if (newRow < 0 || newRow >= board.getBlock().length || newCol >= board.getBlock()[newRow].length || newCol < 0) {
@@ -39,7 +39,7 @@ public class moveController {
      * @param newRow Row coordinate where the animal object desires to go
      * @param newCol Column coordinate where the animal object desires to go
      * @param player Current player moving
-     * @return
+     * @return if the move is valid
      */
     public boolean checkValid(int oldRow, int oldCol, int newRow, int newCol, boolean player, int direction) {
         BlockCoords oldPiece = board.getBlock()[oldRow][oldCol];
@@ -188,8 +188,8 @@ public class moveController {
                 board.setPlayer(!board.isPlayer());
                 board.getBlock()[newX1][newY1] = board.getBlock()[x][y];
                 if ((x == 3 && y == 1) || (x == 3 && y == 2) || (x == 4 && y == 1) || (x == 4 && y == 2) ||
-                    (x == 5 && y == 1) || (x == 5 && y == 2) || (x == 3 && y == 4) || (x == 3 && y == 5) ||
-                    (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) { // River
+                        (x == 5 && y == 1) || (x == 5 && y == 2) || (x == 3 && y == 4) || (x == 3 && y == 5) ||
+                        (x == 4 && y == 4) || (x == 4 && y == 5) || (x == 5 && y == 4) || (x == 5 && y == 5)) { // River
                     view.move(view.getButton(x, y), view.getButton(newX1, newY1), 4);
                     board.getBlock()[x][y] = new BlockCoords(x, y, new River());
                 } else if ((x == 0 && y == 2) || (x == 0 && y == 4) || (x == 1 && y == 3)) { // Trap
